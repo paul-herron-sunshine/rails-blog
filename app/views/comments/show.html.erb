@@ -1,0 +1,8 @@
+<p id="notice"><%= notice %></p>
+
+<div style="border:1px;padding:2rem;">
+	<%= @comment.body %>
+</div>
+
+<%= link_to 'Edit', edit_comment_path(@comment) %> |
+<%= link_to 'Back', comments_path %>
