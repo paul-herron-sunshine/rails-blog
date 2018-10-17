@@ -1,17 +1,13 @@
 require "rails_helper"
 
 RSpec.feature "Integration Tests", :type => :feature do
-  scenario "User visits the home page and then navigates to the about page before visiting the sign up page" do
-    visit "/"
-    expect(page).to have_title("Home | OTB Academy Blog 2018")
-    visit "/about"
-    expect(page).to have_title("About | OTB Academy Blog 2018")
-    visit "/signup"
-    expect(page).to have_title("Sign Up | OTB Academy Blog 2018")
+  before :each do
+    @user = User.new(name: "Test User", email: "user@test.com", password: "password", password_confirmation: "password")
+    @user.save
   end
 
   scenario "User Navigates the the sign up page and clicks 'create my account' button without filling in any fields" do
-    visit "/users/new"
+    visit "/signup"
     click_on 'Create my account'
     expect(page).to have_text("Name can't be blank")
     expect(page).to have_text("Email can't be blank")
@@ -20,6 +16,8 @@ RSpec.feature "Integration Tests", :type => :feature do
     expect(page).to have_text("Password can't be blank")
     expect(page).to have_text("Password is too short (minimum is 6 characters)")
   end
+
+
 
   scenario "User Navigates the the sign up page and a confirmation password that does not match the password given" do
     visit "/signup"
@@ -44,4 +42,40 @@ RSpec.feature "Integration Tests", :type => :feature do
     click_on 'Create my account'
     expect(page).to have_text("Account Created! Welcome to the OTB Academy Blog")
   end
+
+  scenario "User tries an invalid login and the flash appears. they then visit the home page and should not see the flash message" do
+    visit "/login"
+
+    click_on 'Log in'
+    expect(page).to have_text("Invalid email/password combination")
+    visit "/"
+    expect(page).to_not have_text("Invalid email/password combination")
+  end
+
+  scenario "user with a valid account can log in to the website and is successfully redirected to their profile page" do
+    visit "/login"
+
+    fill_in "Email", :with => @user.email
+    fill_in "Password", :with => @user.password
+
+    click_on 'Log in'
+    expect(page).to have_text("Test User")
+  end
+
+  scenario "user should be presented with a different number of options navigation options after logging in" do
+    visit "/"
+    expect(page).to_not have_link("Users")
+    expect(page).to_not have_link("Profile")
+    expect(page).to_not have_link("Settings")
+    expect(page).to_not have_link("Log out")
+
+    visit "/login"
+
+    fill_in "Email", :with => @user.email
+    fill_in "Password", :with => @user.password
+
+    click_on 'Log in'
+    expect(page).to have_text("Test User")
+  end
+
 end
