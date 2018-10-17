@@ -1,9 +1,11 @@
-<% provide(:title, 'Sign up') %>
+<% provide(:title, 'Sign Up') %>
 <h1>Sign up</h1>
+
+<%= render 'layouts/error_messages' %>
 
 <div>
   <div">
-    <%= form_for(@user) do |f| %>
+    <%= form_for(@user, url: signup_path) do |f| %>
       <%= f.label :name %>
       <%= f.text_field :name %>
 
