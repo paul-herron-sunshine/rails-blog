@@ -32,4 +32,16 @@ RSpec.feature "Integration Tests", :type => :feature do
     click_on 'Create my account'
     expect(page).to have_text("Password confirmation doesn't match Password")
   end
+
+  scenario "User Navigates the the sign up page and successfully creates a new account" do
+    visit "/signup"
+
+    fill_in "Name", :with => "test user"
+    fill_in "Email", :with => "test@email.com"
+    fill_in "Password", :with => "password"
+    fill_in "Confirmation", :with => "password"
+
+    click_on 'Create my account'
+    expect(page).to have_text("Account Created! Welcome to the OTB Academy Blog")
+  end
 end
