@@ -1,2 +1,30 @@
-<% provide(:title, 'Sign Up') %>
-<p>Sign up to our site now and start writing your blog!</p>
+<% provide(:title, 'Sign up') %>
+<h1>Sign up</h1>
+
+<div>
+  <div">
+    <%= form_for(@user) do |f| %>
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+
+      <br />
+
+      <%= f.label :email %>
+      <%= f.email_field :email %>
+
+      <br />
+
+      <%= f.label :password %>
+      <%= f.password_field :password %>
+
+      <br />
+
+      <%= f.label :password_confirmation, "Confirmation" %>
+      <%= f.password_field :password_confirmation %>
+
+      <br />
+
+      <%= f.submit "Create my account" %>
+    <% end %>
+  </div>
+</div>
