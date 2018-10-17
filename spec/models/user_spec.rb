@@ -81,4 +81,18 @@ RSpec.describe User, type: :model do
     expect(@user.valid?).to be false
   end
 
+  it "tests that we can save a user to the database if valid" do
+    expect(User.all.count).to be 0
+    @user.save
+    expect(User.all.count).to be 1
+  end
+
+  it "tests that we cant save a user to the database if invalid" do
+    expect(User.all.count).to be 0
+    @user.name = ""
+    @user.save
+    expect(User.all.count).to be 0
+  end
+
+
 end
