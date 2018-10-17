@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  include SessionsHelper
   def index
   end
 
@@ -7,6 +8,7 @@ class PostsController < ApplicationController
   end
 
   def new
+    @user_id=current_user
   end
 
   def create
