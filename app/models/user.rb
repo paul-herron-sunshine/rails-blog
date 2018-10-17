@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  has_many :posts
+
   VALID_EMAIL_PATTERN = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
   before_save { self.email = email.downcase }
