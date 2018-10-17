@@ -17,8 +17,6 @@ RSpec.feature "Integration Tests", :type => :feature do
     expect(page).to have_text("Password is too short (minimum is 6 characters)")
   end
 
-
-
   scenario "User Navigates the the sign up page and a confirmation password that does not match the password given" do
     visit "/signup"
 
@@ -46,7 +44,8 @@ RSpec.feature "Integration Tests", :type => :feature do
   scenario "User tries an invalid login and the flash appears. they then visit the home page and should not see the flash message" do
     visit "/login"
 
-    click_on 'Log in'
+    find_link('Log In', match: :first).click
+
     expect(page).to have_text("Invalid email/password combination")
     visit "/"
     expect(page).to_not have_text("Invalid email/password combination")
@@ -58,7 +57,7 @@ RSpec.feature "Integration Tests", :type => :feature do
     fill_in "Email", :with => @user.email
     fill_in "Password", :with => @user.password
 
-    click_on 'Log in'
+    click_button 'Log In'
     expect(page).to have_text("Test User")
   end
 
@@ -67,15 +66,26 @@ RSpec.feature "Integration Tests", :type => :feature do
     expect(page).to_not have_link("Users")
     expect(page).to_not have_link("Profile")
     expect(page).to_not have_link("Settings")
-    expect(page).to_not have_link("Log out")
+    expect(page).to_not have_link("Log Out")
 
     visit "/login"
 
     fill_in "Email", :with => @user.email
     fill_in "Password", :with => @user.password
 
-    click_on 'Log in'
-    expect(page).to have_text("Test User")
+    click_button 'Log In'
+
+    expect(page).to have_link("Users")
+    expect(page).to have_link("Profile")
+    expect(page).to have_link("Settings")
+    expect(page).to have_link("Log Out")
+
+    click_link 'Log Out'
+
+    expect(page).to_not have_link("Users")
+    expect(page).to_not have_link("Profile")
+    expect(page).to_not have_link("Settings")
+    expect(page).to_not have_link("Log Out")
   end
 
 end
