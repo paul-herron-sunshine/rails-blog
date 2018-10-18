@@ -1,6 +1,15 @@
 require "rails_helper"
 
 RSpec.feature "Integration Tests", :type => :feature do
+  def login_user
+    visit "/login"
+
+    fill_in "Email", :with => @user.email
+    fill_in "Password", :with => @user.password
+
+    click_button 'Log In'
+  end
+
   before :each do
     @user = User.new(name: "Test User", email: "user@test.com", password: "password", password_confirmation: "password")
     @user.save
@@ -61,12 +70,7 @@ RSpec.feature "Integration Tests", :type => :feature do
 
   scenario "user with a valid account can log in to the website and is successfully \
             redirected to their profile page" do
-    visit "/login"
-
-    fill_in "Email", :with => @user.email
-    fill_in "Password", :with => @user.password
-
-    click_button 'Log In'
+    login_user
     expect(page).to have_text("Test User")
   end
 
@@ -77,12 +81,7 @@ RSpec.feature "Integration Tests", :type => :feature do
     expect(page).to_not have_link("Settings")
     expect(page).to_not have_link("Log Out")
 
-    visit "/login"
-
-    fill_in "Email", :with => @user.email
-    fill_in "Password", :with => @user.password
-
-    click_button 'Log In'
+    login_user
 
     expect(page).to have_link("Profile")
     expect(page).to have_link("Settings")
@@ -96,12 +95,7 @@ RSpec.feature "Integration Tests", :type => :feature do
   end
 
   scenario "User should be remembered when leaving the site if logged in" do
-    visit "/login"
-
-    fill_in "Email", :with => @user.email
-    fill_in "Password", :with => @user.password
-
-    click_button 'Log In'
+    login_user
 
     expect(page).to have_link("Profile")
     expect(page).to have_link("Settings")
@@ -118,16 +112,9 @@ RSpec.feature "Integration Tests", :type => :feature do
 
   scenario "User should not be remembered after browser close if they have not \
             checked the 'remember me' checkbox when loggin in" do
-    visit "/login"
-
-    fill_in "Email", :with => @user.email
-    fill_in "Password", :with => @user.password
-
-    click_button 'Log In'
+    login_user
 
     page.reset!
-
-    visit "/"
 
     expect(page).to_not have_link("Profile")
     expect(page).to_not have_link("Settings")
@@ -137,5 +124,24 @@ RSpec.feature "Integration Tests", :type => :feature do
   scenario "User should be remembered after browser close if they have \
             checked the 'remember me' checkbox when loggin in" do
     #TODO
+  end
+
+  scenario "user should not be able to update the profile if the form is not \
+            filled in correctly. error messages will be displayed to the user \
+            detailing the failings" do
+    login_user
+
+    visit edit_user_path(@user.id)
+
+    fill_in "Name", :with => ""
+    fill_in "Email", :with => ""
+    fill_in "Password", :with => ""
+    fill_in "Confirmation", :with => ""
+
+
+    click_button 'Save changes'
+
+    expect(page).to have_text("errors")
+
   end
 end
