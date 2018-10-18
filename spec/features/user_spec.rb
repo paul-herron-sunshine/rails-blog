@@ -80,19 +80,19 @@ RSpec.feature "Integration Tests", :type => :feature do
     visit "/"
     expect(page).to_not have_link("Profile")
     expect(page).to_not have_link("Settings")
-    expect(page).to_not have_link("Log Out")
+    expect(page).to_not have_link("Log out")
 
     login_user(@user)
 
     expect(page).to have_link("Profile")
     expect(page).to have_link("Settings")
-    expect(page).to have_link("Log Out")
+    expect(page).to have_link("Log out")
 
-    click_link 'Log Out'
+    click_link 'Log out'
 
     expect(page).to_not have_link("Profile")
     expect(page).to_not have_link("Settings")
-    expect(page).to_not have_link("Log Out")
+    expect(page).to_not have_link("Log out")
   end
 
   scenario "User should be remembered when leaving the site if logged in" do
@@ -100,7 +100,7 @@ RSpec.feature "Integration Tests", :type => :feature do
 
     expect(page).to have_link("Profile")
     expect(page).to have_link("Settings")
-    expect(page).to have_link("Log Out")
+    expect(page).to have_link("Log out")
 
     visit "http://www.google.com"
 
@@ -108,7 +108,7 @@ RSpec.feature "Integration Tests", :type => :feature do
 
     expect(page).to have_link("Profile")
     expect(page).to have_link("Settings")
-    expect(page).to have_link("Log Out")
+    expect(page).to have_link("Log out")
   end
 
   scenario "User should not be remembered after browser close if they have not \
@@ -119,7 +119,7 @@ RSpec.feature "Integration Tests", :type => :feature do
 
     expect(page).to_not have_link("Profile")
     expect(page).to_not have_link("Settings")
-    expect(page).to_not have_link("Log Out")
+    expect(page).to_not have_link("Log out")
   end
 
   scenario "User should be remembered after browser close if they have \
