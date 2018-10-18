@@ -1,0 +1,115 @@
+/* stylelint-disable */
+// Grid
+$grid-width: 1200px;
+$grid-column-count: 12;
+$grid-gutter-width: 1em;
+
+// Breakpoints
+$breakpoints: (
+  s: 480,
+  m: 639,
+  l: 767,
+  xl: 940,
+  xxl: 1179,
+  xxxl: 1440
+);
+
+// Typography
+$body-font-family: "Open Sans", sans-serif;
+
+@function colour($palette, $key) {
+@return map-get(map-get($palettes, $palette), $key);
+}
+
+$white: #ffffff;
+
+// Grayscale Palette
+$greys: (
+  "white": $white,
+  "light": darken($white, 4%),
+  "mid": darken($white, 20%),
+  "dark": darken($white, 60%),
+  "black": darken($white, 100%)
+);
+
+// Default Palette
+$default: (
+  "main": $white,
+  "font": #313137,
+  "shadow": #ededed
+);
+
+// Primary Palette
+$primary: (
+  "main": #17317f,
+  "font": $white,
+  "shadow": #122d58
+);
+
+// Secondary Palette
+$secondary: (
+  "main": #00a5dd,
+  "font": $white,
+  "shadow": #0091c2
+);
+
+// Tertiary Palette
+$tertiary: (
+  "main": #d5eff9,
+  "font": $white,
+  "shadow": #b2ebf7,
+  "highlight": #eaf9ff
+);
+
+// Tertiary Palette
+$quaternary: (
+  "main": #f2eddf,
+  "font": #17317f,
+  "highlight": #fff8ca
+);
+
+// CTA Palette
+$cta: (
+  "main": #fedc07,
+  "font": #17317f,
+  "shadow": #ebc200
+);
+
+// Attention Palette
+$attention: (
+  "main": #c60900,
+  "font": $white,
+  "shadow": #ad0900
+);
+
+// Advert Palette
+$advert: (
+  "main": #f6417e,
+  "font": $white,
+  "highlight": #ec3772
+);
+
+// Social Palette
+$social: (
+  "facebook": #3b5999,
+  "facebook-font": $white,
+  "glassdoor": #7CB228,
+  "google": #dd4b39,
+  "linkedin": #0076b3,
+  "twitter": #55acee,
+  "tripadvisor": #589442
+);
+
+// All the Palette
+$palettes: (
+  "greys": $greys,
+  "default": $default,
+  "primary": $primary,
+  "secondary": $secondary,
+  "tertiary": $tertiary,
+  "quaternary": $quaternary,
+  "cta": $cta,
+  "attention": $attention,
+  "advert": $advert,
+  "social": $social
+);
