@@ -1,2 +1,13 @@
 <h1>Posts are here</h1>
-<li><%#= link_to "Submit a Post", new_post_path %></li>
+  <div>
+    <%@posts.each do |post|%>
+    <div>
+      <h1>
+        <%=post.title%>
+      </h1>
+      <p>
+        <%=post.body%>
+      </p>
+    </div>
+    <%end%>
+  </div> 
