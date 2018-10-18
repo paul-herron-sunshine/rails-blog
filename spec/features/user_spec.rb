@@ -1,11 +1,11 @@
 require "rails_helper"
 
 RSpec.feature "Integration Tests", :type => :feature do
-  def login_user
+  def login_user(user)
     visit "/login"
 
-    fill_in "Email", :with => @user.email
-    fill_in "Password", :with => @user.password
+    fill_in "Email", :with => user.email
+    fill_in "Password", :with => user.password
 
     click_button 'Log In'
   end
@@ -13,6 +13,9 @@ RSpec.feature "Integration Tests", :type => :feature do
   before :each do
     @user = User.new(name: "Test User", email: "user@test.com", password: "password", password_confirmation: "password")
     @user.save
+
+    @user2 = User.new(name: "Test User 2", email: "user2@test.com", password: "password", password_confirmation: "password")
+    @user2.save
   end
 
   scenario "the user should see different titles depending on the page that they \
@@ -65,7 +68,7 @@ RSpec.feature "Integration Tests", :type => :feature do
 
   scenario "user with a valid account can log in to the website and is successfully \
             redirected to their profile page" do
-    login_user
+    login_user(@user)
     expect(page).to have_text("Test User")
   end
 
@@ -76,7 +79,7 @@ RSpec.feature "Integration Tests", :type => :feature do
     expect(page).to_not have_link("Settings")
     expect(page).to_not have_link("Log Out")
 
-    login_user
+    login_user(@user)
 
     expect(page).to have_link("Profile")
     expect(page).to have_link("Settings")
@@ -90,7 +93,7 @@ RSpec.feature "Integration Tests", :type => :feature do
   end
 
   scenario "User should be remembered when leaving the site if logged in" do
-    login_user
+    login_user(@user)
 
     expect(page).to have_link("Profile")
     expect(page).to have_link("Settings")
@@ -107,7 +110,7 @@ RSpec.feature "Integration Tests", :type => :feature do
 
   scenario "User should not be remembered after browser close if they have not \
             checked the 'remember me' checkbox when loggin in" do
-    login_user
+    login_user(@user)
 
     page.reset!
 
@@ -124,7 +127,7 @@ RSpec.feature "Integration Tests", :type => :feature do
   scenario "user should not be able to update the profile if the form is not \
             filled in correctly. error messages will be displayed to the user \
             detailing the failings" do
-    login_user
+    login_user(@user)
 
     visit edit_user_path(@user.id)
 
@@ -142,7 +145,7 @@ RSpec.feature "Integration Tests", :type => :feature do
 
   scenario "user should be able to update their profile if all values entered are \
             valid" do
-    login_user
+    login_user(@user)
 
     visit edit_user_path(@user.id)
 
@@ -155,6 +158,18 @@ RSpec.feature "Integration Tests", :type => :feature do
     click_button 'Save changes'
 
     expect(page).to have_text("Profile Updated")
+  end
 
+  scenario "user who is not logged in should not be able to access edit profile \
+            page" do
+    visit edit_user_path(@user.id)
+    expect(page).to_not have_button("Save changes")
+  end
+
+  scenario "A logged in user should only be able to access his own edit profile \
+            page" do
+    login_user(@user)
+    visit edit_user_path(@user2.id)
+    expect(page).to_not have_button("Save changes")
   end
 end
