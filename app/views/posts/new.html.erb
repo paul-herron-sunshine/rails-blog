@@ -1,6 +1,9 @@
 <h1>Add post here</h1>
 
 <%= form_for :post, url: posts_path do |f| %>
+
+<%= f.hidden_field :user_id, value: current_user.id %> 
+ 
   <p>
     <%= f.label :title %><br>
     <%= f.text_field :title %>

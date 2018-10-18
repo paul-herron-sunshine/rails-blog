@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  include SessionsHelper
   def index
   end
 
@@ -10,6 +11,7 @@ class PostsController < ApplicationController
   end
 
   def create
+    # render plain: params[:post].inspect
     @post = Post.new(post_params)
 
     @post.save
@@ -18,7 +20,7 @@ class PostsController < ApplicationController
   end
 
   private def post_params
-    params.require(:post).permit(:title, :body)
+    params.require(:post).permit(:user_id, :title, :body)
   end
 
 end
