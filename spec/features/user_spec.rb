@@ -24,12 +24,7 @@ RSpec.feature "Integration Tests", :type => :feature do
             button without filling in any fields" do
     visit "/signup"
     click_on 'Create my account'
-    expect(page).to have_text("Name can't be blank")
-    expect(page).to have_text("Email can't be blank")
-    expect(page).to have_text("Email is invalid")
-    expect(page).to have_text("Password can't be blank")
-    expect(page).to have_text("Password can't be blank")
-    expect(page).to have_text("Password is too short (minimum is 6 characters)")
+    expect(page).to have_text("errors")
   end
 
   scenario "User Navigates the the sign up page and a confirmation password that \
@@ -142,6 +137,24 @@ RSpec.feature "Integration Tests", :type => :feature do
     click_button 'Save changes'
 
     expect(page).to have_text("errors")
+
+  end
+
+  scenario "user should be able to update their profile if all values entered are \
+            valid" do
+    login_user
+
+    visit edit_user_path(@user.id)
+
+    fill_in "Name", :with => "New Name"
+    fill_in "Email", :with => "new@email.com"
+    fill_in "Password", :with => "newpassword"
+    fill_in "Confirmation", :with => "newpassword"
+
+
+    click_button 'Save changes'
+
+    expect(page).to have_text("Profile Updated")
 
   end
 end
