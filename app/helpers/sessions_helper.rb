@@ -1,4 +1,5 @@
 module SessionsHelper
+  attr_reader :current_user
   def log_in(user)
     session[:user_id] = user.id
   end

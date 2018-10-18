@@ -110,13 +110,8 @@ RSpec.feature "Integration Tests", :type => :feature do
     expect(page).to have_link("Log Out")
   end
 
-  scenario "user is logged in on two windows and logs out on one of them. clicking log out on the other window should not result in error" do
-    visit "/login"
 
-    fill_in "Email", :with => @user.email
-    fill_in "Password", :with => @user.password
 
-    click_button 'Log In'
-  end
+
 
 end
