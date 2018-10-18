@@ -172,4 +172,23 @@ RSpec.feature "Integration Tests", :type => :feature do
     visit edit_user_path(@user2.id)
     expect(page).to_not have_button("Save changes")
   end
+
+  scenario "un logged in users should not be able to view full profile pages\
+            of other users" do
+    visit user_path(@user.id)
+    expect(page).to_not have_text(@user.name)
+  end
+
+  scenario "Logged in users be able to view full profile pages\
+            of other users" do
+    login_user(@user)
+    visit user_path(@user2.id)
+    expect(page).to have_text(@user2.name)
+  end
+
+  scenario "All users (both logged in and not logged in) will be able to see a \
+            list of all users on the site" do
+    visit users_path
+    expect(page).to have_text("All Users")
+  end
 end
