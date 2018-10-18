@@ -1,20 +1,26 @@
-<h1>Add post here</h1>
+<div class="posts">
+<div class="posts__title--container">
+  <h1 class="posts__title">You're in the right place to create a post!</h1>
+  </div>
+  <div class="form__container">
+    <div class="form">
+      <%= form_for :post, url: posts_path do |f| %>
+      <%= f.hidden_field :user_id, value: current_user.id %>
 
-<%= form_for :post, url: posts_path do |f| %>
+      <p class="form__label">
+        <%= f.label :title %><br>
+        <%= f.text_field :title, placeholder: "Add your article's title..." %>
+      </p>
 
-<%= f.hidden_field :user_id, value: current_user.id %> 
- 
-  <p>
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
-  </p>
+      <p class="form__label">
+        <%= f.label :body %><br>
+        <%= f.text_area :body, placeholder: "Add your article's content..." %>
+      </p>
 
-  <p>
-    <%= f.label :body %><br>
-    <%= f.text_area :body %>
-  </p>
-
-  <p>
-    <%= f.submit %>
-  </p>
-<% end %>
+      <p class="button">
+        <%= f.submit %>
+      </p>
+      <% end %>
+    </div>
+  </div>
+</div>

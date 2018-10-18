@@ -1,0 +1,32 @@
+.button {
+
+  input[type=submit] {
+    font-size: 1.4em;
+  }
+
+  $button-palettes: (secondary cta attention);
+
+  background-color: colour("cta","main");
+  border: 0;
+  border-radius: 0.25em;
+  color: $white;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 1rem;
+  line-height: 1.1em;
+  margin-left: 40%;
+  padding: 1em;
+  text-align: center;
+  text-decoration: none;
+
+  &:hover {
+    background-color: red;
+  }
+
+  &--small {
+    font-size: 1em;
+    padding-bottom: 0.75em;
+    padding-top: 0.75em;
+  }
+
+}
