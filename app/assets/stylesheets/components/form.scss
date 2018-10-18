@@ -1,0 +1,49 @@
+.form {
+font-size: 1rem;
+
+  input[type=text] {
+    border: 0.1em solid colour("cta","main");
+    border-radius: 0.4em;
+    background-color: colour("greys","light");
+    font-size: 0.8em;
+    margin-top: 0.5em;
+    outline: none;
+    padding: 12px 20px;
+    width: 87%;
+  }
+
+  input[type=text]:focus {
+    background-color: lightblue;
+  }
+
+  &__container {
+    background-color: colour("greys","light");
+    border-radius: 5px;
+    padding: 20px;
+    padding-left: 9em;
+  }
+
+  &__label {
+   font-size: 1.6em;
+  }
+
+  textarea {
+    background-color: colour("greys","light");
+    border: 0.1em solid colour("cta","main");
+    border-radius: 0.4em;
+    box-sizing: border-box;
+    font-size: 0.8em;
+    height: 150px;
+    outline: none;
+    margin-top: 0.5em;
+    padding: 12px 20px;
+    resize: none;
+    width: 90%;
+  }
+
+  textarea:focus {
+    background-color: lightblue;
+  }
+}
+
+
