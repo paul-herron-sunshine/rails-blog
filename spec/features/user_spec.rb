@@ -17,7 +17,7 @@ RSpec.feature "Integration Tests", :type => :feature do
     @user2 = User.new(name: "Test User 2", email: "user2@test.com", password: "password", password_confirmation: "password")
     @user2.save
 
-    @user_admin = User.new(name: "Test User", email: "user@test.com", password: "password", password_confirmation: "password", admin: true)
+    @user_admin = User.new(name: "Test User Admin", email: "useradmin@test.com", password: "password", password_confirmation: "password", admin: true)
     @user_admin.save
   end
 
@@ -197,8 +197,8 @@ RSpec.feature "Integration Tests", :type => :feature do
 
   scenario "Admins should be able to delete other users" do
     login_user(@user_admin)
-
-    users_before_delete = Users.count
+    visit users_path
+    users_before_delete = User.all.count
 
     expect(page).to have_text("All Users")
   end
