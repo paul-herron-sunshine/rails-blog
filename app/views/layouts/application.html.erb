@@ -9,6 +9,9 @@
     <%= render 'layouts/shim' %>
   </head>
   <body>
+    <% if logged_in? %>
+      <span>Current User id: <%= current_user.id %></span>
+    <% end %>
     <%= render 'layouts/header' %>
     <div class="container">
       <% flash.each do |message_type, message| %>
