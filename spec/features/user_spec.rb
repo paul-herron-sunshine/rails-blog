@@ -16,6 +16,9 @@ RSpec.feature "Integration Tests", :type => :feature do
 
     @user2 = User.new(name: "Test User 2", email: "user2@test.com", password: "password", password_confirmation: "password")
     @user2.save
+
+    @user_admin = User.new(name: "Test User", email: "user@test.com", password: "password", password_confirmation: "password", admin: true)
+    @user_admin.save
   end
 
   scenario "the user should see different titles depending on the page that they \
@@ -189,6 +192,14 @@ RSpec.feature "Integration Tests", :type => :feature do
   scenario "All users (both logged in and not logged in) will be able to see a \
             list of all users on the site" do
     visit users_path
+    expect(page).to have_text("All Users")
+  end
+
+  scenario "Admins should be able to delete other users" do
+    login_user(@user_admin)
+
+    users_before_delete = Users.count
+
     expect(page).to have_text("All Users")
   end
 end
