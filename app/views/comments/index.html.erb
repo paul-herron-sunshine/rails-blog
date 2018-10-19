@@ -3,13 +3,13 @@
 <h1>All comments for &ldquo;<%= @post.title %>&rdquo;</h1>
 <%= link_to 'Back to Post', post_path(@post) %>
 
-<section>
+<section class="comments">
   <% if @comments.all.count > 0 %>
 
     <% @comments.each do |comment| %>
-    <article>
+    <article class="container">
       <header>
-        <span><%= comment.created_at %></span>
+        <span>Posted at: <%= comment.created_at.strftime("%d/%m/%Y %H:%M:%S") %></span>
         <span><%= User.find(comment.user_id).name %></span>
       </header>
       <main><%= comment.body %></main>

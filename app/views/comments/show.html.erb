@@ -1,8 +1,13 @@
 <p id="notice"><%= notice %></p>
 
-<div style="border:1px;padding:2rem;">
-	<%= @comment.body %>
-</div>
+<section class="comments">
+    <article class="container">
+		<%= @comment.body %>
+		<footer>
+			<span><%= link_to 'Edit', edit_post_comment_path(@comment.post, @comment) %></span>
+			<span><%= link_to 'Back', post_comments_path %><span>		
+		</footer>
+	</article>
+</section>
 
-<%= link_to 'Edit', edit_post_comment_path(@comment.post, @comment) %> |
-<%= link_to 'Back', post_comments_path %>
+
