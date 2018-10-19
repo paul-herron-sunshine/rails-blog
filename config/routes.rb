@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'password_resets/new'
+  get 'password_resets/edit'
   root "posts#index"
 
   get 'about' => 'pages#about'
@@ -14,6 +16,8 @@ Rails.application.routes.draw do
   resources :posts do
     resources :comments
   end
+  resources :password_resets, only: [:new, :create, :edit, :update]
+
 
 
 end
