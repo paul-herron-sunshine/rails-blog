@@ -11,13 +11,16 @@ RSpec.feature "Integration Tests", :type => :feature do
   end
 
   before :each do
-    @user = User.new(name: "Test User", email: "user@test.com", password: "password", password_confirmation: "password")
+    @un_activated_user = User.new(name: "Test User Inactive", email: "userinactive@test.com", password: "password", password_confirmation: "password", activated: false)
+    @un_activated_user.save
+
+    @user = User.new(name: "Test User", email: "user@test.com", password: "password", password_confirmation: "password", activated: true)
     @user.save
 
-    @user2 = User.new(name: "Test User 2", email: "user2@test.com", password: "password", password_confirmation: "password")
+    @user2 = User.new(name: "Test User 2", email: "user2@test.com", password: "password", password_confirmation: "password", activated: true)
     @user2.save
 
-    @user_admin = User.new(name: "Test User Admin", email: "useradmin@test.com", password: "password", password_confirmation: "password", admin: true)
+    @user_admin = User.new(name: "Test User Admin", email: "useradmin@test.com", password: "password", password_confirmation: "password", activated: true, admin: true)
     @user_admin.save
   end
 
@@ -201,7 +204,38 @@ RSpec.feature "Integration Tests", :type => :feature do
     users_before_delete = User.all.count
 
     expect(page).to have_text("All Users")
-
-
   end
+
+  scenario "Should redirect the user to the home page with a message if they have not activated their account upon login" do
+    @un_activated_user.save
+    login_user(@un_activated_user)
+    expect(page).to have_text("Account not activated. Check your email for the activation link.")
+  end
+
+#  scenario "Tests the entire process for a new user activating their account" do
+#    visit signup_path
+#
+#    initial_users_count = User.count
+#    initial_mail_deliveries_size = ActionMailer::Base.deliveries.size
+#
+#    new_user = { name:  "inactive new user",
+#                email: "inactive_new_user@inactive.com",
+#                password: "password",
+#                password_confirmation: "password" }
+#
+#    fill_in "Name", :with => new_user[:name]
+#    fill_in "Email", :with => new_user[:email]
+#    fill_in "Password", :with => new_user[:password]
+#    fill_in "Confirmation", :with => new_user[:confirmation]
+#
+#    click_button "Create my account"
+#
+#    #expect(User.count).to_not eq initial_users_count
+#    expect(ActionMailer::Base.deliveries.size).to eq initial_mail_deliveries_size
+#    expect(new_user.activated?).to be false
+#
+#
+#    login_user(new_user)
+#
+#  end
 end
