@@ -12,12 +12,13 @@
     background-image: url("./header2.jpg");
     background-repeat: no-repeat;
     background-size: 100% 100%;
-    border:  2px solid yellow;
+    border:  2px solid colour("cta","main");
     border-radius: 0.6em;
     color: colour("cta","font");
     font-size: 1.4em;
     margin-bottom: 1em;
     margin-left: 1.2em;
+    margin-top: 1em;
     padding: 0.2em 0.5em;
   }
 

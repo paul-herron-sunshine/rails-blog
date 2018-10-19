@@ -18,4 +18,54 @@
       margin: -1.3em;
     }
   }
+
+  &__container {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-template-rows: repeat(auto-fill);
+  grid-row-gap: .5em;
+  grid-column-gap: 2em;
+  margin-top: 2em;
+  width: 50%;
+
+  &--link {
+    background-image: url("./header2.jpg");
+    border: 2px solid colour("cta","font");
+    border-radius: 2em;
+    color: colour("cta","font");
+    height: 11em;
+    float:right;
+    overflow:hidden;
+    margin-top: 2.5em;
+    padding: 1em;
+    text-align: center;
+    width:35%;
+    }
+  }
+
+  &__single {
+    background-color: rgba(colour("cta","main"),0.3);
+    border: 2px solid colour("cta","font");
+    border-radius: 3rem;
+    border-style: ridge;
+    color: colour("cta","font");
+    justify-content: space-around;
+    margin: 1%;
+    min-height: 3em;
+    padding: 2rem;
+    text-align: center;
+  }
+
+  &__page {
+    display: inline-flex;
+    width: 60%;
+  }
 }
+
+.posts__container {
+  float:left;
+  width:100%;
+  overflow:hidden;
+}
+

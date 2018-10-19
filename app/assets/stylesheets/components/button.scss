@@ -23,10 +23,11 @@
     background-color: red;
   }
 
-  &--small {
-    font-size: 1em;
-    padding-bottom: 0.75em;
-    padding-top: 0.75em;
+  &--create_post {
+  color: colour("cta","font");
+  font-family: "Open Sans", sans-serif;
+  font-size: 1em;
+  margin-left: 0;
   }
 
 }
