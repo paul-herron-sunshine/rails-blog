@@ -9,10 +9,11 @@ Rails.application.routes.draw do
   post 'login' => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
 
-  # Resources
+  resources :account_activations, only: [:edit]
   resources :users
-  resources :posts do 
+  resources :posts do
     resources :comments
   end
+
 
 end

@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user, only: [:show, :edit, :update]
+  before_action :logged_in_user, only: [:show, :edit, :update, :destroy]
   before_action :correct_user, only: [:edit, :update]
+  before_action :admin_user, only: :destroy
 
   def index
     @users = User.paginate(page: params[:page])
@@ -18,9 +19,9 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      log_in @user
-      flash[:success] = "Account Created! Welcome to the OTB Academy Blog"
-      redirect_to @user
+      UserMailer.account_activation(@user).deliver_now
+      flash[:info] = "Thank you. We have sent an activation email to #{@user.email}. Please visit the link included to complete your registration"
+      redirect_to root_url
     else
       render 'new'
     end
@@ -40,6 +41,14 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  def destroy
+    user = User.find(params[:id])
+    user.destroy
+    flash[:success] = "#{user.name}'s account has been successfully deleted"
+    redirect_to users_url
+
+  end
+
   private
 
     def user_params
@@ -57,5 +66,9 @@ class UsersController < ApplicationController
     def correct_user
       @user = User.find(params[:id])
       redirect_to(root_url) unless @user == current_user
+    end
+
+    def admin_user
+      redirect_to(root_url) unless current_user.admin?
     end
 end
