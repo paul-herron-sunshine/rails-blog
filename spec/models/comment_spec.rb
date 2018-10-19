@@ -4,12 +4,12 @@ RSpec.describe Comment, type: :model do
 
   before :each do    
 
-  	@user = Comment.new
+  	@user = User.new
   	@user = User.new(name: "Test User", email: "user@test.com", password: "password", password_confirmation: "password")
   	@user.save
 
-  	@post = Comment.new
-  	@post = Post.new(title: "Test Post", body: "test test")
+  	@post = Post.new
+  	@post = Post.new(title: "Test Post", body: "test test", user_id: "1")
   	@post.save
 
   	@comment = Comment.new
@@ -27,5 +27,7 @@ RSpec.describe Comment, type: :model do
     @comment.body = ""
     expect(@comment.valid?).to be false
   end
+
+end
 
 
