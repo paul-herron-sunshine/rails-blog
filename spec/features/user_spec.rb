@@ -201,5 +201,7 @@ RSpec.feature "Integration Tests", :type => :feature do
     users_before_delete = User.all.count
 
     expect(page).to have_text("All Users")
+
+
   end
 end
