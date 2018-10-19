@@ -20,7 +20,6 @@ class PasswordResetsController < ApplicationController
   end
 
   def edit
-    @user = get_user
   end
 
   def update
