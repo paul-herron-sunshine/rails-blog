@@ -1,0 +1,9 @@
+<h1>On The Beach Academy Blog 2018</h1>
+
+<p>Hi <%= @user.name %>,</p>
+<p>
+Thank you for signing up to the On The Beach Academy Blog 2018. Click the link below to activate your account:
+</p>
+
+<%= link_to "Activate", edit_account_activation_url(@user.activation_token,
+                                                    email: @user.email) %>
