@@ -1,27 +1,27 @@
 <div class="posts__title--container">
-<h1 class="posts__title">Posts are here</h1>
+  <h1 class="posts__title">Posts are here</h1>
 </div>
 <div class="posts__page">
   <div class="posts__container">
-    <%# <div class="<%= post.id %>
     <%@posts.each do |post|%>
     <div class="posts__single">
-        <h1>
-          <%=post.title%>
-        </h1>
-        <p>
-         by <%=post.user_id%>
-        </p>
-        <p>
-          <%=post.body%>
-        </p>
-      </div>
-      <%end%>
+      <h1>
+        <%=post.title%>
+      </h1>d
+      <p>
+        by <%=post.user_id%>
+      </p>
+      <p>
+        <%=post.body%>
+      </p>
+  <li class="button button--create_post"><%= link_to 'Destroy Post', post_path(post.id), method: :delete, data: { confirm: 'Are you sure?' }%></li>
     </div>
+      <%end%>
   </div>
-  <div class="posts__container--link">
-    <h2>Feel like joining the discussion?</h2>
-    <li class="button button--create_post"><%= link_to "Create Post", new_post_path, {:style=>'text-decoration:none;'} %></li>
-  </div>
-  </div>
+</div>
+<div class="posts__container--link">
+  <h2>Feel like joining the discussion?</h2>
+  <li class="button button--create_post"><%= link_to "Create Post", new_post_path, {:style=>'text-decoration:none;'} %></li>
+</div>
+</div>
 
