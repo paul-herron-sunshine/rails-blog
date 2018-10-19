@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= full_title(yield(:title)) %></title>
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag    'application', media: 'all',
+                                              'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload'  %>
+    <%= render 'layouts/shim' %>
+  </head>
+  <body>
+    <%= render 'layouts/header' %>
+    <% flash.each do |message_type, message| %>
+    <div class="post__title--container">
+  <h1 class="post__title"><%=flash[:success]%></h1>
+      <% end %>
+</div>
+    <div class="container">
+      
+      <%= yield %>
+      <br /><br />
+      <%= render 'layouts/footer' %>
+    </div>
+  </body>
+</html>

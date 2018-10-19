@@ -1,8 +1,6 @@
 <% provide(:title, 'Post') %>
 
-<div class="post__title--container">
- <h1 class="post__title">Your post was successful!</h1>
-  </div>
+
   <div class="post__page">
       <div class="post__single">
         <h1>
@@ -14,6 +12,19 @@
         <p>
           <%=@post.body%>
         </p>
+        <div class="comments">
+    Comments show here:
+    <div class="comments__container">
+      <%@post.comments.each do |comment|%> 
+        <div class="comments__single">
+           <%=comment.body%> 
+        </div>
+      <%end%> 
+    </div>
+     <% if @post.user.name == current_user.name %>
+      <li class="button button--delete_post"><%= link_to 'Delete Post', post_path(@post.id), {method: :delete, data: { confirm: 'Are you sure?' }, :style=>'text-decoration:none;'}%></li>
+      <%end%>
+  </div>
       </div>
   </div>
 </div>

@@ -1,13 +1,18 @@
 class PostsController < ApplicationController
+  layout "posts"
   include SessionsHelper
   before_action :set_post, only: [:show, :edit, :update, :destroy]
 
   def index
     @posts = Post.all
+    #sort here
+    flash.delete(:success)
   end
 
   def show
     @post = Post.find(params[:id])
+    flash[:success] = "Here's the article"
+
   end
 
   def new
@@ -17,6 +22,7 @@ class PostsController < ApplicationController
     # render plain: params[:post].inspect
     @post = Post.new(post_params)
     @post.save
+    flash[:success] = "Your post was successful!"
     #loads show view:
     redirect_to @post
   end

@@ -4,6 +4,7 @@
 <div class="posts__page">
   <div class="posts__container">
     <%@posts.each do |post|%>
+<%= link_to post_path(post.id), class: "linkstyle" do %>
     <div class="posts__single">
       <h1>
         <%=post.title%>
@@ -14,22 +15,12 @@
       <p>
         <%=post.body%>
       </p>
-      <% if post.user.name == current_user.name %>
-      <li class="button button--delete_post"><%= link_to 'Delete Post', post_path(post.id), {method: :delete, data: { confirm: 'Are you sure?' }, :style=>'text-decoration:none;'}%></li>
-      <%end%>
-    <div class="comments">
-    Comments show here:
-    <div class="comments__container">
-      <%post.comments.each do |comment|%>
-        <div class="comments__single">
-          <%=comment.body%>
-        </div>
-      <%end%>
-    </div>
-  </div>
   </div>
     <%end%>
+        <%end%>
   </div>
+
+  </li>
 </div>
 <div class="posts__container--link">
   <h2>Feel like joining the discussion?</h2>
