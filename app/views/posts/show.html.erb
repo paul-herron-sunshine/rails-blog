@@ -1,3 +1,20 @@
 <% provide(:title, 'Post') %>
-<h2><%=@post.title %></h2>
-<p><%=@post.body %></p>
+
+<div class="post__title--container">
+ <h1 class="post__title">Your post was successful!</h1>
+  </div>
+  <div class="post__page">
+      <div class="post__single">
+        <h1>
+          <%=@post.title%>
+        </h1>
+        <p>
+          by <%=@post.user.name%>
+        </p>
+        <p>
+          <%=@post.body%>
+        </p>
+      </div>
+  </div>
+</div>
+

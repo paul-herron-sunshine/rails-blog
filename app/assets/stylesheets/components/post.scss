@@ -1,0 +1,43 @@
+.post {
+  font-family: "Open Sans", sans-serif;
+  font-size: 1rem;
+  padding: 0.3em;
+
+  &__title{
+    background-image: url("./footer.jpg");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;  font-family: "Open Sans", sans-serif;    color: colour("cta", "font");
+    font-size: 2.4em;
+    margin-top: 1em;
+    padding-bottom: 1.5em;
+    padding-top: 1.5em;
+    text-align: center;
+    vertical-align: middle;
+
+    &--container {
+      margin: -1.3em;
+    }
+  }
+
+  &__single {
+    background-color: rgba(colour("cta","main"),0.3);
+    border: 2px solid colour("cta","font");
+    border-radius: 3rem;
+    border-style: ridge;
+    color: colour("cta","font");
+    justify-content: space-around;
+    margin: 1%;
+    margin-top: 4em;
+    min-height: 3em;
+    padding: 2rem;
+    text-align: center;
+  }
+
+  &__page {
+    margin-left: auto;
+    margin-right: auto;
+    width: 60%;
+  }
+}
+
+

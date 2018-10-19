@@ -1,0 +1,13 @@
+.alert {
+  background-color: colour("cta","main");
+  border: 0.1em solid colour("cta","font");
+  border-radius: 0.4em;
+  color: colour("cta","font");
+  font-family: "Open Sans", sans-serif;
+  font-size: 1.6em;
+  text-align: center;
+  margin-left: 0.5em;
+  padding: 0.2em;
+  width: 45%;
+}
+

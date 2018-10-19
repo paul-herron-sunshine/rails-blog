@@ -1,5 +1,5 @@
 <div class="posts__title--container">
-  <h1 class="posts__title">Posts are here</h1>
+  <h1 class="posts__title">Welcome to the OTB Academy Blogosphere!</h1>
 </div>
 <div class="posts__page">
   <div class="posts__container">
@@ -7,16 +7,28 @@
     <div class="posts__single">
       <h1>
         <%=post.title%>
-      </h1>d
+      </h1>
       <p>
-        by <%=post.user_id%>
+        by <%=post.user.name%>
       </p>
       <p>
         <%=post.body%>
       </p>
-  <li class="button button--create_post"><%= link_to 'Destroy Post', post_path(post.id), method: :delete, data: { confirm: 'Are you sure?' }%></li>
-    </div>
+      <% if post.user.name == current_user.name %>
+      <li class="button button--delete_post"><%= link_to 'Delete Post', post_path(post.id), {method: :delete, data: { confirm: 'Are you sure?' }, :style=>'text-decoration:none;'}%></li>
       <%end%>
+    <div class="comments">
+    Comments show here:
+    <div class="comments__container">
+      <%post.comments.each do |comment|%>
+        <div class="comments__single">
+          <%=comment.body%>
+        </div>
+      <%end%>
+    </div>
+  </div>
+  </div>
+    <%end%>
   </div>
 </div>
 <div class="posts__container--link">

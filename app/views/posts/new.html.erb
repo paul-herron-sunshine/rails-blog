@@ -1,6 +1,6 @@
 <div class="posts">
-<div class="posts__title--container">
-  <h1 class="posts__title">You're in the right place to create a post!</h1>
+  <div class="posts__title--container">
+    <h1 class="posts__title">You're in the right place to create a post!</h1>
   </div>
   <div class="form__container">
     <div class="form">
@@ -9,16 +9,16 @@
 
       <p class="form__label">
         <%= f.label :title %><br>
-        <%= f.text_field :title, placeholder: "Add your article's title..." %>
+        <%= f.text_field :title, placeholder: "Add your article's title...", required: true %>
       </p>
 
       <p class="form__label">
         <%= f.label :body %><br>
-        <%= f.text_area :body, placeholder: "Add your article's content..." %>
+        <%= f.text_area :body, placeholder: "Add your article's content...", required: true %>
       </p>
 
-      <p class="button">
-        <%= f.submit %>
+      <p>
+        <%= f.submit class:"button button--save_post"%>
       </p>
       <% end %>
     </div>

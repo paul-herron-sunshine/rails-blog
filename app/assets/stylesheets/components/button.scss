@@ -20,14 +20,23 @@
   text-decoration: none;
 
   &:hover {
-    background-color: red;
+    background-color: $white;
   }
 
   &--create_post {
   color: colour("cta","font");
   font-family: "Open Sans", sans-serif;
-  font-size: 1em;
+  font-size: 1.2em;
   margin-left: 0;
   }
 
+  &--delete_post {
+    font-size: 1em;
+    margin-left: 0;
+    }
+
+  &--save_post {
+    color: colour("cta","font");
+    font-size: 1.2em;
+    }
 }
