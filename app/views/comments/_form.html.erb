@@ -3,18 +3,22 @@
 
   <%= form_for(@comment, url: post_comments_path) do |f| %>
     <%= f.label :body %>
-    <%= f.text_area :body %>
+    <%= f.text_area :body, value: @comment.body %>
 
     <%= f.hidden_field :post_id, value: @post.id %>
     <%= f.hidden_field :user_id, value: current_user.id %>
     <br>
-    <%= f.submit "Submit Comment" %>
+    <% if @comment.id %>
+      <%= f.submit "Edit Comment" %>
+    <% else %>
+      <%= f.submit "Submit Comment" %>
+    <% end %>
     <% if comment.errors.any? %>
       <div id="error_explanation">
         <h2><%= pluralize(comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
         <ul>
         <% comment.errors.full_messages.each do |message| %>
-          <li><%#= message %></li>
+          <li><%= message %></li>
         <% end %>
         </ul>
       </div>
