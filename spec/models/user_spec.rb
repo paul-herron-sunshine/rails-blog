@@ -94,5 +94,8 @@ RSpec.describe User, type: :model do
     expect(User.all.count).to be 0
   end
 
+  it "should return false for a non authenticated user" do
+    expect(@user.authenticated?(:remember, '')).to be false
+  end
 
 end
