@@ -98,4 +98,10 @@ RSpec.describe User, type: :model do
     expect(@user.authenticated?(:remember, '')).to be false
   end
 
+  it "should add one to the views field in the user" do
+    expect(@user.views).to be 0
+    @user.set_views(1)
+    expect(@user.views).to be 1
+  end
+
 end

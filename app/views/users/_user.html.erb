@@ -1,12 +1,15 @@
 <li>
   <%= gravatar_for user, size: 50 %>
   <% if logged_in? %>
-    <%= link_to user.name, user %>
+    <%= link_to user.name, user %> | <em><%= pluralize(user.views, "view") %></em>
+
     <% if current_user.admin? && !(current_user == user) %>
-  |   <%= link_to "delete", user, method: :delete,
+      | <%= link_to "delete", user, method: :delete,
                                 data: { confirm: "Are you certain you want to delete #{user.name}?" } %>
     <% end %>
-
+    <% if user.is_online %>
+      | <span style="color:green;"><em>Currently Online</em></span>
+    <% end %>
   <% else %>
     <strong><%= user.name %></strong> - <em>log in to view full profile</em>
   <% end %>

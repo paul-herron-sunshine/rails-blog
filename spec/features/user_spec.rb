@@ -11,17 +11,10 @@ RSpec.feature "Integration Tests", :type => :feature do
   end
 
   before :each do
-    @un_activated_user = User.new(name: "Test User Inactive", email: "userinactive@test.com", password: "password", password_confirmation: "password", activated: false)
-    @un_activated_user.save
-
-    @user = User.new(name: "Test User", email: "user@test.com", password: "password", password_confirmation: "password", activated: true)
-    @user.save
-
-    @user2 = User.new(name: "Test User 2", email: "user2@test.com", password: "password", password_confirmation: "password", activated: true)
-    @user2.save
-
-    @user_admin = User.new(name: "Test User Admin", email: "useradmin@test.com", password: "password", password_confirmation: "password", activated: true, admin: true)
-    @user_admin.save
+    @un_activated_user = User.create(name: "Test User Inactive", email: "userinactive@test.com", password: "password", password_confirmation: "password", activated: false)
+    @user = User.create(name: "Test User", email: "user@test.com", password: "password", password_confirmation: "password", activated: true)
+    @user2 = User.create(name: "Test User 2", email: "user2@test.com", password: "password", password_confirmation: "password", activated: true)
+    @user_admin = User.create(name: "Test User Admin", email: "useradmin@test.com", password: "password", password_confirmation: "password", activated: true, admin: true)
   end
 
   scenario "the user should see different titles depending on the page that they \
@@ -226,5 +219,20 @@ RSpec.feature "Integration Tests", :type => :feature do
 
     expect(page).to have_text "Test User 2"
     expect(page).to_not have_text "Test User Admin"
+  end
+
+  scenario "" do
+    views_before_profile_view = @user_admin.views
+    visit "/users/#{@user_admin.id}"
+    login_user(@user_admin)
+    @user_admin.reload
+    expect(@user_admin.views).to_not eq views_before_profile_view
+  end
+
+  scenario "is_online flag should be true when user is logged in" do
+    expect(@user_admin.is_online).to be false
+    login_user(@user_admin)
+    @user_admin.reload
+    expect(@user_admin.is_online).to be true
   end
 end
