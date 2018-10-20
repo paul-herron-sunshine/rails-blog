@@ -27,12 +27,15 @@ class PostsController < ApplicationController
   end
 
   def destroy
-     if @post.user_id == current_user.id    # destroy method deletes record from db
-      @post.destroy
-      respond_to do |format|
-        format.html { redirect_to posts_url, notice: 'Your post was successfully deleted.' }
-        format.json { head :no_content }
-      end
+    if @post.user_id == current_user.id    # destroy method deletes record from db
+    @post.destroy
+    respond_to do |format|
+      format.html { redirect_to posts_url }
+      format.json { head :no_content }
+      flash[:success] = "Your post was successfully deleted"
+
+      single_title = "Your post was successfully removed"
+    end
     else
       flash[:danger] = "You can only delete articles that you have written"
       redirect_to posts_url

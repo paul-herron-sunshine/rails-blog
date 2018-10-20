@@ -1,5 +1,5 @@
 .container {
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Roboto Mono', monospace;
 }
 
 a {
@@ -7,5 +7,9 @@ a {
 }
 
 body {
-  height: 100%
+  background-color: rgba(colour("cta","main"),0.3);
+  font-family: 'Roboto Mono', monospace;
+  height: 100%;
+  width: 100%
 }
+

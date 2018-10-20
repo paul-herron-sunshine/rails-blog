@@ -6,7 +6,7 @@
 
   $button-palettes: (secondary cta attention);
 
-  background-color: colour("cta","main");
+  background-color: rgba(colour("cta","main"), 0.8);
   border: 0;
   border-radius: 0.25em;
   color: $white;
@@ -25,7 +25,6 @@
 
   &--create_post {
   color: colour("cta","font");
-  font-family: "Open Sans", sans-serif;
   font-size: 1.2em;
   margin-left: 0;
   }

@@ -1,42 +1,43 @@
 .posts {
-  font-family: "Open Sans", sans-serif;
   font-size: 1rem;
   padding: 0.3em;
 
   &__title{
-    background-image: url("./footer.jpg");
-    background-repeat: no-repeat;
-    background-size: 100% 100%;  font-family: "Open Sans", sans-serif;    color: colour("cta", "font");
-    font-size: 2.4em;
-    margin-top: 1em;
-    padding-bottom: 1.5em;
-    padding-top: 1.5em;
+    color: colour("cta", "font");
+    font-size: 2em;
+    padding-bottom: 1.2em;
+    padding-top: 1.2em;
     text-align: center;
     vertical-align: middle;
 
     &--container {
+      background-image: url("./header5.jpg");
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
       margin: -1.3em;
     }
   }
 
   &__container {
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(1, 1fr);
-  grid-template-rows: repeat(auto-fill);
-  grid-row-gap: .5em;
-  grid-column-gap: 2em;
-  margin-top: 2em;
-  width: 50%;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: repeat(auto-fill);
+    grid-row-gap: .5em;
+    grid-column-gap: 2em;
+    margin-top: 2em;
+    width: 100%;
 
   &--link {
-    background-image: url("./header2.jpg");
+    background-image: url("./header3.jpg");
+    // background-repeat: no-repeat;
+    background-size: 100% 230%;
     border: 2px solid colour("cta","font");
     border-radius: 2em;
     color: colour("cta","font");
     height: 11em;
     float:right;
     overflow:hidden;
+    margin-right: 1.6em;
     margin-top: 2.5em;
     padding: 1em;
     text-align: center;
