@@ -104,4 +104,15 @@ RSpec.describe User, type: :model do
     expect(@user.views).to be 1
   end
 
+  it "should update the last_active_at fiels in the user model" do
+    @user.set_last_active(Time.zone.now)
+    first_t = @user.last_active_at
+
+    sleep(1.0/2)
+    @user.set_last_active(Time.zone.now)
+    second_t = @user.last_active_at
+    expect(first_t).to be < second_t
+
+  end
+
 end

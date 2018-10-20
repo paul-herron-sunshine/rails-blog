@@ -30,6 +30,10 @@ class User < ApplicationRecord
     update_attribute(:is_online, ol)
   end
 
+  def set_last_active(last_active)
+    update_attribute(:last_active_at, last_active)
+  end
+
   def self.new_token
     SecureRandom.urlsafe_base64
   end

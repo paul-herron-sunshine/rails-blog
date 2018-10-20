@@ -3,6 +3,7 @@ module SessionsHelper
   def log_in(user)
     session[:user_id] = user.id
     user.set_online(true)
+    user.set_last_active(Time.zone.now)
   end
 
   def remember(user)
