@@ -4,7 +4,6 @@ class UsersController < ApplicationController
   before_action :admin_user, only: :destroy
 
   def index
-    @parameters = params
     if params[:user] != nil && params[:user].key?(:search_string)
       @users = []
       User.all.each do |u|
@@ -22,6 +21,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @user.set_views(@user.views + 1)
   end
 
   def create

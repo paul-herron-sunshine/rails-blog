@@ -4,7 +4,8 @@ User.create!(name:  "Fraser Johnstone",
              password_confirmation: "Mancini2180",
              admin: true,
              activated: true,
-             activated_at: Time.zone.now)
+             activated_at: Time.zone.now,
+             views: Random.rand(0..450))
 
 User.create!(name:  "Paul Herron",
              email: "paul.herron@onthebeach.co.uk",
@@ -12,7 +13,8 @@ User.create!(name:  "Paul Herron",
              password_confirmation: "password",
              admin: true,
              activated: true,
-             activated_at: Time.zone.now)
+             activated_at: Time.zone.now,
+             views: Random.rand(0..450))
 
 User.create!(name:  "Kirstie Davidson",
              email: "kirstie.davidson@onthebeach.co.uk",
@@ -20,7 +22,8 @@ User.create!(name:  "Kirstie Davidson",
              password_confirmation: "password",
              admin: true,
              activated: true,
-             activated_at: Time.zone.now)
+             activated_at: Time.zone.now,
+             views: Random.rand(0..450))
 
 97.times do |n|
   name  = Faker::Name.name
@@ -31,6 +34,7 @@ User.create!(name:  "Kirstie Davidson",
                password: password,
                password_confirmation: password,
                activated: true,
-               activated_at: Time.zone.now)
+               activated_at: Time.zone.now,
+               views: Random.rand(0..450))
 
 end

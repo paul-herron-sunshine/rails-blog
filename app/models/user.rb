@@ -22,6 +22,18 @@ class User < ApplicationRecord
     BCrypt::Password.create(string, cost: cost)
   end
 
+  def set_views(new_views)
+    update_attribute(:views, new_views)
+  end
+
+  def set_online(ol)
+    update_attribute(:is_online, ol)
+  end
+
+  def set_last_active(last_active)
+    update_attribute(:last_active_at, last_active)
+  end
+
   def self.new_token
     SecureRandom.urlsafe_base64
   end
@@ -46,19 +58,16 @@ class User < ApplicationRecord
     update_attribute(:activated_at, Time.zone.now)
   end
 
-  # Sends activation email.
   def send_activation_email
     UserMailer.account_activation(self).deliver_now
   end
 
-  # Sets the password reset attributes.
   def create_reset_digest
     self.reset_token = User.new_token
     update_attribute(:reset_digest,  User.digest(reset_token))
     update_attribute(:reset_sent_at, Time.zone.now)
   end
 
-  # Sends password reset email.
   def send_password_reset_email
     UserMailer.password_reset(self).deliver_now
   end
