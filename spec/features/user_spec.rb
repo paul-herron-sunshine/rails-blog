@@ -204,38 +204,27 @@ RSpec.feature "Integration Tests", :type => :feature do
     users_before_delete = User.all.count
 
     expect(page).to have_text("All Users")
+    click_link("delete", :match => :first)
+    expect(User.all.count).to_not eq users_before_delete
   end
 
-  scenario "Should redirect the user to the home page with a message if they have not activated their account upon login" do
+  scenario "Should redirect the user to the home page with a message if they \
+            have not activated their account upon login" do
     @un_activated_user.save
     login_user(@un_activated_user)
     expect(page).to have_text("Account not activated. Check your email for the activation link.")
   end
 
-#  scenario "Tests the entire process for a new user activating their account" do
-#    visit signup_path
-#
-#    initial_users_count = User.count
-#    initial_mail_deliveries_size = ActionMailer::Base.deliveries.size
-#
-#    new_user = { name:  "inactive new user",
-#                email: "inactive_new_user@inactive.com",
-#                password: "password",
-#                password_confirmation: "password" }
-#
-#    fill_in "Name", :with => new_user[:name]
-#    fill_in "Email", :with => new_user[:email]
-#    fill_in "Password", :with => new_user[:password]
-#    fill_in "Confirmation", :with => new_user[:confirmation]
-#
-#    click_button "Create my account"
-#
-#    #expect(User.count).to_not eq initial_users_count
-#    expect(ActionMailer::Base.deliveries.size).to eq initial_mail_deliveries_size
-#    expect(new_user.activated?).to be false
-#
-#
-#    login_user(new_user)
-#
-#  end
+  scenario "search functionality on the users page displays only users containing the search string" do
+    visit users_path
+    expect(page).to have_text "Test User"
+    expect(page).to have_text "Test User 2"
+    expect(page).to have_text "Test User Admin"
+
+    fill_in "user_search_string", :with => "Test User 2"
+    click_button "Search"
+
+    expect(page).to have_text "Test User 2"
+    expect(page).to_not have_text "Test User Admin"
+  end
 end
