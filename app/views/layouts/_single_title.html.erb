@@ -1,7 +1,6 @@
 <div class="posts__title--container">
-  <%# <h1 class="posts__title">Welcome to the OTB Academy Blogosphere PAGE TITLE from _single-title!</h1> %>
-      <h1 class="posts__title"><%= single_title(yield(:single_title)) %></h1>
- <% flash.each do |message_type, message| %>
-        <div class="alert alert-<%= message_type %>"><%= message %></div>
-      <% end %>
+  <h1 class="posts__title"><%= single_title(yield(:single_title)) %></h1>
+  <% flash.each do |message_type, message| %>
+    <div class="alert alert-<%= message_type %>"><%= message %></div>
+  <% end %>
 </div>

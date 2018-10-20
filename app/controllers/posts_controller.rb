@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   layout "posts"
   include SessionsHelper
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :set_post, only: [:show, :edit, :update, :destroy, :vote]
 
   def index
     @posts = Post.all
@@ -40,6 +40,12 @@ class PostsController < ApplicationController
       flash[:danger] = "You can only delete articles that you have written"
       redirect_to posts_url
     end
+  end
+
+  def update
+    @post = Post.find(params[:id])
+    @post.update_attribute(:votes, @post.votes + params[:value].to_i)
+    redirect_to @post
   end
 
   private 

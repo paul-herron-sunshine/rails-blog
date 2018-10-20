@@ -13,17 +13,24 @@
         <p>
           <%=@post.body%>
         </p>
+         <p>
+          votes:<%=@post.votes%>
+        </p>
         <div class="comments">
     Comments show here:
+        <%= render 'comments/thing' %>
+
     <div class="comments__container">
-      <%@post.comments.each do |comment|%> 
+      <%@post.comments.each do |comment|%>
         <div class="comments__single">
-           <%=comment.body%> 
+           <%=comment.body%>
         </div>
       <%end%> 
     </div>
      <% if @post.user.name == current_user.name %>
-      <li class="button button--delete_post"><%= link_to 'Delete Post', post_path(@post.id), {method: :delete, data: { confirm: 'Are you sure?' }, :style=>'text-decoration:none;'}%></li>
+      <li class="button button--delete_post"><%= link_to 'Delete Post', post_path(@post.id), { method: :delete, data: { confirm: 'Are you sure?' }, :style=>'text-decoration:none;'}%></li>
+      <li class="button button--delete_post"><%= link_to 'Upvote Post', post_path(@post.id, :value => 1), { method: :put, :style=>'text-decoration:none;'}%></li>
+      <li class="button button--delete_post"><%= link_to 'Downvote Post', post_path(@post.id, :value => -1), { method: :put, :style=>'text-decoration:none;'}%></li>
       <%end%>
   </div>
       </div>
