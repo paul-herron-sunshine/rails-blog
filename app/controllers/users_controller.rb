@@ -4,9 +4,17 @@ class UsersController < ApplicationController
   before_action :admin_user, only: :destroy
 
   def index
-    @users = User.paginate(page: params[:page])
+    @parameters = params
+    if params[:user] != nil && params[:user].key?(:search_string)
+      @users = []
+      User.all.each do |u|
+        @users << u if u.name.downcase.include?(params[:user][:search_string].downcase)
+      end
+      @users = @users.paginate(page: params[:page])
+    else
+      @users = User.paginate(page: params[:page])
+    end
   end
-
 
   def new
     @user = User.new
@@ -50,10 +58,15 @@ class UsersController < ApplicationController
   end
 
   private
-
     def user_params
-      params.require(:user).permit(:name, :email, :password,
-                                   :password_confirmation)
+      #if params.key?(:search_string)
+        params.require(:user).permit(:name, :email, :password,
+                                     :password_confirmation,
+                                     :search_string)
+      #else
+      #  params.require(:user).permit(:name, :email, :password,
+      #                               :password_confirmation)
+      #end
     end
 
     def logged_in_user
