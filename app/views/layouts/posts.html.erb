@@ -10,6 +10,7 @@
   </head>
   <body>
     <%= render 'layouts/header' %>
+    <%= render 'layouts/single_title' %>
     <% flash.each do |message_type, message| %>
     <div class="post__title--container">
   <h1 class="post__title"><%=flash[:success]%></h1>

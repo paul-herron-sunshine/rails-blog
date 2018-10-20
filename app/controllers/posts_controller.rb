@@ -6,13 +6,12 @@ class PostsController < ApplicationController
   def index
     @posts = Post.all
     #sort here
-    flash.delete(:success)
+    single_title = "Welcome to the OTB Academy Blogosphere"
   end
 
   def show
     @post = Post.find(params[:id])
-    flash[:success] = "Here's the article"
-
+    single_title = "Here's the article"
   end
 
   def new
@@ -22,7 +21,7 @@ class PostsController < ApplicationController
     # render plain: params[:post].inspect
     @post = Post.new(post_params)
     @post.save
-    flash[:success] = "Your post was successful!"
+    single_title = "Your post was successful!"
     #loads show view:
     redirect_to @post
   end
