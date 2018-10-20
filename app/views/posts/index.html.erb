@@ -12,6 +12,15 @@
       <p>
         <%=post.body%>
       </p>
+      <% if @post.votes? %>
+          <p>
+          votes:<%=@post.votes%>
+        </p>
+        <% else %>
+           <p>
+          votes 0
+        </p>
+        <% end %>
   </div>
     <%end%>
         <%end%>

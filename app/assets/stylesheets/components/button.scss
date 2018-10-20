@@ -30,12 +30,21 @@
   }
 
   &--delete_post {
-    font-size: 1em;
+    border: 2px solid colour("cta","font");
+    font-size: 1.6em;
     margin-left: 0;
+    padding: 0.3em;
     }
 
   &--save_post {
     color: colour("cta","font");
     font-size: 1.2em;
+    }
+
+  &--vote_post {
+    background-color: colour("cta","font");
+    font-size: 1.4em;
+    margin-left: 0;
+    padding: 0.3em;
     }
 }

@@ -1,16 +1,17 @@
 .alert {
-  background-image: url("./header2.jpg");
+  background-image: url("./header3.jpg");
   background-repeat: no-repeat;
-  background-size: 100% 100%;  
+  background-size: 100% 200%;  
   border: 2px solid colour("cta","font");
   border-radius: 0.4em;
-  color: $white;
+  color: colour("cta","font");
   font-size: 1.4em;
   font-weight: 700;
   text-align: center;
   margin-left: 1.5em;
+  margin-right: 1.5em;
   padding-bottom: 0.4em;
   padding-top: 0.4em;
-  width: 25%;
+  min-width: 25%;
 }
 

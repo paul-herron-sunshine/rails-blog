@@ -13,9 +13,15 @@
         <p>
           <%=@post.body%>
         </p>
-         <p>
+        <% if @post.votes? %>
+          <p>
           votes:<%=@post.votes%>
         </p>
+        <% else %>
+           <p>
+          votes 0
+        </p>
+        <% end %>
         <div class="comments">
     Comments show here:
         <%= render 'comments/thing' %>
@@ -28,9 +34,9 @@
       <%end%> 
     </div>
      <% if @post.user.name == current_user.name %>
-      <li class="button button--delete_post"><%= link_to 'Delete Post', post_path(@post.id), { method: :delete, data: { confirm: 'Are you sure?' }, :style=>'text-decoration:none;'}%></li>
-      <li class="button button--delete_post"><%= link_to 'Upvote Post', post_path(@post.id, :value => 1), { method: :put, :style=>'text-decoration:none;'}%></li>
-      <li class="button button--delete_post"><%= link_to 'Downvote Post', post_path(@post.id, :value => -1), { method: :put, :style=>'text-decoration:none;'}%></li>
+      <li class="button button--delete_post"><%= link_to '🗑️', post_path(@post.id), { method: :delete, data: { confirm: 'Are you sure?' }, :style=>'text-decoration:none;'}%></li>
+      <li class="button button--vote_post"><%= link_to '👍', post_path(@post.id, :value => 1), { method: :put, :style=>'text-decoration:none;'}%></li>
+      <li class="button button--vote_post"><%= link_to '👎', post_path(@post.id, :value => -1), { method: :put, :style=>'text-decoration:none;'}%></li>
       <%end%>
   </div>
       </div>

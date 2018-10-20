@@ -44,7 +44,13 @@ class PostsController < ApplicationController
 
   def update
     @post = Post.find(params[:id])
-    @post.update_attribute(:votes, @post.votes + params[:value].to_i)
+    @post.update_attribute(:votes, @post.votes ? @post.votes + params[:value].to_i : 1)
+    redirect_to @post
+  end
+
+  def vote_down
+    @post = post.find(params[:id])
+    @post.update_attribute(:votes, @post.votes - 1)
     redirect_to @post
   end
 
