@@ -221,12 +221,20 @@ RSpec.feature "Integration Tests", :type => :feature do
     expect(page).to_not have_text "Test User Admin"
   end
 
-  scenario "" do
-    views_before_profile_view = @user_admin.views
-    visit "/users/#{@user_admin.id}"
-    login_user(@user_admin)
-    @user_admin.reload
-    expect(@user_admin.views).to_not eq views_before_profile_view
+  scenario "views should be incremented when another user visits a profile" do
+    login_user(@user)
+    views_before_profile_view = @user2.views
+    visit "/users/#{@user2.id}"
+    @user2.reload
+    expect(@user2.views).to_not eq views_before_profile_view
+  end
+
+  scenario "views should be incremented when another user visits a profile" do
+    login_user(@user2)
+    views_before_profile_view = @user2.views
+    visit "/users/#{@user2.id}"
+    @user2.reload
+    expect(@user2.views).to eq views_before_profile_view
   end
 
   scenario "is_online flag should be true when user is logged in" do

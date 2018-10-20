@@ -21,7 +21,9 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @user.set_views(@user.views + 1)
+    if @user.id != current_user.id
+      @user.set_views(@user.views + 1)
+    end
   end
 
   def create
