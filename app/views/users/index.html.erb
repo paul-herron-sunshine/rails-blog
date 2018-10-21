@@ -1,12 +1,11 @@
 <% provide(:title, 'All Users') %>
 <% provide(:single_title, 'Our Bloggers') %>
+<div class = "users__pages-container">
+<%= will_paginate @users, :previous_label => '&laquo;', :next_label => '&raquo;' %>
+</div>
 
-<h1>All Users</h1>
-
-<%= will_paginate %>
-
-<ul>
+<ul class="users__container">
   <%= render @users %>
 </ul>
 
-<%= will_paginate %>
+<%= will_paginate @users, :previous_label => '&laquo;', :next_label => '&raquo;' %>

@@ -1,8 +1,14 @@
-<li>
-  <%= gravatar_for user, size: 50 %>
-  <% if logged_in? %>
-    <%= link_to user.name, user %>
-  <% else %>
-    <strong><%= user.name %></strong> - <em>log in to view full profile</em>
-  <% end %>
-</li>
+<span class="users__single--container">
+  <div class="users__gravatar"> 
+    <%= gravatar_for user, size: 50 %>
+  </div>
+    <% if logged_in? %>
+    <div class="users__username">
+      <%= link_to user.name, user %>
+    </div>
+    <% else %>
+    <div>
+      <strong><%= user.name %></strong> - <em>log in to view full profile</em>
+    </div>
+    <% end %>
+</span>
