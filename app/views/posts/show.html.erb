@@ -8,21 +8,21 @@
           <%=@post.title%>
         </h1>
         <p>
-          posted by <%=@post.user.name%>
+          posted by <em><%=@post.user.name%></em>
         </p>
         <p>
         <%= time_ago_in_words(@post.created_at) %> ago
         </p>
         <% if @post.votes? %>
           <p>
-          votes:<%=@post.votes%>
+          votes <%=@post.votes%>
         </p>
         <% else %>
            <p>
           votes 0
         </p>
         <% end %>
-        <p>
+        <p class="post__body">
           <%=@post.body%>
         </p>
         <div class="comments">
@@ -38,9 +38,9 @@
     </div>
      <% if @post.user.name == current_user.name %>
       <li class="button button--delete_post"><%= link_to '🗑️', post_path(@post.id), { method: :delete, data: { confirm: 'Are you sure?' }, :style=>'text-decoration:none;'}%></li>
+      <%end%>
       <li class="button button--vote_post"><%= link_to '👍', post_path(@post.id, :value => 1), { method: :put, :style=>'text-decoration:none;'}%></li>
       <li class="button button--vote_post"><%= link_to '👎', post_path(@post.id, :value => -1), { method: :put, :style=>'text-decoration:none;'}%></li>
-      <%end%>
   </div>
       </div>
   </div>

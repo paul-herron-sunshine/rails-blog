@@ -14,11 +14,11 @@
         <%=post.title%>
       </h1>
       <p>
-        by <%=post.user.name%>
+        created by <%=post.user.name%>
       </p>
-      <p>
-        <%=post.body%>
-      </p>
+       <p>
+        <%= time_ago_in_words(post.created_at) %> ago
+        </p>
       <% if post.votes %>
           <p>
           votes <%=post.votes%>
@@ -28,6 +28,9 @@
           votes 0
         </p>
         <% end %>
+      <p class="posts__body">
+        <%=post.body.truncate_words(150)%>
+      </p>
   </div>
     <%end%>
         <%end%>
