@@ -6,7 +6,7 @@
     <% if user.is_online %>
       | <span style="color:green;"><em>Currently Online</em></span>
     <% else %>
-      | last active at <%= user.last_active_at.to_s %>
+      | last login -  <%= distance_of_time_in_words(user.last_active_at, Time.now) %> ago 
     <% end %>
 
     <% if current_user.admin? && !(current_user == user) %>
