@@ -12,9 +12,9 @@ RSpec.feature "Integration Tests", :type => :feature do
 
   before :each do
     @un_activated_user = User.create(name: "Test User Inactive", email: "userinactive@test.com", password: "password", password_confirmation: "password", activated: false)
-    @user = User.create(name: "Test User", email: "user@test.com", password: "password", password_confirmation: "password", activated: true)
-    @user2 = User.create(name: "Test User 2", email: "user2@test.com", password: "password", password_confirmation: "password", activated: true)
-    @user_admin = User.create(name: "Test User Admin", email: "useradmin@test.com", password: "password", password_confirmation: "password", activated: true, admin: true)
+    @user = User.create(name: "Test User", email: "user@test.com", password: "password", password_confirmation: "password", activated: true, last_active_at: Faker::Time.between(365.days.ago, Time.now), activated_at: Faker::Time.between(365.days.ago, Time.now))
+    @user2 = User.create(name: "Test User 2", email: "user2@test.com", password: "password", password_confirmation: "password", activated: true, last_active_at: Faker::Time.between(365.days.ago, Time.now), activated_at: Faker::Time.between(365.days.ago, Time.now))
+    @user_admin = User.create(name: "Test User Admin", email: "useradmin@test.com", password: "password", password_confirmation: "password", activated: true, admin: true, last_active_at: Faker::Time.between(365.days.ago, Time.now), activated_at: Faker::Time.between(365.days.ago, Time.now))
   end
 
   scenario "the user should see different titles depending on the page that they \
@@ -195,10 +195,22 @@ RSpec.feature "Integration Tests", :type => :feature do
     login_user(@user_admin)
     visit users_path
     users_before_delete = User.all.count
-
-    expect(page).to have_text("All Users")
     click_link("delete", :match => :first)
     expect(User.all.count).to_not eq users_before_delete
+  end
+
+  scenario "Any user should be able to delete their own account" do
+    login_user(@user)
+    visit user_path(@user)
+    users_before_delete = User.all.count
+    click_link("Delete Account")
+    expect(User.all.count).to_not eq users_before_delete
+  end
+
+  scenario "A non admin user should not be able to delete another persons account" do
+    login_user(@user)
+    visit user_path(@user2)
+    expect(page).to_not have_text "Delete Account"
   end
 
   scenario "Should redirect the user to the home page with a message if they \

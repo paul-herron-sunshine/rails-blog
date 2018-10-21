@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
   before_action :logged_in_user, only: [:show, :edit, :update, :destroy]
   before_action :correct_user, only: [:edit, :update]
-  before_action :admin_user, only: :destroy
 
   def index
     @users = User.all
@@ -15,7 +14,9 @@ class UsersController < ApplicationController
     @online_users = []
     @offline_users = []
     @users.each do |user|
-      user.is_online ? @online_users << user : @offline_users << user
+      if user.activated
+        user.is_online ? @online_users << user : @offline_users << user
+      end
     end
 
     @online_users = @online_users.sort {|x, y| y.views <=> x.views}
@@ -62,22 +63,21 @@ class UsersController < ApplicationController
 
   def destroy
     user = User.find(params[:id])
-    user.destroy
-    flash[:success] = "#{user.name}'s account has been successfully deleted"
-    redirect_to users_url
-
+    if current_user.admin || user.id == current_user.id
+      user.destroy
+      flash[:success] = "#{user.name}'s account has been successfully deleted"
+      redirect_to root_url
+    else
+      flash[:danger] = "You do not have the authority to delete #{user.name}'s account"
+      redirect_to root_url
+    end
   end
 
   private
     def user_params
-      #if params.key?(:search_string)
         params.require(:user).permit(:name, :email, :password,
                                      :password_confirmation,
                                      :search_string)
-      #else
-      #  params.require(:user).permit(:name, :email, :password,
-      #                               :password_confirmation)
-      #end
     end
 
     def logged_in_user
