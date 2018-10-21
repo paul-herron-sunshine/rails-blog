@@ -5,7 +5,8 @@ User.create!(name:  "Fraser Johnstone",
              admin: true,
              activated: true,
              activated_at: Time.zone.now,
-             views: Random.rand(0..450))
+             last_active_at:Faker::Time.between(365.days.ago, Time.now),
+             views: Random.rand(0..1500))
 
 User.create!(name:  "Paul Herron",
              email: "paul.herron@onthebeach.co.uk",
@@ -14,7 +15,8 @@ User.create!(name:  "Paul Herron",
              admin: true,
              activated: true,
              activated_at: Time.zone.now,
-             views: Random.rand(0..450))
+             last_active_at:Faker::Time.between(365.days.ago, Time.now),
+             views: Random.rand(0..1500))
 
 User.create!(name:  "Kirstie Davidson",
              email: "kirstie.davidson@onthebeach.co.uk",
@@ -23,7 +25,8 @@ User.create!(name:  "Kirstie Davidson",
              admin: true,
              activated: true,
              activated_at: Time.zone.now,
-             views: Random.rand(0..450))
+             last_active_at:Faker::Time.between(365.days.ago, Time.now),
+             views: Random.rand(0..1500))
 
 97.times do |n|
   name  = Faker::Name.name
@@ -35,6 +38,7 @@ User.create!(name:  "Kirstie Davidson",
                password_confirmation: password,
                activated: true,
                activated_at: Time.zone.now,
-               views: Random.rand(0..450))
+               last_active_at:Faker::Time.between(365.days.ago, Time.now),
+               views: Random.rand(0..1500))
 
 end

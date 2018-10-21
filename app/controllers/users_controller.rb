@@ -4,15 +4,24 @@ class UsersController < ApplicationController
   before_action :admin_user, only: :destroy
 
   def index
+    @users = User.all
     if params[:user] != nil && params[:user].key?(:search_string)
       @users = []
       User.all.each do |u|
         @users << u if u.name.downcase.include?(params[:user][:search_string].downcase)
       end
-      @users = @users.paginate(page: params[:page])
-    else
-      @users = User.paginate(page: params[:page])
     end
+
+    @online_users = []
+    @offline_users = []
+    @users.each do |user|
+      user.is_online ? @online_users << user : @offline_users << user
+    end
+
+    @online_users = @online_users.sort {|x, y| y.views <=> x.views}
+    @offline_users = @offline_users.sort {|x, y| y.views <=> x.views}
+
+    @users = (@online_users + @offline_users).paginate(page: params[:page])
   end
 
   def new
