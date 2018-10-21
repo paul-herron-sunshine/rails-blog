@@ -15,7 +15,9 @@ class UsersController < ApplicationController
     @online_users = []
     @offline_users = []
     @users.each do |user|
-      user.is_online ? @online_users << user : @offline_users << user
+      if user.activated
+        user.is_online ? @online_users << user : @offline_users << user
+      end
     end
 
     @online_users = @online_users.sort {|x, y| y.views <=> x.views}

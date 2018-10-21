@@ -12,9 +12,9 @@ RSpec.feature "Integration Tests", :type => :feature do
 
   before :each do
     @un_activated_user = User.create(name: "Test User Inactive", email: "userinactive@test.com", password: "password", password_confirmation: "password", activated: false)
-    @user = User.create(name: "Test User", email: "user@test.com", password: "password", password_confirmation: "password", activated: true)
-    @user2 = User.create(name: "Test User 2", email: "user2@test.com", password: "password", password_confirmation: "password", activated: true)
-    @user_admin = User.create(name: "Test User Admin", email: "useradmin@test.com", password: "password", password_confirmation: "password", activated: true, admin: true)
+    @user = User.create(name: "Test User", email: "user@test.com", password: "password", password_confirmation: "password", activated: true, last_active_at: Faker::Time.between(365.days.ago, Time.now))
+    @user2 = User.create(name: "Test User 2", email: "user2@test.com", password: "password", password_confirmation: "password", activated: true, last_active_at: Faker::Time.between(365.days.ago, Time.now))
+    @user_admin = User.create(name: "Test User Admin", email: "useradmin@test.com", password: "password", password_confirmation: "password", activated: true, admin: true, last_active_at: Faker::Time.between(365.days.ago, Time.now))
   end
 
   scenario "the user should see different titles depending on the page that they \
