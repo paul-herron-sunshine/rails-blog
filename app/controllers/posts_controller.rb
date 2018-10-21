@@ -4,8 +4,11 @@ class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy, :vote]
 
   def index
-    @posts = Post.all
-    #sort here
+    @posts = if params[:term]
+      Post.where("title LIKE ? or body LIKE ?", "%#{params[:term]}%", "%#{params[:term]}%")
+      else
+        Post.order("created_at DESC").all
+      end
     single_title = "Welcome to the OTB Academy Blogosphere"
   end
 
@@ -57,7 +60,7 @@ class PostsController < ApplicationController
   private 
   
   def post_params
-    params.require(:post).permit(:user_id, :title, :body)
+    params.require(:post).permit(:user_id, :title, :body, :term)
   end
 
   def set_post

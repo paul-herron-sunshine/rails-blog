@@ -8,10 +8,10 @@
           <%=@post.title%>
         </h1>
         <p>
-          by <%=@post.user.name%>
+          posted by <%=@post.user.name%>
         </p>
         <p>
-          <%=@post.body%>
+        <%= time_ago_in_words(@post.created_at) %> ago
         </p>
         <% if @post.votes? %>
           <p>
@@ -22,6 +22,9 @@
           votes 0
         </p>
         <% end %>
+        <p>
+          <%=@post.body%>
+        </p>
         <div class="comments">
     Comments show here:
         <%= render 'comments/thing' %>

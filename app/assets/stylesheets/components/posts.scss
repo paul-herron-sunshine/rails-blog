@@ -2,6 +2,23 @@
   font-size: 1rem;
   padding: 0.3em;
 
+  &__search {
+    border-radius: 0.4em;
+    height: 3em;
+    margin-bottom: 0.1em;
+    margin-left: 1.5em;
+    vertical-align: top;
+    width: 18em;
+
+
+    &--container{
+      display: inline-block;
+      padding: 2em 0 0;
+      padding-left: 72%;
+      vertical-align: top;
+    }
+  }
+
   &__title{
     color: colour("cta", "font");
     font-size: 2em;
