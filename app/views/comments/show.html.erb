@@ -4,7 +4,7 @@
 		<%= @comment.body %>
 		<footer>
 			<span><%= link_to 'Edit', edit_post_comment_path(@comment.post, @comment) %></span>
-			<span><%= link_to 'Back', post_comments_path %><span>		
+			<span> | <%= link_to 'Back', post_comments_path %><span>		
 		</footer>
 	</article>
 </section>

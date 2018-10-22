@@ -10,13 +10,27 @@
 	max-width:800px;
 	padding:2rem;
 
-	.container {
-
+	  &__container {
+	    display: grid;
+	    grid-template-columns: repeat(1, 1fr);
+	    grid-template-rows: repeat(auto-fill);
+	    grid-row-gap: .5em;
+	    grid-column-gap: 2em;
+	    margin-top: 2em;
+	    min-height: 20em;
+	    width: 100%;
 		padding-bottom:2rem;
+
+		hr {
+		    border: 0;
+		    height: 1px;
+		    background: #17317f;
+		}
 
 		header {
 
 			padding:0.5rem;
+			text-align:left;
 
 			span {
 
@@ -31,9 +45,25 @@
 		}
 		main {
 			padding:0.5rem;
+			text-align:left;
 		}
 		footer {
 			padding:0.5rem;
+			text-align:left;
 		}
 	}
+
+	  &__single {
+	    background-color: rgba(colour("cta","main"),0.3);
+	    border: 2px solid colour("cta","font");
+	    border-radius: 3rem;
+	    border-style: ridge;
+	    color: colour("cta","font");
+	    justify-content: space-around;
+	    margin: 1%;
+	    min-height: 3em;
+	    padding: 2rem;
+	    text-align: center;
+	  }
+
 }
