@@ -85,4 +85,11 @@
     margin: 1.8em 0 1em 2em;
     padding: 0.5em;
   }
+
+  &--create_account {
+    color: colour("cta","font");
+    font-size: 1.2em;
+    margin-top: 1.5em;
+    padding: 0.5em;
+  }
 }

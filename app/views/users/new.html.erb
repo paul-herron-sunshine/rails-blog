@@ -1,10 +1,10 @@
 <% provide(:title, 'Sign Up') %>
-<h1>Sign up</h1>
+<% provide(:single_title, 'Sign Up To The Blogosphere') %>
 
 <%= render 'layouts/error_messages' %>
 
 <div>
-  <div">
+  <div class="form form--create_account">
     <%= form_for(@user, url: signup_path) do |f| %>
       <%= f.label :name %>
       <%= f.text_field :name %>
@@ -22,11 +22,11 @@
       <br />
 
       <%= f.label :password_confirmation, "Confirmation" %>
-      <%= f.password_field :password_confirmation %>
+      <%= f.password_field :password_confirmation, {:style=>'margin-left:0;'} %>
 
       <br />
 
-      <%= f.submit "Create my account" %>
+      <%= f.submit "Create my account", class: "button button--create_account"%>
     <% end %>
   </div>
 </div>

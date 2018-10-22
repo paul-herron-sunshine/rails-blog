@@ -68,6 +68,10 @@ font-size: 1rem;
    font-size: 1.6em;
   }
 
+  &__confirmation {
+    background-color: green;
+   }
+
   textarea {
     background-color: colour("greys","light");
     border: 0.1em solid colour("cta","main");
@@ -95,6 +99,22 @@ font-size: 1rem;
 
     }
   }
+
+  &--create_account {
+    input[type=text] {
+      margin-left: 6.1em;
+      margin-top: 2em;
+      width: 30%;
+    }
+
+    input[type=email] {
+      margin-left: 5.3em;
+      width: 30%;
+    }
+
+    input[type=password] {
+      margin-left: 3em;
+      width: 30%;
+    }
+  }
 }
-
-
