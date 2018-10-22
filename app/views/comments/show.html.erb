@@ -2,10 +2,12 @@
 
 <section class="comments">
     <article class="container">
+		<div class="comments__single">
 		<%= @comment.body %>
-		<footer>
-			<span><%= link_to 'Edit', edit_post_comment_path(@comment.post, @comment) %></span>
-			<span><%= link_to 'Back', post_comments_path %><span>		
+		</div>
+		<footer class="comments__buttons-container--edit">
+			<li class="button button--comment_editsecond"><%= link_to '✍️', edit_post_comment_path(@comment.post, @comment) %></li>
+			<li class="button button--comment_editsecond"><%= link_to 'Back', post_comments_path %></li>
 		</footer>
 	</article>
 </section>

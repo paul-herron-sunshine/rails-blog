@@ -14,6 +14,7 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    @count = comment_count
     single_title = "Here's the article"
   end
 
@@ -55,6 +56,11 @@ class PostsController < ApplicationController
     @post = post.find(params[:id])
     @post.update_attribute(:votes, @post.votes - 1)
     redirect_to @post
+  end
+
+  def comment_count 
+    @count = Comment.where("post_id = ?", params[:id]).count
+    # @count = "test count"
   end
 
   private 

@@ -1,6 +1,10 @@
 .form {
 font-size: 1rem;
 
+&--log_in {
+  margin-top: 3em;
+}
+
   input[type=text] {
     border: 0.1em solid colour("cta","main");
     border-radius: 0.4em;
@@ -14,6 +18,43 @@ font-size: 1rem;
 
   input[type=text]:focus {
     background-color: lightblue;
+  }
+
+  input[type=email] {
+    border: 0.1em solid colour("cta","main");
+    border-radius: 0.4em;
+    background-color: colour("greys","light");
+    font-size: 0.8em;
+    margin-top: 0.5em;
+    outline: none;
+    padding: 12px 20px;
+    width: 25%;
+  }
+
+  input[type=email]:focus {
+    background-color: lightblue;
+  }
+
+  input[type=password] {
+    border: 0.1em solid colour("cta","main");
+    border-radius: 0.4em;
+    background-color: colour("greys","light");
+    font-size: 0.8em;
+    margin-top: 0.5em;
+    outline: none;
+    padding: 12px 20px;
+    width: 20%;
+  }
+
+  input[type=password]:focus {
+    background-color: lightblue;
+  }
+
+  input[type=checkbox]{
+    height: 2.4em;
+    position: relative;
+    top: 0.7em;
+    width: 2.4em;
   }
 
   &__container {
@@ -43,6 +84,16 @@ font-size: 1rem;
 
   textarea:focus {
     background-color: lightblue;
+  }
+
+  &--comment {
+    textarea {
+      font-size: 1.6em;
+      height: 4em;
+      margin-left: 4%;
+      width: 90%;
+
+    }
   }
 }
 
