@@ -6,7 +6,7 @@
 
   $button-palettes: (secondary cta attention);
 
-  background-color: colour("cta","main");
+  background-color: rgba(colour("cta","main"), 0.8);
   border: 0;
   border-radius: 0.25em;
   color: $white;
@@ -20,13 +20,69 @@
   text-decoration: none;
 
   &:hover {
-    background-color: red;
+    background-color: $white;
   }
 
-  &--small {
+  &--create_post {
+  color: colour("cta","font");
+  font-size: 1.2em;
+  margin-left: 0;
+  }
+
+  &--delete_post {
+    border: 2px solid colour("cta","font");
+    font-size: 1.5em;
+    margin-left: 0;
+    padding: 0.2em;
+    padding-bottom: 0.1em;
+    }
+
+  &--save_post {
+    color: colour("cta","font");
+    font-size: 1.2em;
+    }
+
+  &--vote_post {
+    background-color: colour("cta","font");
+    font-size: 1.4em;
+    margin-left: 0;
+    padding: 0.3em;
+  }
+
+  &--search_post {
+    background-color: colour("cta","font");
     font-size: 1em;
-    padding-bottom: 0.75em;
-    padding-top: 0.75em;
+    height: 2em;
+    margin-left: 0;
+    margin-right: 2em;
+    padding: 0.3em;
+    vertical-align: top;
   }
 
+  &--comment_post {
+    margin-left: 0;
+    margin: 0.3em;
+    padding: 0.4em 0.2em 0.4em 0.4em;
+    text-align: center;
+  }
+
+  &--comment_edit {
+    color: colour("cta","font");
+    margin-top: 1em;
+    text-align: center;
+  }
+
+  &--comment_editsecond {
+    color: colour("cta","font");
+    margin-left: 0;
+    margin-top: 1em;
+    text-align: center;
+  }
+
+  &--log_in {
+    color: colour("cta","font");
+    font-size: 1.4em;
+    margin: 1.8em 0 1em 2em;
+    padding: 0.5em;
+  }
 }

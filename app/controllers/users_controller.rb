@@ -3,6 +3,7 @@ class UsersController < ApplicationController
   before_action :correct_user, only: [:edit, :update]
 
   def index
+    @parameters = params
     @users = User.all
     if params[:user] != nil && params[:user].key?(:search_string)
       @users = []
@@ -19,10 +20,17 @@ class UsersController < ApplicationController
       end
     end
 
-    @online_users = @online_users.sort {|x, y| y.views <=> x.views}
-    @offline_users = @offline_users.sort {|x, y| y.views <=> x.views}
+    if !params.key?("sort_by") || params["sort_by"] == "2"
+      @online_users = @online_users.sort {|x, y| y.views <=> x.views}
+      @offline_users = @offline_users.sort {|x, y| y.views <=> x.views}
+    elsif params["sort_by"] == "3"
+      @online_users = @online_users.sort {|x, y| y.last_active_at <=> x.last_active_at}
+      @offline_users = @offline_users.sort {|x, y| y.last_active_at <=> x.last_active_at}
+    end
+
 
     @users = (@online_users + @offline_users).paginate(page: params[:page])
+
   end
 
   def new

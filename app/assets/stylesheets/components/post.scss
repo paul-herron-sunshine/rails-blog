@@ -1,0 +1,52 @@
+.post {
+  font-size: 1rem;
+  padding: 0.3em;
+
+  &__body {
+    text-align: justify;
+    padding: 0 0.8em;
+  }
+
+  &__buttons{
+    display: flex;
+    justify-content: space-between;
+    padding-left: 40%;
+    padding-top: 1.4em;
+    width: 20%;
+  }
+
+  &__title{
+    background-image: url("./footer.jpg");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    color: colour("cta", "font");
+    font-size: 2.4em;
+    padding-bottom: 1.5em;
+    padding-top: 1.5em;
+    text-align: center;
+    vertical-align: middle;
+
+    &--container {
+      margin: -1.3em;
+    }
+  }
+
+  &__single {
+    background-color: rgba(colour("cta","main"),0.3);
+    border: 2px solid colour("cta","font");
+    border-radius: 3rem;
+    border-style: ridge;
+    color: colour("cta","font");
+    justify-content: space-around;
+    margin: 4em -6em 6em -6em;
+    min-height: 3em;
+    padding: 2rem;
+    text-align: center;
+  }
+
+  &__page {
+    margin-left: auto;
+    margin-right: auto;
+    width: 60%;
+  }
+}

@@ -1,0 +1,23 @@
+.profile {
+text-align: center;
+
+  &__single {
+    background-image: url("./header2.jpg");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    border: 2px solid colour("cta","font");
+    border-radius: 3rem;
+    border-style: ridge;
+    color: colour("cta","font");
+    justify-content: space-around;
+    margin: 4em auto 6em auto;
+    min-height: 3em;
+    padding: 2rem;
+    text-align: center;
+    width: 50%;
+
+    &--list {
+      list-style-type: none;
+    }
+  }
+}

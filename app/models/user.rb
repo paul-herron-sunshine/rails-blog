@@ -3,7 +3,7 @@ class User < ApplicationRecord
   before_save   :downcase_email
   before_create :create_activation_digest
 
-  has_many :posts
+  has_many :posts, dependent: :destroy
 
   VALID_EMAIL_PATTERN = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   attr_accessor :remember_token

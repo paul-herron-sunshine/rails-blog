@@ -1,25 +1,28 @@
 <p id="notice"><%= notice %></p>
+<% provide(:title, 'Comments') %>
+<% provide(:single_title, "All comments for #{@post.title}") %>
 
-<h1>All comments for &ldquo;<%= @post.title %>&rdquo;</h1>
 <%= link_to 'Back to Post', post_path(@post) %>
 
 <section class="comments">
   <% if @comments.all.count > 0 %>
 
     <% @comments.each do |comment| %>
-    <article class="container">
+    <article class="comments__single">
       <header>
-        <span>Posted at: <%= comment.created_at.strftime("%d/%m/%Y %H:%M:%S") %></span>
-        <span><%= User.find(comment.user_id).name %></span>
+        <span class=><em>Posted at: <%= comment.created_at.strftime("%d/%m/%Y %H:%M:%S") %></span>
+        <span>by <%= User.find(comment.user_id).name %></em></span>
       </header>
-      <main><%= comment.body %></main>
+      <main style="font-size:1.4em;">"<%= comment.body %>"</main>
       <footer>
-        <span><%= link_to 'Show', [comment.post, comment] %></span>
+      <div class="comments__buttons-container">
+        <%# <li class="button button--comment_post"><%= link_to '👀', [comment.post, comment] %></li>
         <%# if user logged and comment belongs to user %>
         <% if current_user && current_user.id == comment.user_id %></span>
-          <span><%= link_to 'Edit', edit_post_comment_path(comment.post, comment) %>
-          <span><%= link_to 'Destroy', [comment.post, comment], method: :delete, data: { confirm: 'Are you sure?' } %></span>
+          <li class="button button--comment_post"><%= link_to '✍️', edit_post_comment_path(comment.post, comment) %></li>
+          <li class="button button--comment_post"><%= link_to '🗑️', [comment.post, comment], method: :delete, data: { confirm: 'Are you sure?' } %></li>
         <% end %>
+        </div>
       </footer>
     </article>
     <% end %>

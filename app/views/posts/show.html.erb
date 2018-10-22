@@ -1,3 +1,46 @@
 <% provide(:title, 'Post') %>
-<h2><%=@post.title %></h2>
-<p><%=@post.body %></p>
+<% provide(:single_title, "Here's the Article") %>
+
+
+<div class="post__page">
+  <div class="post__single">
+    <h1>
+      <%=@post.title%>
+    </h1>
+    <p>
+      posted by <em><%=@post.user.name%></em>
+    </p>
+    <p>
+    <%= time_ago_in_words(@post.created_at) %> ago
+    </p>
+    <% if @post.votes? %>
+      <p>
+      votes <%=@post.votes%>
+    </p>
+    <% else %>
+      <p>
+        votes 0
+      </p>
+    <% end %>
+    <p class="post__body">
+      <%=@post.body%>
+    </p>
+    <div class="comments__view">
+      <%= link_to 'View comments here', post_comments_path(@post.id) %>
+      <%=@count%>
+    </div>
+    <div class="post__buttons">
+      <% if logged_in? %>
+        <% if @post.user.name == current_user.name %>
+          <li class="button button--delete_post"><%= link_to '🗑️', post_path(@post.id), { method: :delete, data: { confirm: 'Are you sure?' }, :style=>'text-decoration:none;'}%></li>
+        <%end%>
+        <li class="button button--vote_post"><%= link_to '👍', post_path(@post.id, :value => 1), { method: :put, :style=>'text-decoration:none;'}%></li>
+        <li class="button button--vote_post"><%= link_to '👎', post_path(@post.id, :value => -1), { method: :put, :style=>'text-decoration:none;'}%></li>
+      <%end%>
+    </div>
+  </div>
+  </div>
+  </div>
+  </div>
+</div>
+
