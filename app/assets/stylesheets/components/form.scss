@@ -44,6 +44,16 @@ font-size: 1rem;
   textarea:focus {
     background-color: lightblue;
   }
+
+  &--comment {
+    textarea {
+      font-size: 1.6em;
+      height: 4em;
+      margin-left: 4%;
+      width: 90%;
+
+    }
+  }
 }
 
 
