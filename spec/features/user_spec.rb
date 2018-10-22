@@ -11,17 +11,10 @@ RSpec.feature "Integration Tests", :type => :feature do
   end
 
   before :each do
-    @un_activated_user = User.new(name: "Test User Inactive", email: "userinactive@test.com", password: "password", password_confirmation: "password", activated: false)
-    @un_activated_user.save
-
-    @user = User.new(name: "Test User", email: "user@test.com", password: "password", password_confirmation: "password", activated: true)
-    @user.save
-
-    @user2 = User.new(name: "Test User 2", email: "user2@test.com", password: "password", password_confirmation: "password", activated: true)
-    @user2.save
-
-    @user_admin = User.new(name: "Test User Admin", email: "useradmin@test.com", password: "password", password_confirmation: "password", activated: true, admin: true)
-    @user_admin.save
+    @un_activated_user = User.create(name: "Test User Inactive", email: "userinactive@test.com", password: "password", password_confirmation: "password", activated: false)
+    @user = User.create(name: "Test User", email: "user@test.com", password: "password", password_confirmation: "password", activated: true, last_active_at: Faker::Time.between(365.days.ago, Time.now), activated_at: Faker::Time.between(365.days.ago, Time.now))
+    @user2 = User.create(name: "Test User 2", email: "user2@test.com", password: "password", password_confirmation: "password", activated: true, last_active_at: Faker::Time.between(365.days.ago, Time.now), activated_at: Faker::Time.between(365.days.ago, Time.now))
+    @user_admin = User.create(name: "Test User Admin", email: "useradmin@test.com", password: "password", password_confirmation: "password", activated: true, admin: true, last_active_at: Faker::Time.between(365.days.ago, Time.now), activated_at: Faker::Time.between(365.days.ago, Time.now))
   end
 
   scenario "the user should see different titles depending on the page that they \
@@ -202,40 +195,64 @@ RSpec.feature "Integration Tests", :type => :feature do
     login_user(@user_admin)
     visit users_path
     users_before_delete = User.all.count
-
-    expect(page).to have_text("All Users")
+    click_link("delete", :match => :first)
+    expect(User.all.count).to_not eq users_before_delete
   end
 
-  scenario "Should redirect the user to the home page with a message if they have not activated their account upon login" do
+  scenario "Any user should be able to delete their own account" do
+    login_user(@user)
+    visit user_path(@user)
+    users_before_delete = User.all.count
+    click_link("Delete Account")
+    expect(User.all.count).to_not eq users_before_delete
+  end
+
+  scenario "A non admin user should not be able to delete another persons account" do
+    login_user(@user)
+    visit user_path(@user2)
+    expect(page).to_not have_text "Delete Account"
+  end
+
+  scenario "Should redirect the user to the home page with a message if they \
+            have not activated their account upon login" do
     @un_activated_user.save
     login_user(@un_activated_user)
     expect(page).to have_text("Account not activated. Check your email for the activation link.")
   end
 
-#  scenario "Tests the entire process for a new user activating their account" do
-#    visit signup_path
-#
-#    initial_users_count = User.count
-#    initial_mail_deliveries_size = ActionMailer::Base.deliveries.size
-#
-#    new_user = { name:  "inactive new user",
-#                email: "inactive_new_user@inactive.com",
-#                password: "password",
-#                password_confirmation: "password" }
-#
-#    fill_in "Name", :with => new_user[:name]
-#    fill_in "Email", :with => new_user[:email]
-#    fill_in "Password", :with => new_user[:password]
-#    fill_in "Confirmation", :with => new_user[:confirmation]
-#
-#    click_button "Create my account"
-#
-#    #expect(User.count).to_not eq initial_users_count
-#    expect(ActionMailer::Base.deliveries.size).to eq initial_mail_deliveries_size
-#    expect(new_user.activated?).to be false
-#
-#
-#    login_user(new_user)
-#
-#  end
+  scenario "search functionality on the users page displays only users containing the search string" do
+    visit users_path
+    expect(page).to have_text "Test User"
+    expect(page).to have_text "Test User 2"
+    expect(page).to have_text "Test User Admin"
+
+    fill_in "user_search_string", :with => "Test User 2"
+    click_button "Search"
+
+    expect(page).to have_text "Test User 2"
+    expect(page).to_not have_text "Test User Admin"
+  end
+
+  scenario "views should be incremented when another user visits a profile" do
+    login_user(@user)
+    views_before_profile_view = @user2.views
+    visit "/users/#{@user2.id}"
+    @user2.reload
+    expect(@user2.views).to_not eq views_before_profile_view
+  end
+
+  scenario "views should be incremented when another user visits a profile" do
+    login_user(@user2)
+    views_before_profile_view = @user2.views
+    visit "/users/#{@user2.id}"
+    @user2.reload
+    expect(@user2.views).to eq views_before_profile_view
+  end
+
+  scenario "is_online flag should be true when user is logged in" do
+    expect(@user_admin.is_online).to be false
+    login_user(@user_admin)
+    @user_admin.reload
+    expect(@user_admin.is_online).to be true
+  end
 end

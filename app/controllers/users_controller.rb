@@ -1,12 +1,29 @@
 class UsersController < ApplicationController
   before_action :logged_in_user, only: [:show, :edit, :update, :destroy]
   before_action :correct_user, only: [:edit, :update]
-  before_action :admin_user, only: :destroy
 
   def index
-    @users = User.paginate(page: params[:page])
-  end
+    @users = User.all
+    if params[:user] != nil && params[:user].key?(:search_string)
+      @users = []
+      User.all.each do |u|
+        @users << u if u.name.downcase.include?(params[:user][:search_string].downcase)
+      end
+    end
 
+    @online_users = []
+    @offline_users = []
+    @users.each do |user|
+      if user.activated
+        user.is_online ? @online_users << user : @offline_users << user
+      end
+    end
+
+    @online_users = @online_users.sort {|x, y| y.views <=> x.views}
+    @offline_users = @offline_users.sort {|x, y| y.views <=> x.views}
+
+    @users = (@online_users + @offline_users).paginate(page: params[:page])
+  end
 
   def new
     @user = User.new
@@ -14,6 +31,9 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    if @user.id != current_user.id
+      @user.set_views(@user.views + 1)
+    end
   end
 
   def create
@@ -43,17 +63,21 @@ class UsersController < ApplicationController
 
   def destroy
     user = User.find(params[:id])
-    user.destroy
-    flash[:success] = "#{user.name}'s account has been successfully deleted"
-    redirect_to users_url
-
+    if current_user.admin || user.id == current_user.id
+      user.destroy
+      flash[:success] = "#{user.name}'s account has been successfully deleted"
+      redirect_to root_url
+    else
+      flash[:danger] = "You do not have the authority to delete #{user.name}'s account"
+      redirect_to root_url
+    end
   end
 
   private
-
     def user_params
-      params.require(:user).permit(:name, :email, :password,
-                                   :password_confirmation)
+        params.require(:user).permit(:name, :email, :password,
+                                     :password_confirmation,
+                                     :search_string)
     end
 
     def logged_in_user
