@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get 'login' => 'sessions#new'
   post 'login' => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
+  get 'single_user_posts' => 'posts#single_user_index'
 
   resources :account_activations, only: [:edit]
   resources :users
