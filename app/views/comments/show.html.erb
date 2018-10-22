@@ -1,12 +1,26 @@
+<% provide(:single_title, @title) %>
 
 <section class="comments">
-    <article class="container">
-		<%= @comment.body %>
-		<footer>
-			<span><%= link_to 'Edit', edit_post_comment_path(@comment.post, @comment) %></span>
-			<span> | <%= link_to 'Back', post_comments_path %><span>		
-		</footer>
+  <%= link_to 'Show all comments for ' + @post.title, post_comments_path, class: "back" %>		
+  <div class="comments__container">
+    <article class="comments__single">
+        <header>
+          <span>Posted at: <%= @comment.created_at.strftime("%d/%m/%Y %H:%M:%S") %></span>
+          <span><%= @userName %></span>
+        </header>    	
+        <hr>
+    	<main>
+			<%= @comment.body %>
+		</main>
+		<% if current_user && current_user.id == @comment.user_id %>
+			<hr>
+			<footer>
+				<span><%= link_to 'Edit', edit_post_comment_path(@comment.post, @comment) %></span>
+	            <span> | <%= link_to 'Delete', [@comment.post, @comment], method: :delete, data: { confirm: 'Are you sure?' } %></span>
+			</footer>
+		<% end %>
 	</article>
+  </span>
 </section>
 
 

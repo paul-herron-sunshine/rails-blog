@@ -18,6 +18,9 @@ class CommentsController < ApplicationController
   # GET /comments/1.json
   def show
     @comment = Comment.find(params[:id])
+    @post = Post.find(params[:post_id]) 
+    @userName = User.find(@comment.user_id).name
+    @title = "Comment by " + @userName
   end
 
   # GET /comments/new

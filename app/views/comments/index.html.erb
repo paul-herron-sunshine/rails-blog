@@ -1,29 +1,28 @@
 <% provide(:single_title, @title) %>
 
 <h1></h1>
-<%= link_to 'Back to Post', post_path(@post) %>
 
 <section class="comments">
+<%= link_to "Back to " + @post.title, post_path(@post), class: "back" %>
   <% if @comments.all.count > 0 %>
 
     <div class="comments__container">
       <% @comments.each do |comment| %>
       <article class="comments__single">
         <header>
-          <span>Posted at: <%= comment.created_at.strftime("%d/%m/%Y %H:%M:%S") %></span>
-          <span><%= User.find(comment.user_id).name %></span>
+          <span>POSTED AT: <%= comment.created_at.strftime("%d/%m/%Y %H:%M:%S") %></span>
+          <span><%= User.find(comment.user_id).name.upcase %></span>
         </header>
         <hr>
-        <main><%= comment.body %></main>
-        <hr>
-        <footer>
-          <span><%= link_to 'Show', [comment.post, comment] %></span>
-          <%# if user logged and comment belongs to user %>
-          <% if current_user && current_user.id == comment.user_id %></span>
-            <span> | <%= link_to 'Edit', edit_post_comment_path(comment.post, comment) %>
-            <span> | <%= link_to 'Delete', [comment.post, comment], method: :delete, data: { confirm: 'Are you sure?' } %></span>
-          <% end %>
-        </footer>
+        <main><%= truncate(comment.body, :length => 200, :separator => ' ', :omission => ' ... ') {link_to '(more)', [comment.post, comment] } %></main>
+        <% if current_user && current_user.id == comment.user_id %>
+          <hr>
+          <footer>
+            <%# if user logged and comment belongs to user %>
+              <span> <%= link_to 'Edit', edit_post_comment_path(comment.post, comment) %>
+              <span> | <%= link_to 'Delete', [comment.post, comment], method: :delete, data: { confirm: 'Are you sure?' } %></span>
+          </footer>
+        <% end %>
       </article>
       <% end %>
     </div>
