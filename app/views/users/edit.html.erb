@@ -2,30 +2,29 @@
 <% provide(:single_title, "Update Your Settings Here") %>
 
 <div>
-  <div>
+  <div class="form form--update_settings">
     <%= form_for(@user) do |f| %>
       <%= render 'layouts/error_messages' %>
 
       <%= f.label :name %>
       <%= f.text_field :name %>
-
+      <br>
       <%= f.label :email %>
       <%= f.email_field :email %>
-
+      <br>
       <%= f.label :password %>
       <%= f.password_field :password %>
-
+      <br>
       <%= f.label :password_confirmation, "Confirmation" %>
-      <%= f.password_field :password_confirmation, class: 'form-control' %>
-
-      <%= f.submit "Save changes" %>
-    <% end %>
-
-    <div>
+      <%= f.password_field :password_confirmation, {:style=>'margin-left:3.4em; margin-bottom:1.4em;'} %>
+    <div class="users__gravatar-container">
       <%= gravatar_for @user %>
       <a href="http://gravatar.com/emails" target="_blank">change</a>
     </div>
-    <%= link_to "Delete Account", @user, method: :delete,
-                  data: { confirm: "Are you certain you wish to delete your account?" } %>
+  <div class="comments__buttons-container">
+    <%= f.submit "Save changes", class:"button button--update_settings" %>
+    <%= link_to "Delete Account", @user, method: :delete, :class=>"button button--update_settings", data: { confirm: "Are you certain you wish to delete your account?" } %>
+    <% end %>
+  </div>
   </div>
 </div>
