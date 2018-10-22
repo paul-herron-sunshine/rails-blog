@@ -67,17 +67,22 @@ User.all.each do |user|
     num_comments = Random.rand(0..7)
 
     title = Faker::FamilyGuy.quote
-    txt = Faker::Lorem.paragraphs(Random.rand(1..3))
+    post_txt = []
+    Random.rand(1..4).times do
+      post_txt << Faker::Lorem.paragraph(Random.rand(4..10))
+    end
+
+    post_txt = post_txt.join("\n\n")
     num_comments = Random.rand(0..7)
     post_created_at = Faker::Time.between(user.created_at, Time.now)
     post = Post.create!(title: title,
-                 body: txt,
+                 body: post_txt,
                  user_id: user.id,
                  votes: Random.rand(0..200),
                  created_at: post_created_at)
 
     num_comments.times do |t|
-      txt = Faker::Lorem.sentences(Random.rand(1..3))
+      txt = Faker::Lorem.sentences(Random.rand(1..3)).join
       comment_created_at = Faker::Time.between(post.created_at, Time.now)
       Comment.create!(body: txt,
                    user_id: user.id,
