@@ -3,22 +3,41 @@
 
 <div class="profile">
   <div class="profile__single">
-<h1>
-  <%= gravatar_for @user %>
-  <%= @user.name %>
-</h1>
-<ul class="profile__single--list">
-  <li><%= @user.email %></li>
-  <li><%= @user.views %> profile views</li>
-  <li>Last login: <%= distance_of_time_in_words(@user.last_active_at, Time.now) %> ago</li>
-  <li>Member since <%= @user.activated_at.strftime("%d %B %Y") %></li>
+  <h1>
+    <%= gravatar_for @user %>
+    <br />
+    <%= @user.name %>
+  </h1>
+    <br />
+    <% if @user.id == current_user.id %>
+      <%= link_to "Compose Post", new_post_path, :style=>'padding: 20px; background-color:black; color:white;' %>
+    <% end %>
+    <%= link_to "View Posts", single_user_posts_path(:user_id => @user.id), :style=>'padding: 20px; background-color:black; color:white;' %>
+    <br />
 
-  <% if @user.id == current_user.id %>
-    <li>- - -</li>
-    <li><%= link_to "Modify Account Details", edit_user_path(@user.id) %></li>
-    <li><%= link_to "Delete Account", @user, method: :delete,
-                  data: { confirm: "Are you certain you wish to delete your account?" } %></li>
-  <% end %>
-</ul>
+  <br /><hr /><br />
+    <%= @user.email %>
+    <br />
+    <%= @user.views %> profile views
+    <br />
+    <% if @user.is_online %>
+      <br />
+      <span style="padding:10px;background-color:green; color:white;">Currently Online</span>
+      <br />
+    <% else %>
+      last login -  <%= distance_of_time_in_words(@user.last_active_at, Time.now) %> ago
+    <% end %>
+    <br />
+    Member since <%= @user.activated_at.strftime("%d %B %Y") %>
+    <br />
+
+    <% if @user.id == current_user.id %>
+      <br /><hr /><br />
+      <%= link_to "Modify Account Details", edit_user_path(@user.id) %>
+      <br /><br />
+      <em><%= link_to "Remove Account", @user, method: :delete, :style=>'padding: 10px; background-color:red; color:white;',
+                              data: { confirm: "Are you certain you want to delete #{@user.name}?" } %></em>
+    <% end %>
+
   </div>
 </div>

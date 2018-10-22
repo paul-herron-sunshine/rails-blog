@@ -12,6 +12,12 @@ class PostsController < ApplicationController
     single_title = "Welcome to the OTB Academy Blogosphere"
   end
 
+  def single_user_index
+    @parameters = params
+    @posts = Post.where(user_id: params[:user_id])
+    single_title = "Posts"
+  end
+
   def show
     @post = Post.find(params[:id])
     @count = comment_count
@@ -58,13 +64,13 @@ class PostsController < ApplicationController
     redirect_to @post
   end
 
-  def comment_count 
+  def comment_count
     @count = Comment.where("post_id = ?", params[:id]).count
     # @count = "test count"
   end
 
-  private 
-  
+  private
+
   def post_params
     params.require(:post).permit(:user_id, :title, :body, :term)
   end
