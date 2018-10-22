@@ -15,5 +15,9 @@ module ApplicationHelper
       else
         single_title
       end
-  end
+
+  # def get_num_users
+  #   User.all.count
+  # end
+end
 end

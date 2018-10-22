@@ -1,12 +1,25 @@
 .users {
+
+  display: flex;
+
   &__pages-container {
     display: inline-flex;
     list-style-type: none;
   }
 
+
+  &__online {
+    display: grid;
+  }
+  &__log_in {
+    float:right;
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+
   &__container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(1, 1fr);
     grid-template-rows: repeat(auto-fill);
     grid-row-gap: .5em;
     grid-column-gap: 2em;

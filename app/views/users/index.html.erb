@@ -4,6 +4,11 @@
 <%= will_paginate @users, :previous_label => '&laquo;', :next_label => '&raquo;' %>
 </div>
 
+<%= form_for(:user, url: users_path, method: :get) do |f| %>
+  <%= f.text_field :search_string %>
+  <%= f.submit "Search" %>
+<% end %>
+
 <ul class="users__container">
   <%= render @users %>
 </ul>

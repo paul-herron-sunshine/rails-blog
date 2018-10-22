@@ -25,5 +25,7 @@
       <%= gravatar_for @user %>
       <a href="http://gravatar.com/emails" target="_blank">change</a>
     </div>
+    <%= link_to "Delete Account", @user, method: :delete,
+                  data: { confirm: "Are you certain you wish to delete your account?" } %>
   </div>
 </div>

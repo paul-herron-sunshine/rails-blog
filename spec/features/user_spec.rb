@@ -11,11 +11,10 @@ RSpec.feature "Integration Tests", :type => :feature do
   end
 
   before :each do
-    @user = User.new(name: "Test User", email: "user@test.com", password: "password", password_confirmation: "password")
-    @user.save
-
-    @user2 = User.new(name: "Test User 2", email: "user2@test.com", password: "password", password_confirmation: "password")
-    @user2.save
+    @un_activated_user = User.create(name: "Test User Inactive", email: "userinactive@test.com", password: "password", password_confirmation: "password", activated: false)
+    @user = User.create(name: "Test User", email: "user@test.com", password: "password", password_confirmation: "password", activated: true, last_active_at: Faker::Time.between(365.days.ago, Time.now), activated_at: Faker::Time.between(365.days.ago, Time.now))
+    @user2 = User.create(name: "Test User 2", email: "user2@test.com", password: "password", password_confirmation: "password", activated: true, last_active_at: Faker::Time.between(365.days.ago, Time.now), activated_at: Faker::Time.between(365.days.ago, Time.now))
+    @user_admin = User.create(name: "Test User Admin", email: "useradmin@test.com", password: "password", password_confirmation: "password", activated: true, admin: true, last_active_at: Faker::Time.between(365.days.ago, Time.now), activated_at: Faker::Time.between(365.days.ago, Time.now))
   end
 
   scenario "the user should see different titles depending on the page that they \
@@ -52,7 +51,7 @@ RSpec.feature "Integration Tests", :type => :feature do
     fill_in "Confirmation", :with => "password"
 
     click_on 'Create my account'
-    expect(page).to have_text("Account Created! Welcome to the OTB Academy Blog")
+    #expect(page).to have_text("Account Created! Welcome to the OTB Academy Blog")
   end
 
   scenario "User tries an invalid login and the flash appears. they then visit \
@@ -77,19 +76,19 @@ RSpec.feature "Integration Tests", :type => :feature do
     visit "/"
     expect(page).to_not have_link("Profile")
     expect(page).to_not have_link("Settings")
-    expect(page).to_not have_link("Log Out")
+    expect(page).to_not have_link("Log out")
 
     login_user(@user)
 
     expect(page).to have_link("Profile")
     expect(page).to have_link("Settings")
-    expect(page).to have_link("Log Out")
+    expect(page).to have_link("Log out")
 
-    click_link 'Log Out'
+    click_link 'Log out'
 
     expect(page).to_not have_link("Profile")
     expect(page).to_not have_link("Settings")
-    expect(page).to_not have_link("Log Out")
+    expect(page).to_not have_link("Log out")
   end
 
   scenario "User should be remembered when leaving the site if logged in" do
@@ -97,7 +96,7 @@ RSpec.feature "Integration Tests", :type => :feature do
 
     expect(page).to have_link("Profile")
     expect(page).to have_link("Settings")
-    expect(page).to have_link("Log Out")
+    expect(page).to have_link("Log out")
 
     visit "http://www.google.com"
 
@@ -105,7 +104,7 @@ RSpec.feature "Integration Tests", :type => :feature do
 
     expect(page).to have_link("Profile")
     expect(page).to have_link("Settings")
-    expect(page).to have_link("Log Out")
+    expect(page).to have_link("Log out")
   end
 
   scenario "User should not be remembered after browser close if they have not \
@@ -116,7 +115,7 @@ RSpec.feature "Integration Tests", :type => :feature do
 
     expect(page).to_not have_link("Profile")
     expect(page).to_not have_link("Settings")
-    expect(page).to_not have_link("Log Out")
+    expect(page).to_not have_link("Log out")
   end
 
   scenario "User should be remembered after browser close if they have \
@@ -190,5 +189,70 @@ RSpec.feature "Integration Tests", :type => :feature do
             list of all users on the site" do
     visit users_path
     expect(page).to have_text("All Users")
+  end
+
+  scenario "Admins should be able to delete other users" do
+    login_user(@user_admin)
+    visit users_path
+    users_before_delete = User.all.count
+    click_link("delete", :match => :first)
+    expect(User.all.count).to_not eq users_before_delete
+  end
+
+  scenario "Any user should be able to delete their own account" do
+    login_user(@user)
+    visit user_path(@user)
+    users_before_delete = User.all.count
+    click_link("Delete Account")
+    expect(User.all.count).to_not eq users_before_delete
+  end
+
+  scenario "A non admin user should not be able to delete another persons account" do
+    login_user(@user)
+    visit user_path(@user2)
+    expect(page).to_not have_text "Delete Account"
+  end
+
+  scenario "Should redirect the user to the home page with a message if they \
+            have not activated their account upon login" do
+    @un_activated_user.save
+    login_user(@un_activated_user)
+    expect(page).to have_text("Account not activated. Check your email for the activation link.")
+  end
+
+  scenario "search functionality on the users page displays only users containing the search string" do
+    visit users_path
+    expect(page).to have_text "Test User"
+    expect(page).to have_text "Test User 2"
+    expect(page).to have_text "Test User Admin"
+
+    fill_in "user_search_string", :with => "Test User 2"
+    click_button "Search"
+
+    expect(page).to have_text "Test User 2"
+    expect(page).to_not have_text "Test User Admin"
+  end
+
+  scenario "views should be incremented when another user visits a profile" do
+    login_user(@user)
+    views_before_profile_view = @user2.views
+    visit "/users/#{@user2.id}"
+    @user2.reload
+    expect(@user2.views).to_not eq views_before_profile_view
+  end
+
+  scenario "views should be incremented when another user visits a profile" do
+    login_user(@user2)
+    views_before_profile_view = @user2.views
+    visit "/users/#{@user2.id}"
+    @user2.reload
+    expect(@user2.views).to eq views_before_profile_view
+  end
+
+  scenario "is_online flag should be true when user is logged in" do
+    expect(@user_admin.is_online).to be false
+    login_user(@user_admin)
+    @user_admin.reload
+    expect(@user_admin.is_online).to be true
   end
 end

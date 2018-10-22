@@ -15,5 +15,9 @@ text-align: center;
     padding: 2rem;
     text-align: center;
     width: 30%;
+
+    &--list {
+      list-style-type: none;
+    }
   }
 }

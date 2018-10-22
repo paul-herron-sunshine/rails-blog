@@ -1,25 +1,33 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Comments</h1>
+<h1>All comments for &ldquo;<%= @post.title %>&rdquo;</h1>
+<%= link_to 'Back to Post', post_path(@post) %>
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<section class="comments">
+  <% if @comments.all.count > 0 %>
 
-  <tbody>
-      <% @comments.each do |comment| %>
-      <tr>
-        <td><%= link_to 'Show', [comment.post, comment] %></td>
-        <td><%= link_to 'Edit', edit_post_comment_path(comment.post, comment) %></td>
-        <td><%= link_to 'Destroy', [comment.post, comment], method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+    <% @comments.each do |comment| %>
+    <article class="container">
+      <header>
+        <span>Posted at: <%= comment.created_at.strftime("%d/%m/%Y %H:%M:%S") %></span>
+        <span><%= User.find(comment.user_id).name %></span>
+      </header>
+      <main><%= comment.body %></main>
+      <footer>
+        <span><%= link_to 'Show', [comment.post, comment] %></span>
+        <%# if user logged and comment belongs to user %>
+        <% if current_user && current_user.id == comment.user_id %></span>
+          <span><%= link_to 'Edit', edit_post_comment_path(comment.post, comment) %>
+          <span><%= link_to 'Destroy', [comment.post, comment], method: :delete, data: { confirm: 'Are you sure?' } %></span>
+        <% end %>
+      </footer>
+    </article>
     <% end %>
-  </tbody>
-</table>
+  <% else %>
+    There are no comments for this post yet
+  <% end %>
+</section>
 
-<br>
-
-<%#= link_to 'New Comment', new_comment_path %>
+<% if current_user %>
+  <%= link_to 'New Comment', new_post_comment_path %>
+<% end %>

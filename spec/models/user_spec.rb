@@ -94,5 +94,25 @@ RSpec.describe User, type: :model do
     expect(User.all.count).to be 0
   end
 
+  it "should return false for a non authenticated user" do
+    expect(@user.authenticated?(:remember, '')).to be false
+  end
+
+  it "should add one to the views field in the user" do
+    expect(@user.views).to be 0
+    @user.set_views(1)
+    expect(@user.views).to be 1
+  end
+
+  it "should update the last_active_at fiels in the user model" do
+    @user.set_last_active(Time.zone.now)
+    first_t = @user.last_active_at
+
+    sleep(1.0/2)
+    @user.set_last_active(Time.zone.now)
+    second_t = @user.last_active_at
+    expect(first_t).to be < second_t
+
+  end
 
 end

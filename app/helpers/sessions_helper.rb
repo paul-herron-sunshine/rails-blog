@@ -2,6 +2,8 @@ module SessionsHelper
   attr_reader :current_user
   def log_in(user)
     session[:user_id] = user.id
+    user.set_online(true)
+    user.set_last_active(Time.zone.now)
   end
 
   def remember(user)
@@ -15,7 +17,7 @@ module SessionsHelper
       @current_user ||= User.find_by(id: user_id)
     elsif (user_id = cookies.signed[:user_id])
       user = User.find_by(id: user_id)
-      if user && user.authenticated?(cookies[:remember_token])
+      if user && user.authenticated?(:remember, cookies[:remember_token])
         log_in user
         @current_user = user
       end
@@ -35,6 +37,16 @@ module SessionsHelper
   def log_out
     forget(current_user)
     session.delete(:user_id)
+    @current_user.set_online(false)
     @current_user = nil
+  end
+
+  def redirect_back_or(default)
+    redirect_to(session[:forwarding_url] || default)
+    session.delete(:forwarding_url)
+  end
+
+  def store_location
+    session[:forwarding_url] = request.original_url if request.get?
   end
 end

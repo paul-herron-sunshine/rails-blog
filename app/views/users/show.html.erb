@@ -3,11 +3,22 @@
 
 <div class="profile">
   <div class="profile__single">
-    <h1>
-      <%= gravatar_for @user %>
-      <%= @user.name %>
-    </h1><br>
-    <h3><em>email: </em> <%= @user.email %></h3>
+<h1>
+  <%= gravatar_for @user %>
+  <%= @user.name %>
+</h1>
+<ul class="profile__single--list">
+  <li><%= @user.email %></li>
+  <li><%= @user.views %> profile views</li>
+  <li>Last login: <%= distance_of_time_in_words(@user.last_active_at, Time.now) %> ago</li>
+  <li>Member since <%= @user.activated_at.strftime("%d %B %Y") %></li>
 
+  <% if @user.id == current_user.id %>
+    <li>- - -</li>
+    <li><%= link_to "Modify Account Details", edit_user_path(@user.id) %></li>
+    <li><%= link_to "Delete Account", @user, method: :delete,
+                  data: { confirm: "Are you certain you wish to delete your account?" } %></li>
+  <% end %>
+</ul>
   </div>
 </div>

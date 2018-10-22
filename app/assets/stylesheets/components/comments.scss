@@ -1,12 +1,39 @@
 .comments {
 
-   &__container {
-     background-color: blue;
-   }
-   &__single {
-     background-color: $white;
-     border: 0.1em solid colour("cta","main");
-    border-radius: 0.4em;
-    background-color: colour("greys","light");
-   }
+	// &__single {
+	// 	background-color: $white;
+	// 	border: 0.1em solid colour("cta","main");
+	//  border-radius: 0.4em;
+	//  background-color: colour("greys","light");
+	// }
+
+	max-width:800px;
+	padding:2rem;
+
+	.container {
+
+		padding-bottom:2rem;
+
+		header {
+
+			padding:0.5rem;
+
+			span {
+
+				display:inline-block;
+				font-size:0.9rem;
+				font-weight:bold;
+
+				&:nth-child(2) {
+					float:right;
+				}
+			}
+		}
+		main {
+			padding:0.5rem;
+		}
+		footer {
+			padding:0.5rem;
+		}
+	}
 }
