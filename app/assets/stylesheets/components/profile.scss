@@ -1,6 +1,11 @@
 .profile {
 text-align: center;
 
+&__buttons-container {
+  display: flex;
+  padding: 1em 0 0.5em 15%;
+}
+
   &__single {
     background-image: url("./header2.jpg");
     background-repeat: no-repeat;
@@ -17,6 +22,7 @@ text-align: center;
     width: 50%;
 
     &--list {
+      line-height: 2;
       list-style-type: none;
     }
   }
