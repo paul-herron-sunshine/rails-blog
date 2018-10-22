@@ -104,18 +104,21 @@ font-size: 1rem;
 
   &--create_account {
     input[type=text] {
-      margin-left: 6.1em;
+      height: 1.4em;
+      margin-left: 6em;
       margin-top: 2em;
       width: 30%;
     }
 
     input[type=email] {
+      height: 1.4em;
       margin-left: 5.3em;
       width: 30%;
     }
 
     input[type=password] {
-      margin-left: 3em;
+      height: 1.6em;
+      margin-left: 4.3em;
       width: 30%;
     }
   }
