@@ -24,12 +24,12 @@
           votes <%=post.votes%>
         </p>
         <% else %>
-           <p> 
+           <p>
           votes 0
         </p>
         <% end %>
       <p class="posts__body">
-        <%=post.body.truncate_words(150)%>
+        <%=simple_format(post.body.truncate_words(150))%>
       </p>
   </div>
     <%end%>
@@ -43,4 +43,3 @@
   <li class="button button--create_post"><%= link_to "Create Post", new_post_path, {:style=>'text-decoration:none;'} %></li>
 </div>
 </div>
-

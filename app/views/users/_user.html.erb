@@ -1,30 +1,30 @@
+<li>
 <div class="users">
-<span class="users__single--container">
-  <div class="users__gravatar"> 
-    <%= gravatar_for user, size: 50 %>
-  </div>
-    <% if logged_in? %>
-    <div class="users__username">
-    <%= link_to user.name, user %> | <em><%= pluralize(user.views, "view") %></em>
+  <span class="users__single--container">
+    <div class="users__gravatar">
+      <%= gravatar_for user, size: 50 %>
     </div>
-    <% else %>
-    <div class="users__username">
-      <strong><%= user.name %></strong> - <em>log in to view full profile</em>
-    </div>
-    <% end %>
-</span>
-<span class="users__log_in">
-    <% if user.is_online %>
-      | <span class="users__log_in", style="color:green;"><em> Currently Online</em></span>
-    <% else %>
-      <span class="users__log_in">
-        | last login -  <%= distance_of_time_in_words(user.last_active_at, Time.now) %> ago 
-      </span>
-    <% end %>
+      <% if logged_in? %>
+        <div class="users__username">
+          <strong><%= link_to user.name, user %></strong> | <em><%= pluralize(user.views, "view") %></em>
+          <% if user.is_online %>
+            &nbsp;|&nbsp;<span style="padding:10px;background-color:green; color:white;">Currently Online</span>
+          <% else %>
+            &nbsp;|&nbsp;last login -  <%= distance_of_time_in_words(user.last_active_at, Time.now) %> ago
+          <% end %>
 
-    <% if current_user.admin? && !(current_user == user) %>
-      | <%= link_to "delete", user, method: :delete,
-                                data: { confirm: "Are you certain you want to delete #{user.name}?" } %>
-    <% end %>
-  <% else %>
+          <% if current_user.admin %>
+            |&nbsp;<em><%= link_to "delete", user, method: :delete, :style=>'padding:10px;background-color:red; color:white;',
+                                    data: { confirm: "Are you certain you want to delete #{user.name}?" } %></em>
+          <% end %>
+        </div>
+      <% else %>
+        <div class="users__username">
+          <strong><%= user.name %></strong> - <em>log in to view full profile </em>
+        </div>
+      <% end %>
+
+  </span>
 </div>
+<hr />
+</li>

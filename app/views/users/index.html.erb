@@ -1,11 +1,15 @@
 <% provide(:title, 'All Users') %>
 <% provide(:single_title, 'Our Bloggers') %>
+
 <div class = "users__pages-container">
 <%= will_paginate @users, :previous_label => '&laquo;', :next_label => '&raquo;' %>
 </div>
 
 <%= form_for(:user, url: users_path, method: :get) do |f| %>
+
   <%= f.text_field :search_string %>
+  <%= select_tag(:sort_by, options_for_select(
+           [['Sort by...', 1], ['Views', 2], ['Most recent login', 3]])) %>
   <%= f.submit "Search" %>
 <% end %>
 

@@ -2,36 +2,54 @@ require "rails_helper"
 
 RSpec.feature "Integration Tests", :type => :feature do
   def login_user(user)
-    visit "/login"
-
+    visit login_path
     fill_in "Email", :with => user.email
     fill_in "Password", :with => user.password
-
     click_button 'Log In'
   end
 
   before :each do
-    @un_activated_user = User.create(name: "Test User Inactive", email: "userinactive@test.com", password: "password", password_confirmation: "password", activated: false)
-    @user = User.create(name: "Test User", email: "user@test.com", password: "password", password_confirmation: "password", activated: true, last_active_at: Faker::Time.between(365.days.ago, Time.now), activated_at: Faker::Time.between(365.days.ago, Time.now))
-    @user2 = User.create(name: "Test User 2", email: "user2@test.com", password: "password", password_confirmation: "password", activated: true, last_active_at: Faker::Time.between(365.days.ago, Time.now), activated_at: Faker::Time.between(365.days.ago, Time.now))
-    @user_admin = User.create(name: "Test User Admin", email: "useradmin@test.com", password: "password", password_confirmation: "password", activated: true, admin: true, last_active_at: Faker::Time.between(365.days.ago, Time.now), activated_at: Faker::Time.between(365.days.ago, Time.now))
-  end
-
-  scenario "the user should see different titles depending on the page that they \
-            are on" do
-    #TODO
+    @un_activated_user = User.create(name: "Test User Inactive",
+                                     email: "userinactive@test.com",
+                                     password: "password",
+                                     password_confirmation: "password",
+                                     activated: false)
+    @user = User.create(name: "Test User",
+                        email: "user@test.com",
+                        password: "password",
+                        password_confirmation: "password",
+                        activated: true,
+                        last_active_at: Faker::Time.between(365.days.ago, Time.now),
+                        activated_at: Faker::Time.between(365.days.ago, Time.now))
+    @user2 = User.create(name: "Test User 2",
+                         email: "user2@test.com",
+                         password: "password",
+                         password_confirmation: "password",
+                         activated: true,
+                         last_active_at: Faker::Time.between(365.days.ago, Time.now),
+                         activated_at: Faker::Time.between(365.days.ago, Time.now))
+    @user_admin = User.create(name: "Test User Admin",
+                              email: "useradmin@test.com",
+                              password: "password",
+                              password_confirmation: "password",
+                              activated: true,
+                              admin: true,
+                              last_active_at: Faker::Time.between(365.days.ago, Time.now),
+                              activated_at: Faker::Time.between(365.days.ago, Time.now))
   end
 
   scenario "User Navigates the the sign up page and clicks 'create my account' \
-            button without filling in any fields" do
-    visit "/signup"
+            button without filling in any fields. will recieve notification of \
+            errors in the form" do
+    visit signup_path
     click_on 'Create my account'
     expect(page).to have_text("errors")
   end
 
   scenario "User Navigates the the sign up page and a confirmation password that \
-            does not match the password given" do
-    visit "/signup"
+            does not match the password given. should recieve notification \
+            of the error" do
+    visit signup_path
 
     fill_in "Name", :with => "test user"
     fill_in "Email", :with => "test@email.com"
@@ -43,7 +61,7 @@ RSpec.feature "Integration Tests", :type => :feature do
   end
 
   scenario "User Navigates the the sign up page and successfully creates a new account" do
-    visit "/signup"
+    visit signup_path
 
     fill_in "Name", :with => "test user"
     fill_in "Email", :with => "test@email.com"
@@ -51,17 +69,17 @@ RSpec.feature "Integration Tests", :type => :feature do
     fill_in "Confirmation", :with => "password"
 
     click_on 'Create my account'
-    #expect(page).to have_text("Account Created! Welcome to the OTB Academy Blog")
+    expect(page).to have_text("Thank you. We have sent an activation email to test@email.com")
   end
 
   scenario "User tries an invalid login and the flash appears. they then visit \
             the home page and should not see the flash message" do
-    visit "/login"
+    visit login_path
 
     click_button 'Log In'
 
     expect(page).to have_text("Invalid email/password combination")
-    visit "/"
+    visit root_path
     expect(page).to_not have_text("Invalid email/password combination")
   end
 
@@ -73,7 +91,7 @@ RSpec.feature "Integration Tests", :type => :feature do
 
   scenario "user should be presented with a different number of options navigation \
             options after logging in" do
-    visit "/"
+    visit root_path
     expect(page).to_not have_link("Profile")
     expect(page).to_not have_link("Settings")
     expect(page).to_not have_link("Log out")
@@ -100,7 +118,7 @@ RSpec.feature "Integration Tests", :type => :feature do
 
     visit "http://www.google.com"
 
-    visit "/"
+    visit root_path
 
     expect(page).to have_link("Profile")
     expect(page).to have_link("Settings")
@@ -109,23 +127,17 @@ RSpec.feature "Integration Tests", :type => :feature do
 
   scenario "User should not be remembered after browser close if they have not \
             checked the 'remember me' checkbox when loggin in" do
-    login_user(@user)
-
-    page.reset!
-
-    expect(page).to_not have_link("Profile")
-    expect(page).to_not have_link("Settings")
-    expect(page).to_not have_link("Log out")
+    #TODO Gav said no!
   end
 
   scenario "User should be remembered after browser close if they have \
             checked the 'remember me' checkbox when loggin in" do
-    #TODO
+    #TODO Gav said no!
   end
 
-  scenario "user should not be able to update the profile if the form is not \
+  scenario "User should not be able to update the profile if the form is not \
             filled in correctly. error messages will be displayed to the user \
-            detailing the failings" do
+            detailing the errors in the form" do
     login_user(@user)
 
     visit edit_user_path(@user.id)
@@ -188,7 +200,7 @@ RSpec.feature "Integration Tests", :type => :feature do
   scenario "All users (both logged in and not logged in) will be able to see a \
             list of all users on the site" do
     visit users_path
-    expect(page).to have_text("All Users")
+    expect(page).to have_text("Our Bloggers")
   end
 
   scenario "Admins should be able to delete other users" do
