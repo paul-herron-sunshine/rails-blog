@@ -11,10 +11,10 @@
       <article class="comments__single">
         <header>
           <span>POSTED AT: <%= comment.created_at.strftime("%d/%m/%Y %H:%M:%S") %></span>
-          <span><%= User.find(comment.user_id).name.upcase %></span>
+          <span><%= link_to User.find(comment.user_id).name.upcase, User.find(comment.user_id) %></span>
         </header>
         <hr>
-        <main><%= truncate(comment.body, :length => 200, :separator => ' ', :omission => ' ... ') {link_to '(more)', [comment.post, comment] } %></main>
+        <main><%= truncate(comment.body, :length => 400, :separator => ' ', :omission => ' ... ') {link_to '(more)', [comment.post, comment] } %></main>
         <% if current_user && current_user.id == comment.user_id %>
           <hr>
           <footer>
