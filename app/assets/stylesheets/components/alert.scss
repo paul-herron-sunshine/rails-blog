@@ -1,0 +1,17 @@
+.alert {
+  background-image: url("./header3.jpg");
+  background-repeat: no-repeat;
+  background-size: 100% 200%;  
+  border: 2px solid colour("cta","font");
+  border-radius: 0.4em;
+  color: colour("cta","font");
+  font-size: 1.4em;
+  font-weight: 700;
+  text-align: center;
+  margin-left: 1.5em;
+  margin-right: 1.5em;
+  padding-bottom: 0.4em;
+  padding-top: 0.4em;
+  min-width: 25%;
+}
+

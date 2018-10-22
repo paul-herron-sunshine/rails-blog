@@ -1,3 +1,48 @@
-// Place all the styles related to the Users controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.users {
+
+  display: flex;
+
+  &__pages-container {
+    display: inline-flex;
+    list-style-type: none;
+  }
+
+
+  &__online {
+    display: grid;
+  }
+  &__log_in {
+    float:right;
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+
+  &__container {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: repeat(auto-fill);
+    grid-row-gap: .5em;
+    grid-column-gap: 2em;
+    list-style: none;
+    margin-top: 2em;
+    min-height: 20em;
+    justify-content: center;
+    width: 100%;  
+    align-self: center;
+    align-items: center
+  }
+
+  &__username {
+    vertical-align: middle;
+    margin: auto;
+    margin-left: 0.7em;
+  }
+
+  &__single {
+    vertical-align: middle;
+
+    &--container {
+      display: inline-flex;
+    }
+  }
+}

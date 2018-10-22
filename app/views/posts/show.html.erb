@@ -1,3 +1,48 @@
 <% provide(:title, 'Post') %>
-<h2><%=@post.title %></h2>
-<p><%=@post.body %></p>
+<% provide(:single_title, "Here's the Article") %>
+
+
+  <div class="post__page">
+      <div class="post__single">
+        <h1>
+          <%=@post.title%>
+        </h1>
+        <p>
+          posted by <em><%=@post.user.name%></em>
+        </p>
+        <p>
+        <%= time_ago_in_words(@post.created_at) %> ago
+        </p>
+        <% if @post.votes? %>
+          <p>
+          votes <%=@post.votes%>
+        </p>
+        <% else %>
+           <p>
+          votes 0
+        </p>
+        <% end %>
+        <p class="post__body">
+          <%=@post.body%>
+        </p>
+        <div class="comments">
+    Comments show here:
+        <%= render 'comments/thing' %>
+
+    <div class="comments__container">
+      <%@post.comments.each do |comment|%>
+        <div class="comments__single">
+           <%=comment.body%>
+        </div>
+      <%end%> 
+    </div>
+     <% if @post.user.name == current_user.name %>
+      <li class="button button--delete_post"><%= link_to '🗑️', post_path(@post.id), { method: :delete, data: { confirm: 'Are you sure?' }, :style=>'text-decoration:none;'}%></li>
+      <%end%>
+      <li class="button button--vote_post"><%= link_to '👍', post_path(@post.id, :value => 1), { method: :put, :style=>'text-decoration:none;'}%></li>
+      <li class="button button--vote_post"><%= link_to '👎', post_path(@post.id, :value => -1), { method: :put, :style=>'text-decoration:none;'}%></li>
+  </div>
+      </div>
+  </div>
+</div>
+

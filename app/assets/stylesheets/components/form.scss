@@ -17,7 +17,7 @@ font-size: 1rem;
   }
 
   &__container {
-    background-color: colour("greys","light");
+    background-color: rgba(colour("cta","main"),0.3);
     border-radius: 5px;
     padding: 20px;
     padding-left: 9em;

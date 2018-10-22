@@ -1,9 +1,13 @@
 <% provide(:title, @user.name) %>
+<% provide(:single_title, "View Profile") %>
+
+<div class="profile">
+  <div class="profile__single">
 <h1>
   <%= gravatar_for @user %>
   <%= @user.name %>
 </h1>
-<ul>
+<ul class="profile__single--list">
   <li><%= @user.email %></li>
   <li><%= @user.views %> profile views</li>
   <li>Last login: <%= distance_of_time_in_words(@user.last_active_at, Time.now) %> ago</li>
@@ -16,3 +20,5 @@
                   data: { confirm: "Are you certain you wish to delete your account?" } %></li>
   <% end %>
 </ul>
+  </div>
+</div>

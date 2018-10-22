@@ -8,6 +8,13 @@ $gray-medium-light: #eaeaea;
   -webkit-box-sizing: border-box;
   box-sizing:         border-box;
 }
+
+@mixin not-last-child($selector) {
+  & #{$selector}:not(:last-child) {
+    @content;
+  }
+}
+
 .debug_dump {
   clear: both;
   float: left;
@@ -20,3 +27,4 @@ $gray-medium-light: #eaeaea;
   border-width: thin;
   border-color: black
 }
+
