@@ -6,18 +6,22 @@
     text-align: justify;
   }
 
+  &__buttons{
+    display: flex;
+  }
 
   &__search {
     border-radius: 0.4em;
-    height: 3em;
+    height: 2.6em;
     margin-bottom: 0.1em;
     margin-left: 1.5em;
+    margin-right: 0.5em;
     vertical-align: top;
     width: 18em;
 
 
     &--container{
-      display: inline-block;
+      display: flex;
       padding: 2em 0 0;
       padding-left: 72%;
       vertical-align: top;

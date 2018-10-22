@@ -7,6 +7,13 @@
     padding: 0 0.8em;
   }
 
+  &__buttons{
+    display: flex;
+    justify-content: space-between;
+    padding-left: 40%;
+    width: 20%;
+  }
+
   &__title{
     background-image: url("./footer.jpg");
     background-repeat: no-repeat;
