@@ -1,9 +1,9 @@
 <% provide(:title, 'Comments') %>
 <% provide(:single_title, "Edit your Comment for #{@post.title}") %>
 
-<%= render 'form', comment: @comment %>
+<section class="comments">
+	<%= link_to 'Back', post_comments_path, class: 'back' %>
+	<%= render 'form', comment: @comment %>
 
-<%= link_to 'Show', post_comment_path([@post,@comment]) %> |
-<%= link_to 'Back', post_comments_path %> | 
-<%= link_to 'Delete', [@comment.post, @comment], method: :delete, data: { confirm: 'Are you sure?' } %>
-
+	<%= link_to '🗑️', [@comment.post, @comment], method: :delete, data: { confirm: 'Are you sure?' } %>
+</section>
