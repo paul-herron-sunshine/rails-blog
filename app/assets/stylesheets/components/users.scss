@@ -7,6 +7,16 @@
     list-style-type: none;
   }
 
+  &__gravatar {
+    margin-right: 3em;
+  }
+
+  &__gravatar-container {
+    display: flex;
+    height: 7em;
+    line-height: 7em;
+
+  }
 
   &__online {
     display: grid;
