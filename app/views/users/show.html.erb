@@ -3,10 +3,12 @@
 
 <div class="profile">
   <div class="profile__single">
-<h1>
+  <div class="profile__buttons-container">
   <%= gravatar_for @user %>
+<h1>
   <%= @user.name %>
 </h1>
+</div>
 <ul class="profile__single--list">
   <li><%= @user.email %></li>
   <li><%= @user.views %> profile views</li>
