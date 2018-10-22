@@ -1,4 +1,5 @@
-<% provide(:single_title, @title) %>
+<% provide(:title, 'Comments') %>
+<% provide(:single_title, "Edit your Comment for #{@post.title}") %>
 
 <%= render 'form', comment: @comment %>
 

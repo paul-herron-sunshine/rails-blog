@@ -14,11 +14,12 @@
 		</main>
 		<% if current_user && current_user.id == @comment.user_id %>
 			<hr>
-			<footer>
-				<span><%= link_to 'Edit', edit_post_comment_path(@comment.post, @comment) %></span>
-	            <span> | <%= link_to 'Delete', [@comment.post, @comment], method: :delete, data: { confirm: 'Are you sure?' } %></span>
+			<footer class="comments__buttons-container--edit">
+				<li class="button button--comment_editsecond"><%= link_to '✍️', edit_post_comment_path(@comment.post, @comment) %></span>
+	            <li class="button button--comment_editsecond"><%= link_to 'Delete', [@comment.post, @comment], method: :delete, data: { confirm: 'Are you sure?' } %></span>
 			</footer>
 		<% end %>
+		</div>
 	</article>
   </span>
 </section>

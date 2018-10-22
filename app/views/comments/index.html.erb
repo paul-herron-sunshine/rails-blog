@@ -1,6 +1,5 @@
-<% provide(:single_title, @title) %>
-
-<h1></h1>
+<% provide(:title, 'Comments') %>
+<% provide(:single_title, "All comments for #{@post.title}") %>
 
 <section class="comments">
 <%= link_to "Back to " + @post.title, post_path(@post), class: "back" %>
@@ -17,16 +16,17 @@
         <main><%= truncate(comment.body, :length => 400, :separator => ' ', :omission => ' ... ') {link_to '(more)', [comment.post, comment] } %></main>
         <% if current_user && current_user.id == comment.user_id %>
           <hr>
+          <div class="comments__buttons-container">
           <footer>
             <%# if user logged and comment belongs to user %>
-              <span> <%= link_to 'Edit', edit_post_comment_path(comment.post, comment) %>
-              <span> | <%= link_to 'Delete', [comment.post, comment], method: :delete, data: { confirm: 'Are you sure?' } %></span>
+              <li class="button button--comment_post"> <%= link_to '✍️', edit_post_comment_path(comment.post, comment) %></li>
+              <li class="button button--comment_post"> <%= link_to '🗑️', [comment.post, comment], method: :delete, data: { confirm: 'Are you sure?' } %></li>
           </footer>
         <% end %>
       </article>
       <% end %>
     </div>
-  <% else %>
+    <% else %>
     There are no comments for this post yet
   <% end %>
 </section>

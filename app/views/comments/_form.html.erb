@@ -1,6 +1,6 @@
 
 <% if current_user.id %>
-
+<div class="form form--comment">
   <!-- User logged in -->
   <div class="form__container">
     <%= form_for(@comment, url: @comment.id ? post_comment_path : post_comments_path, :html => {:class => 'form'} ) do |f| %>
@@ -11,7 +11,7 @@
       <%= f.hidden_field :post_id, value: @post.id %>
       <%= f.hidden_field :user_id, value: current_user.id %>
       <br>
-      <%= f.submit @comment.id ? "Edit Comment" : "Submit Comment", :class => 'button' %>
+      <%= f.submit @comment.id ? "Edit Comment" : "Submit Comment", :class => 'button button--comment_edit' %>
       <% if comment.errors.any? %>
         <div id="error_explanation">
           <h2><%= pluralize(comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
@@ -21,7 +21,7 @@
           <% end %>
           </ul>
         </div>
-      <% end %>
+      <% end %>   
     <% end %>
   </div>
 <% else %>
@@ -30,3 +30,4 @@
   <p>You must be logged in to post comments</p>
 
 <% end %>
+</div>
