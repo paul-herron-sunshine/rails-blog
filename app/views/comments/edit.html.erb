@@ -1,6 +1,8 @@
-<h1>Editing Comment</h1>
+<% provide(:single_title, @title) %>
 
 <%= render 'form', comment: @comment %>
 
 <%= link_to 'Show', post_comment_path([@post,@comment]) %> |
-<%= link_to 'Back', post_comments_path %>
+<%= link_to 'Back', post_comments_path %> | 
+<%= link_to 'Delete', [@comment.post, @comment], method: :delete, data: { confirm: 'Are you sure?' } %>
+

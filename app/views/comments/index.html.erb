@@ -1,6 +1,6 @@
-<p id="notice"><%#= notice %></p>
+<% provide(:single_title, @title) %>
 
-<h1>All comments for &ldquo;<%= @post.title %>&rdquo;</h1>
+<h1></h1>
 <%= link_to 'Back to Post', post_path(@post) %>
 
 <section class="comments">
