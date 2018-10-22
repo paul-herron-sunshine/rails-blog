@@ -25,9 +25,9 @@
   }
 
   &--create_post {
-  color: colour("cta","font");
-  font-size: 1.2em;
-  margin-left: 0;
+    color: colour("cta","font");
+    font-size: 1.2em;
+    margin-left: 0;
   }
 
   &--delete_post {
@@ -109,4 +109,11 @@
     margin: 1.5em 0.2em 0 0.2em;
     padding: 0.5em;
   }
+
+  &--home_page {
+    color: colour("cta","font");
+    font-size: 1em;
+    margin-left: 2em;
+    min-width: 5em;
+    }
 }
