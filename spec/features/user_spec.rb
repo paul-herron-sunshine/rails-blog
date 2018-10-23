@@ -39,7 +39,7 @@ RSpec.feature "Integration Tests", :type => :feature do
   end
 
   scenario "User Navigates the the sign up page and clicks 'create my account' \
-            button without filling in any fields. will recieve notification of \
+            button without filling in any fields. will receive notification of \
             errors in the form" do
     visit signup_path
     click_on 'Create my account'
@@ -47,7 +47,7 @@ RSpec.feature "Integration Tests", :type => :feature do
   end
 
   scenario "User Navigates the the sign up page and a confirmation password that \
-            does not match the password given. should recieve notification \
+            does not match the password given. should receive notification \
             of the error" do
     visit signup_path
 

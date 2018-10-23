@@ -39,8 +39,9 @@
           <li class="button button--vote_post"><%= link_to '👍', post_path(@post.id, :value => 1), { method: :put, :style=>'text-decoration:none;'}%></li>
           <li class="button button--vote_post"><%= link_to '👎', post_path(@post.id, :value => -1), { method: :put, :style=>'text-decoration:none;'}%></li>
         </div>
-        <%else%>
-          <div class="post__log-in-bubble"><%= link_to "Log in to vote on this article", login_path %></div>
-        <%end%>
+      <%end%>
+      <% unless logged_in?%>
+        <div class="post__log-in-bubble"><%= link_to "Log in to vote on this article", login_path %></div>
+      <%end%>
   </div>
 </div>
