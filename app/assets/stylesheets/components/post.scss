@@ -19,6 +19,18 @@
     }
   }
 
+  &__log-in-bubble{
+    background-color: $white;
+    border: 2px solid colour("cta","font");
+    border-radius: 3em;
+    border-style: ridge;
+    color: colour("cta","font");
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1em;
+    width: 35%;
+  }
+
   &__page {
     margin-left: auto;
     margin-right: auto;
