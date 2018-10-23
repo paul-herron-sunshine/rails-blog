@@ -34,11 +34,13 @@
       </p>
     <% end %>
     </div>
-    <div class="post__buttons">
-        <% if logged_in? && @post.user.name != current_user.name%>
+      <% if logged_in? && @post.user.name != current_user.name%>
+        <div class="post__buttons">
           <li class="button button--vote_post"><%= link_to '👍', post_path(@post.id, :value => 1), { method: :put, :style=>'text-decoration:none;'}%></li>
           <li class="button button--vote_post"><%= link_to '👎', post_path(@post.id, :value => -1), { method: :put, :style=>'text-decoration:none;'}%></li>
+        </div>
+        <%else%>
+          <div class="post__log-in-bubble"><%= link_to "Log in to vote on this article", login_path %></div>
         <%end%>
-      </div>
   </div>
 </div>
