@@ -1,5 +1,5 @@
-<% provide(:title, 'Comments') %>
-<% provide(:single_title, "All comments for #{@post.title}") %>
+<% provide( :title, 'Comments' ) %>
+<% provide( :single_title, "All comments for \'#{@post.title}\'" ) %>
 
 <section class="comments">
 <%= link_to "Back to " + @post.title, post_path(@post), class: "back" %>
@@ -16,7 +16,7 @@
         <main><%= truncate(comment.body, :length => 400, :separator => ' ', :omission => ' ... ') {link_to '(more)', [comment.post, comment] } %></main>
         <% if (current_user && current_user.id == comment.user_id) || (comment.created_at != comment.updated_at) %>
           <% if comment.created_at != comment.updated_at %>
-            <div class="edited">updated <%= time_ago_in_words(comment.updated_at) %> ago</div>
+            <div class="comments__edited">updated <%= time_ago_in_words(comment.updated_at) %> ago</div>
           <% end %>
         <hr>
         <div class="comments__buttons-container">
@@ -30,10 +30,14 @@
       <% end %>
     </div>
     <% else %>
-    There are no comments for this post yet
+    <div class="comments__none">
+    <div>
+    <p class="comments__paragraph">There are no comments for this post yet</p>
+    </div>
+    </div>
   <% end %>
 </section>
 
 <% if current_user %>
-  <%= link_to 'New Comment', new_post_comment_path, class: "button" %>
+  <%= link_to 'New Comment', new_post_comment_path, class: "button button--new_comment" %>
 <% end %>

@@ -14,15 +14,6 @@ body {
   width: 100%
 }
 
-.pagination {
-  display: inline-flex;
-  list-style-type: none;
-}
-
-.previous_page {
-    padding-right: 0.2em;
-}
-
 .next_page {
   padding-left: 0.2em;
 }
@@ -30,7 +21,9 @@ body {
 .pagination a {
   border: 2px solid colour("cta","font");
   color: colour("cta","font");
+  display: inline-flex;
   float: left;
+  list-style-type: none;
   padding: 8px 16px;
   text-decoration: none;
   transition: background-color .3s;
@@ -42,3 +35,7 @@ body {
 }
 
 .pagination a:hover:not(.active) {background-color: #ddd;}
+
+.previous_page {
+    padding-right: 0.2em;
+}
