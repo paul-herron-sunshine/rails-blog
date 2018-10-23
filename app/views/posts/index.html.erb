@@ -40,6 +40,12 @@
 </div>
 <div class="posts__container--link">
   <h2>Feel like joining the discussion?</h2>
+  <%if logged_in?%>
   <li class="button button--create_post"><%= link_to "Create Post", new_post_path, {:style=>'text-decoration:none;'} %></li>
+  <%else%>
+  <div class="post__buttons--home">
+<li class="button button--home_page"><%= link_to "Log in", login_path %></li>
+<li class="button button--home_page"><%= link_to "Sign Up", signup_path%></li>  <%end%>
+</div>
 </div>
 </div>
