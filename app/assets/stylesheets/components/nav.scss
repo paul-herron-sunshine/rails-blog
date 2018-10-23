@@ -8,6 +8,10 @@
   padding-top: 0.8em;
   padding-bottom: 2em;
 
+  @include max-width(m) {
+    background-image: url("./header2.jpg");
+  }
+
   &__login-message {
     border:  2px solid colour("cta","main");
     border-radius: 0.6em;
