@@ -21,7 +21,7 @@ require 'rails_helper'
 #
 # Also compared to earlier versions of this generator, there are no longer any
 # expectations of assigns and templates rendered. These features have been
-# removed from Rails core in Rails 5, but can be added back in via the
+# emoved from Rails core in Rails 5, but can be added back in via the
 # `rails-controller-testing` gem.
 
 RSpec.describe CommentsController, type: :controller do

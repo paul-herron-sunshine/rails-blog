@@ -44,7 +44,7 @@ class PostsController < ApplicationController
       format.json { head :no_content }
       flash[:success] = "Your post was successfully deleted"
 
-      single_title = "Your post was successfully removed"
+      single_title = "Your post was successfully emoved"
     end
     else
       flash[:danger] = "You can only delete articles that you have written"

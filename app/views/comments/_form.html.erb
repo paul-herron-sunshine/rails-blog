@@ -12,6 +12,8 @@
       <%= f.hidden_field :user_id, value: current_user.id %>
       <br>
       <%= f.submit @comment.id ? "Edit Comment" : "Submit Comment", :class => 'button button--comment_edit' %>
+      	<%= link_to '🗑️', [@comment.post, @comment], method: :delete, data: { confirm: 'Are you sure?' }, :class => 'button button--comment_remove' %>
+
       <% if comment.errors.any? %>
         <div id="error_explanation">
           <h2><%= pluralize(comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
