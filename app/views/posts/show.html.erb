@@ -34,8 +34,10 @@
         <% if @post.user.name == current_user.name %>
           <li class="button button--delete_post"><%= link_to '🗑️', post_path(@post.id), { method: :delete, data: { confirm: 'Are you sure?' }, :style=>'text-decoration:none;'}%></li>
         <%end%>
+        <% if @post.user.name != current_user.name%>
         <li class="button button--vote_post"><%= link_to '👍', post_path(@post.id, :value => 1), { method: :put, :style=>'text-decoration:none;'}%></li>
         <li class="button button--vote_post"><%= link_to '👎', post_path(@post.id, :value => -1), { method: :put, :style=>'text-decoration:none;'}%></li>
+        <%end%>
       <%end%>
     </div>
   </div>
