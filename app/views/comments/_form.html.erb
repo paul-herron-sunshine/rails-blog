@@ -6,7 +6,7 @@
     <%= form_for(@comment, url: @comment.id ? post_comment_path : post_comments_path, :html => {:class => 'form'} ) do |f| %>
       <p class="form__label">
         <%= f.label "Your comment" %>
-        <%= f.text_area :body, value: @comment.body, :placeholder => "Test" %>
+        <%= f.text_area :body, value: @comment.body, :placeholder => "What's on your mind..?" %>
       </p>
       <%= f.hidden_field :post_id, value: @post.id %>
       <%= f.hidden_field :user_id, value: current_user.id %>

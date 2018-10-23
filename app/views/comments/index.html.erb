@@ -9,16 +9,19 @@
       <% @comments.each do |comment| %>
       <article class="comments__single">
         <header>
-          <span>POSTED AT: <%= comment.created_at.strftime("%d/%m/%Y %H:%M:%S") %></span>
+          <span>POSTED <%= time_ago_in_words(comment.created_at).upcase %> AGO</span>
           <span><%= link_to User.find(comment.user_id).name.upcase, User.find(comment.user_id) %></span>
         </header>
         <hr>
         <main><%= truncate(comment.body, :length => 400, :separator => ' ', :omission => ' ... ') {link_to '(more)', [comment.post, comment] } %></main>
-        <% if current_user && current_user.id == comment.user_id %>
-          <hr>
-          <div class="comments__buttons-container">
+        <% if (current_user && current_user.id == comment.user_id) || (comment.created_at != comment.updated_at) %>
+          <% if comment.created_at != comment.updated_at %>
+            <div class="edited">updated <%= time_ago_in_words(comment.updated_at) %> ago</div>
+          <% end %>
+        <hr>
+        <div class="comments__buttons-container">
           <footer>
-            <%# if user logged and comment belongs to user %>
+              <%# if user logged and comment belongs to user %>
               <li class="button button--comment_post"> <%= link_to '✍️', edit_post_comment_path(comment.post, comment) %></li>
               <li class="button button--comment_post"> <%= link_to '🗑️', [comment.post, comment], method: :delete, data: { confirm: 'Are you sure?' } %></li>
           </footer>
