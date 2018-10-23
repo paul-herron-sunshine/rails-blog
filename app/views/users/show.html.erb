@@ -6,19 +6,19 @@
     <div class="profile__single--header">
       <%= gravatar_for @user %>
       <br />
-    <h1>
-      <%= @user.name %>
-    </h1>
+      <h1>
+        <%= @user.name %>
+      </h1>
     </div>
-      <br />
+    <br />
       <% if @user.id == current_user.id %>
-      <div>
+      <div class="profile__links">
         <%= link_to "Compose Post",   new_post_path, class: "profile__compose" %>
         <%= link_to "View Posts", single_user_posts_path(:user_id => @user.id), class: "profile__compose" %>
       <% end %>
     </div>
       <br />
-    <br /><hr /><br />
+      <hr /><br />
       <div class="profile__modify">
       <%= @user.email %>
       <br />

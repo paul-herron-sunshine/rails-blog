@@ -1,5 +1,5 @@
 .post {
-  font-size: 1rem;
+  font-size: 1em;
   padding: 0.3em;
 
   &__body {
@@ -14,7 +14,12 @@
     padding-top: 1.4em;
     width: 10%;
 
+    @include max-width(m) {
+      padding-left: 35%;
+    }
+
     &--home {
+      margin-left: -28px;
       padding-left: 0;
     }
   }
@@ -34,20 +39,27 @@
   &__page {
     margin-left: auto;
     margin-right: auto;
-    width: 60%;
+    width: 50%;
   }
 
   &__single {
     background-color: rgba(colour("cta","main"),0.3);
     border: 2px solid colour("cta","font");
-    border-radius: 3rem;
+    border-radius: 3em;
     border-style: ridge;
     color: colour("cta","font");
     justify-content: space-around;
     margin: 4em -6em 6em -6em;
     min-height: 3em;
-    padding: 2rem;
+    padding: 2em;
     text-align: center;
+
+    @include max-width(m) {
+      border-radius: 1em;
+      font-size: 1em;
+      margin: 2em -4em 3em -4em;
+      padding: 0.5em;
+    }
   }
 
   &__title{
@@ -60,10 +72,6 @@
     padding-top: 1.5em;
     text-align: center;
     vertical-align: middle;
-
-    &--container {
-      margin: -1.3em;
-    }
   }
 }
 
@@ -71,4 +79,8 @@ hr {
   border: solid 0.5px colour("cta","font");
   color: colour("cta","font");
   width: 30em;
+
+  @include max-width(m){
+    width: 15em;
+  }
 }

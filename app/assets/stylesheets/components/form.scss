@@ -1,9 +1,6 @@
 .form {
-font-size: 1rem;
-
-&--log_in {
-  margin-top: 3em;
-}
+font-size: 1em;
+padding: 0 0.2em;
 
   input[type=text] {
     border: 0.1em solid colour("cta","main");
@@ -64,6 +61,10 @@ font-size: 1rem;
       border-radius: 5px;
       padding: 20px;
       padding-left: 9em;
+
+      @include max-width(m) {
+        padding-left: 1em;
+      }
     }
 
     &__label {
@@ -103,23 +104,77 @@ font-size: 1rem;
   }
 
   &--create_account {
+
+    @include max-width(m) {
+      font-size: 0.9em;
+    }
+
     input[type=text] {
-      height: 1.4em;
-      margin-left: 6em;
+      height: 1.3em;
+      margin-left: 5em;
       margin-top: 2em;
       width: 30%;
+
+      @include max-width(m) {
+        height: 1.2em;
+        margin-left: 5em;
+        width: 45%;
+      }
     }
 
     input[type=email] {
-      height: 1.4em;
-      margin-left: 5.3em;
+      height: 1.3em;
+      margin-left: 4.4em;
       width: 30%;
+
+      @include max-width(m) {
+        height: 1.2em;
+        margin-left: 4.3em;
+        width: 45%;
+      }
     }
 
     input[type=password] {
       height: 1.6em;
-      margin-left: 4.3em;
+      margin-left: 3.2em;
       width: 30%;
+
+      @include max-width(m) {
+        height: 1.4em;
+        margin-left: 3.2em;
+        width: 45%;
+      }
+    }
+  }
+
+  &--log_in {
+    margin-top: 3em;
+  
+    @include max-width(m) {
+      font-size: 0.9em;
+    }
+  
+    input[type=email] {
+      height: 1.3em;
+      margin-left: 4.4em;
+      width: 30%;
+  
+      @include max-width(m) {
+        height: 1.1em;
+        margin-left: 0.3em;
+        width: 83%;
+      }
+    }
+
+    input[type=password] {
+      height: 1.3em;
+      margin-left: 4.4em;
+      width: 30%;
+  
+      @include max-width(m) {
+        margin-left: 0.3em;
+        width: 83%;
+      }
     }
   }
 

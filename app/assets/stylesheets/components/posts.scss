@@ -1,5 +1,5 @@
 .posts {
-  font-size: 1rem;
+  font-size: 1em;
   padding: 0.3em;
 
   &__body {
@@ -14,7 +14,7 @@
     grid-column-gap: 2em;
     margin-top: 2em;
     min-height: 20em;
-    width: 100%;
+    // width: 100%;
 
   &--link {
     background-image: url("./header3.jpg");
@@ -30,12 +30,26 @@
     padding: 1em;
     text-align: center;
     width:35%;
+
+    @include max-width(m) {
+      border-radius: 1em;
+      height: 6em;
+      padding: 0.1em;
+      position: absolute;
+      top: 190px;
+      width: 95%
+     }
     }
   }
 
   &__page {
     display: inline-flex;
     width: 60%;
+
+    @include max-width(m) {
+     padding-top: 3em;
+     width: 100%
+    }
   }
 
   &__search {
@@ -47,41 +61,59 @@
     vertical-align: top;
     width: 18em;
 
+    @include max-width(m) {
+      margin-left: 0;
+      width: 24em;
+    }
 
     &--container{
       display: flex;
       padding: 2em 0 0;
       padding-left: 72%;
       vertical-align: top;
+
+      @include max-width(m) {
+        padding-left: 0;
+      }
     }
   }
 
   &__single {
     background-color: rgba(colour("cta","main"),0.3);
     border: 2px solid colour("cta","font");
-    border-radius: 3rem;
+    border-radius: 3em;
     border-style: ridge;
     color: colour("cta","font");
     justify-content: space-around;
     margin: 1%;
     min-height: 3em;
-    padding: 2rem;
+    padding: 2em;
     text-align: center;
+
+    @include max-width(m) {
+      border-radius: 2em;
+      padding: 0.5em;
+    }
   }
 
   &__title{
     color: colour("cta", "font");
     font-size: 2em;
+    margin-left: 0;
     padding-bottom: 1.5em;
+    margin-top: 0;
     padding-top: 1.5em;
     text-align: center;
     vertical-align: middle;
+
+    @include max-width(m) {
+      font-size: 1.2em;
+    }
 
     &--container {
       background-image: url("./header5.jpg");
       background-repeat: no-repeat;
       background-size: 100% 100%;
-      margin: -1.3em;
     }
   }
 }

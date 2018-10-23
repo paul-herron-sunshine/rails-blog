@@ -1,24 +1,24 @@
 .messages {
-  font-size: 1rem;
+  font-size: 1em;
   padding: 0.3em;
 
   &__single {
     background-color: rgba(colour("cta","main"),0.3);
     border: 2px solid colour("cta","font");
-    border-radius: 3rem;
+    border-radius: 3em;
     border-style: ridge;
     color: colour("cta","font");
     justify-content: space-around;
     margin: 1%;
     min-height: 3em;
-    padding: 2rem;
+    padding: 2em;
     text-align: center;
   }
 
   &__single_sender {
     background-color: rgba(colour("cta","main"),0.3);
     border: 2px solid colour("cta","font");
-    border-radius: 3rem;
+    border-radius: 3em;
     border-style: ridge;
     color: colour("cta","font");
     justify-content: space-around;
@@ -26,14 +26,14 @@
     margin-right:35%;
     margin-left: -15%;
     min-height: 2em;
-    padding: 2rem;
+    padding: 2em;
     text-align: center;
   }
 
   &__single_receiver {
     background-color: white;
     border: 2px solid colour("cta","font");
-    border-radius: 3rem;
+    border-radius: 3em;
     border-style: ridge;
     color: colour("cta","font");
     justify-content: space-around;
@@ -41,7 +41,7 @@
     margin-right:-15%;
     margin-left: 35%;
     min-height: 3em;
-    padding: 2rem;
+    padding: 2em;
     text-align: center;
   }
 
@@ -63,7 +63,7 @@
     grid-column-gap: 2em;
     margin-top: 2em;
     min-height: 20em;
-    width: 100%;
+    // width: 100%;
 
   }
 }

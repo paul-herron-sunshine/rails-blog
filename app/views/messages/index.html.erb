@@ -12,15 +12,14 @@
             <div class="users__username">
               <strong><%= link_to user.name, messages_path(:sender_id => current_user.id, :receiver_id => user.id) %></strong>
               <% if user.is_online %>
-                &nbsp;|&nbsp;<span style="padding:10px;background-color:green; color:white;">Currently Online</span>
+                &nbsp;|&nbsp;<span class="users__online--link">Currently Online</span>
               <% else %>
                 &nbsp;|&nbsp;last login -  <%= distance_of_time_in_words(user.last_active_at, Time.now) %> ago
               <% end %>
             </div>
+          </div>
         </span>
-      </div>
       <hr />
     </li>
   <% end %>
-
 </ul>

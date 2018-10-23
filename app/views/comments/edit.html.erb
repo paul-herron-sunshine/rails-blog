@@ -4,6 +4,4 @@
 <section class="comments">
 	<%= link_to 'Back', post_comments_path, class: 'comments__back' %>
 	<%= render 'form', comment: @comment %>
-
-	<%= link_to '🗑️', [@comment.post, @comment], method: :delete, data: { confirm: 'Are you sure?' } %>
 </section>
