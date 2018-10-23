@@ -1,6 +1,23 @@
 class MessagesController < ApplicationController
-  def create
+  def index
+    user_ids = []
+    @messages = Message.where(sender_id: current_user.id)
+    @messages += Message.where(receiver_id: current_user.id)
 
+    @messages.each do |message|
+      if message.sender_id == current_user.id
+        user_ids << message.receiver_id
+      else
+        user_ids << message.sender_id
+      end
+    end
+
+    user_ids = user_ids.uniq
+
+    @users = user_ids.map { |user_id| User.find(user_id) }
+  end
+
+  def create
     sender_id = params[:sender_id]
     receiver_id = params[:receiver_id]
     message = params[:message]

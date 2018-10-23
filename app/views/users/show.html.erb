@@ -36,6 +36,8 @@
 
     <% if @user.id == current_user.id %>
       <br /><hr /><br />
+      <%= link_to "View Inbox", user_inbox_path %>
+      <br /><br /><hr /><br />
       <%= link_to "Modify Account Details", edit_user_path(@user.id) %>
       <br /><br />
       <em><%= link_to "Remove Account", @user, method: :delete, :style=>'border-radius:0.4em; padding: 10px; background-color:red; color:white;',

@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   get 'single_user_posts' => 'posts#single_user_index'
   get 'messages' => 'messages#show'
   post 'messages' => 'messages#create'
+  get 'user_inbox' => 'messages#index'
 
   resources :account_activations, only: [:edit]
   resources :users
