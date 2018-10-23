@@ -215,7 +215,7 @@ RSpec.feature "Integration Tests", :type => :feature do
     login_user(@user)
     visit user_path(@user)
     users_before_delete = User.all.count
-    click_link("Delete Account")
+    click_link("Remove Account")
     expect(User.all.count).to_not eq users_before_delete
   end
 
@@ -266,5 +266,39 @@ RSpec.feature "Integration Tests", :type => :feature do
     login_user(@user_admin)
     @user_admin.reload
     expect(@user_admin.is_online).to be true
+  end
+
+  scenario "a non logged in user should not be able to view an inbox" do
+    visit user_inbox_path
+    expect(page).to have_text "Log In"
+  end
+
+  scenario "a logged in user should be able to view the inbox" do
+    login_user(@user)
+    visit user_inbox_path
+    expect(page).to_not have_text "Log In"
+  end
+
+  scenario "a non logged in user should not be able to view any messages" do
+    visit messages_path
+    expect(page).to have_text "Log In"
+  end
+
+  scenario "a logged in user should be able to view the inbox" do
+    login_user(@user)
+    visit messages_path
+    expect(page).to_not have_text "Log In"
+  end
+
+  scenario "a logged in user should be able to send a message to another user" do
+    initial_msg_count = Message.all.count
+
+    login_user(@user)
+    visit user_path(@user2.id)
+    click_on "Start Conversation"
+    fill_in "message", :with => "test message content"
+    click_button "Send Message"
+
+    expect(Message.all.count).to be > initial_msg_count
   end
 end

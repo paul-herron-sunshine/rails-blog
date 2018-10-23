@@ -3,46 +3,45 @@
 
 <div class="profile">
   <div class="profile__single">
-    <div class="profile__single--header">
-      <%= gravatar_for @user %>
+
+  <h1>
+    <%= gravatar_for @user %>
+    <br />
+    <%= @user.name %>
+  </h1>
+    <br />
+    <% if @user.id == current_user.id %>
+      <%= link_to "Compose Post", new_post_path, :style=>'border-radius:0.4em; padding: 20px; background-color:black; color:white;' %>
+    <% else %>
+      <%= link_to "Start Conversation", messages_path(:sender_id => current_user.id, :receiver_id => @user.id), :style=>'border-radius:0.4em; padding: 20px; background-color:black; color:white;' %>
+    <% end %>
+    <%= link_to "View Posts", single_user_posts_path(:user_id => @user.id), :style=>'border-radius:0.4em; padding: 20px; background-color:black; color:white;' %>
+    <br />
+
+  <br /><hr /><br />
+    <%= @user.email %>
+    <br />
+    <%= @user.views %> profile views
+    <br />
+    <% if @user.is_online %>
       <br />
-    <h1>
-      <%= @user.name %>
-    </h1>
-    </div>
+      <span style="border-radius:0.4em; padding:10px;background-color:green; color:white;">Currently Online</span>
       <br />
-      <% if @user.id == current_user.id %>
-      <div>
-        <%= link_to "Compose Post",   new_post_path, class: "profile__compose" %>
-        <%= link_to "View Posts", single_user_posts_path(:user_id => @user.id), class: "profile__compose" %>
-      <% end %>
-    </div>
-      <br />
-    <br /><hr /><br />
-      <div class="profile__modify">
-      <%= @user.email %>
-      <br />
-      <%= @user.views %> profile views
-      <br />
-      <% if @user.is_online %>
-        <br />
-        <span class="profile__online--link">Currently Online</span>
-        <br />
-      <% else %>
-        last login -  <%= distance_of_time_in_words(@user.last_active_at, Time.now) %> ago
-      <% end %>
-      <br />
-      Member since <%= @user.activated_at.strftime("%d %B %Y") %>
-      <br />
-     </div>
-      <% if @user.id == current_user.id %>
-        <br /><hr /><br />
-        <div class="profile__modify">
-          <%= link_to "Modify Account Details", edit_user_path(@user.id) %>
-          <br /><br />
-          <%= link_to "Remove Account", @user, method: :delete, class: "profile__remove",
-                                  data: { confirm: "Are you certain you want to delete #{@user.name}?" } %>
-        <% end %>
-      </div>
+    <% else %>
+      last login -  <%= distance_of_time_in_words(@user.last_active_at, Time.now) %> ago
+    <% end %>
+    <br />
+    Member since <%= @user.activated_at.strftime("%d %B %Y") %>
+    <br />
+
+    <% if @user.id == current_user.id %>
+      <br /><hr /><br />
+      <%= link_to "View Inbox", user_inbox_path %>
+      <br /><br /><hr /><br />
+      <%= link_to "Modify Account Details", edit_user_path(@user.id) %>
+      <br /><br />
+      <em><%= link_to "Remove Account", @user, method: :delete, :style=>'border-radius:0.4em; padding: 10px; background-color:red; color:white;',
+                              data: { confirm: "Are you certain you want to delete #{@user.name}?" } %></em>
+    <% end %>
   </div>
 </div>
