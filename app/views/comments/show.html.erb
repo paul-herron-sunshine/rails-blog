@@ -5,7 +5,7 @@
   <div class="comments__container">
     <article class="comments__single">
         <header>
-          <span>Posted at: <%= @comment.created_at.strftime("%d/%m/%Y %H:%M:%S") %></span>
+          <span><%= @comment.created_at.strftime("%d/%m/%Y %H:%M:%S") %></span>
           <span><%= @userName %></span>
         </header>    	
         <hr>
