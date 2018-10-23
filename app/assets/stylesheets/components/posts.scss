@@ -6,6 +6,38 @@
     text-align: justify;
   }
 
+  &__container {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: repeat(auto-fill);
+    grid-row-gap: .5em;
+    grid-column-gap: 2em;
+    margin-top: 2em;
+    min-height: 20em;
+    width: 100%;
+
+  &--link {
+    background-image: url("./header3.jpg");
+    background-size: 100% 230%;
+    border: 2px solid colour("cta","font");
+    border-radius: 2em;
+    color: colour("cta","font");
+    height: 11em;
+    float:right;
+    overflow:hidden;
+    margin-right: 1.6em;
+    margin-top: 2.5em;
+    padding: 1em;
+    text-align: center;
+    width:35%;
+    }
+  }
+
+  &__page {
+    display: inline-flex;
+    width: 60%;
+  }
+
   &__search {
     border-radius: 0.4em;
     height: 2.6em;
@@ -24,6 +56,19 @@
     }
   }
 
+  &__single {
+    background-color: rgba(colour("cta","main"),0.3);
+    border: 2px solid colour("cta","font");
+    border-radius: 3rem;
+    border-style: ridge;
+    color: colour("cta","font");
+    justify-content: space-around;
+    margin: 1%;
+    min-height: 3em;
+    padding: 2rem;
+    text-align: center;
+  }
+
   &__title{
     color: colour("cta", "font");
     font-size: 2em;
@@ -39,52 +84,6 @@
       margin: -1.3em;
     }
   }
-
-  &__container {
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    grid-template-rows: repeat(auto-fill);
-    grid-row-gap: .5em;
-    grid-column-gap: 2em;
-    margin-top: 2em;
-    min-height: 20em;
-    width: 100%;
-
-  &--link {
-    background-image: url("./header3.jpg");
-    // background-repeat: no-repeat;
-    background-size: 100% 230%;
-    border: 2px solid colour("cta","font");
-    border-radius: 2em;
-    color: colour("cta","font");
-    height: 11em;
-    float:right;
-    overflow:hidden;
-    margin-right: 1.6em;
-    margin-top: 2.5em;
-    padding: 1em;
-    text-align: center;
-    width:35%;
-    }
-  }
-
-  &__single {
-    background-color: rgba(colour("cta","main"),0.3);
-    border: 2px solid colour("cta","font");
-    border-radius: 3rem;
-    border-style: ridge;
-    color: colour("cta","font");
-    justify-content: space-around;
-    margin: 1%;
-    min-height: 3em;
-    padding: 2rem;
-    text-align: center;
-  }
-
-  &__page {
-    display: inline-flex;
-    width: 60%;
-  }
 }
 
 .posts__container {
@@ -92,4 +91,3 @@
   width:100%;
   overflow:hidden;
 }
-

@@ -1,46 +1,47 @@
 .profile {
 text-align: center;
 
-&__compose {
-  background-color:colour("cta","font");
-  border-radius: 0.4em;
-  color: $white;
-  padding: 20px;
-}
-&__modify {
-  display: flex;
-  flex-direction: column;
-}
+  &__buttons-container {
+    display: flex;
+    padding: 1em 0 0.5em 15%;
+  }
 
-&__remove {
-  background-color: rgba(red, 0.8);
-  border-radius: 0.4em;
-  color: $white;
-  font-family: 'Roboto Mono', monospace;
-  padding: 10px 12px;
-  margin-left: auto;
-  margin-right: auto;
-  width: 22%;
-}
-
-&__online {
-  display: grid;
-
-  &--link {
-    background-color: rgba(green, 0.8);
+  &__compose {
+    background-color:colour("cta","font");
     border-radius: 0.4em;
     color: $white;
+    padding: 20px;
+  }
+
+  &__modify {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__online {
+    display: grid;
+
+    &--link {
+      background-color: rgba(green, 0.8);
+      border-radius: 0.4em;
+      color: $white;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 10px;
+      width: 22%;
+    }
+  }
+
+  &__remove {
+    background-color: rgba(red, 0.8);
+    border-radius: 0.4em;
+    color: $white;
+    font-family: 'Roboto Mono', monospace;
+    padding: 10px 12px;
     margin-left: auto;
     margin-right: auto;
-    padding: 10px;
     width: 22%;
   }
-}
-
-&__buttons-container {
-  display: flex;
-  padding: 1em 0 0.5em 15%;
-}
 
   &__single {
     background-image: url("./header2.jpg");
