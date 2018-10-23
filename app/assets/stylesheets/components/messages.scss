@@ -1,0 +1,69 @@
+.messages {
+  font-size: 1rem;
+  padding: 0.3em;
+
+  &__single {
+    background-color: rgba(colour("cta","main"),0.3);
+    border: 2px solid colour("cta","font");
+    border-radius: 3rem;
+    border-style: ridge;
+    color: colour("cta","font");
+    justify-content: space-around;
+    margin: 1%;
+    min-height: 3em;
+    padding: 2rem;
+    text-align: center;
+  }
+
+  &__single_sender {
+    background-color: rgba(colour("cta","main"),0.3);
+    border: 2px solid colour("cta","font");
+    border-radius: 3rem;
+    border-style: ridge;
+    color: colour("cta","font");
+    justify-content: space-around;
+    margin: 1%;
+    margin-right:35%;
+    margin-left: -15%;
+    min-height: 2em;
+    padding: 2rem;
+    text-align: center;
+  }
+
+  &__single_receiver {
+    background-color: white;
+    border: 2px solid colour("cta","font");
+    border-radius: 3rem;
+    border-style: ridge;
+    color: colour("cta","font");
+    justify-content: space-around;
+    margin: 1%;
+    margin-right:-15%;
+    margin-left: 35%;
+    min-height: 3em;
+    padding: 2rem;
+    text-align: center;
+  }
+
+  &__page {
+    margin-left: auto;
+    margin-right: auto;
+    width: 60%;
+  }
+
+  &__body {
+    text-align: justify;
+  }
+
+  &__container {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: repeat(auto-fill);
+    grid-row-gap: .5em;
+    grid-column-gap: 2em;
+    margin-top: 2em;
+    min-height: 20em;
+    width: 100%;
+
+  }
+}

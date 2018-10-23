@@ -215,7 +215,7 @@ RSpec.feature "Integration Tests", :type => :feature do
     login_user(@user)
     visit user_path(@user)
     users_before_delete = User.all.count
-    click_link("Delete Account")
+    click_link("Remove Account")
     expect(User.all.count).to_not eq users_before_delete
   end
 

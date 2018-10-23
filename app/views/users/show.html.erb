@@ -11,6 +11,8 @@
     <br />
     <% if @user.id == current_user.id %>
       <%= link_to "Compose Post", new_post_path, :style=>'border-radius:0.4em; padding: 20px; background-color:black; color:white;' %>
+    <% else %>
+      <%= link_to "Start Conversation", messages_path(:sender_id => current_user.id, :receiver_id => @user.id), :style=>'border-radius:0.4em; padding: 20px; background-color:black; color:white;' %>
     <% end %>
     <%= link_to "View Posts", single_user_posts_path(:user_id => @user.id), :style=>'border-radius:0.4em; padding: 20px; background-color:black; color:white;' %>
     <br />

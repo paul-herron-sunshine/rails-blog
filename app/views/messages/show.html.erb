@@ -1,0 +1,33 @@
+<%= form_tag(url: messages_path, method: :post) do %>
+
+  <%= text_field_tag :message %>
+  <%= hidden_field_tag 'sender_id', @sender_id  %>
+  <%= hidden_field_tag 'receiver_id', @receiver_id  %>
+  <%= submit_tag "Send Message" %>
+<% end %>
+
+<div class="messages__page">
+
+      <% if @messages.count == 0 %>
+        <div class="messages__single">
+          There are no messages between the two of you...type in the box above to start a conversation
+        </div>
+      <% else %>
+        <% @messages.each do |msg| %>
+          <% if msg.sender_id == current_user.id %>
+            <div class="messages__single_sender">
+              <p class="messages__body">
+                <%=simple_format(msg.body)%>
+              </p>
+            </div>
+          <% else %>
+            <div class="messages__single_receiver">
+              <p class="messages__body">
+                <%=simple_format(msg.body)%>
+              </p>
+            </div>
+          <% end %>
+        <% end %>
+      <% end %>
+
+</div>

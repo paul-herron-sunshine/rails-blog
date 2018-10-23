@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   post 'login' => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
   get 'single_user_posts' => 'posts#single_user_index'
+  get 'messages' => 'messages#show'
+  post 'messages' => 'messages#create'
 
   resources :account_activations, only: [:edit]
   resources :users
