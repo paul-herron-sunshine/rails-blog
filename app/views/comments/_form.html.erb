@@ -2,27 +2,28 @@
 <% if current_user.id %>
 <div class="form form--comment">
   <!-- User logged in -->
-  <%= form_for(@comment, url: @comment.id ? post_comment_path : post_comments_path ) do |f| %>
-    <%# <%= f.label :body %> 
-    <%= f.text_area :body, value: @comment.body %>
-
-    <%= f.hidden_field :post_id, value: @post.id %>
-    <%= f.hidden_field :user_id, value: current_user.id %>
-    <br>
-    <%= f.submit @comment.id ? "Edit Comment" : "Submit Comment", class: "button button--comment_edit" %>
-
-    <% if comment.errors.any? %>
-      <div id="error_explanation">
-        <h2><%= pluralize(comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
-        <ul>
-        <% comment.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-        </ul>
-      </div>
+  <div class="form__container">
+    <%= form_for(@comment, url: @comment.id ? post_comment_path : post_comments_path, :html => {:class => 'form'} ) do |f| %>
+      <p class="form__label">
+        <%= f.label "Your comment" %>
+        <%= f.text_area :body, value: @comment.body, :placeholder => "What's on your mind..?" %>
+      </p>
+      <%= f.hidden_field :post_id, value: @post.id %>
+      <%= f.hidden_field :user_id, value: current_user.id %>
+      <br>
+      <%= f.submit @comment.id ? "Edit Comment" : "Submit Comment", :class => 'button button--comment_edit' %>
+      <% if comment.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+          <ul>
+          <% comment.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
     <% end %>
-  <% end %>
-
+  </div>
 <% else %>
 
   <!-- User not logged in -->

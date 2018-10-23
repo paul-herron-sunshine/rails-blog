@@ -59,20 +59,20 @@ font-size: 1rem;
     width: 2.4em;
   }
 
-  &__container {
-    background-color: rgba(colour("cta","main"),0.3);
-    border-radius: 5px;
-    padding: 20px;
-    padding-left: 9em;
-  }
+    &__container {
+      background-color: rgba(colour("cta","main"),0.3);
+      border-radius: 5px;
+      padding: 20px;
+      padding-left: 9em;
+    }
 
-  &__label {
-   font-size: 1.6em;
-  }
+    &__label {
+    font-size: 1.6em;
+    }
 
-  &__confirmation {
-    background-color: green;
-   }
+    &__confirmation {
+      background-color: green;
+    }
 
   textarea {
     background-color: colour("greys","light");
@@ -94,7 +94,7 @@ font-size: 1rem;
 
   &--comment {
     textarea {
-      font-size: 1.6em;
+      font-size: 1em;
       height: 4em;
       margin-left: 4%;
       width: 90%;
