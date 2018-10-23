@@ -1,3 +1,4 @@
+#add 3 admin users
 created_at = Faker::Time.between(750.days.ago, Time.now)
 activated_at = Faker::Time.between(created_at, Time.now)
 last_active_at = Faker::Time.between(activated_at, Time.now)
@@ -40,6 +41,7 @@ User.create!(name:  "Kirstie Davidson",
              last_active_at: last_active_at,
              views: Random.rand(0..1500))
 
+# add fake users
 97.times do |n|
   name  = Faker::Name.name
   email = "example-#{n+1}@hotmail.com"
@@ -59,10 +61,8 @@ User.create!(name:  "Kirstie Davidson",
 
 end
 
+# add posts and comments
 User.all.each do |user|
-
-
-
   Random.rand(1..15).times do |post_num|
     num_comments = Random.rand(0..7)
 
@@ -88,6 +88,23 @@ User.all.each do |user|
                    user_id: user.id,
                    post_id: post.id,
                    created_at: comment_created_at)
+    end
+  end
+end
+
+# add conversations between users
+User.all.each do |user|
+  # create a number of conversations
+  Random.rand(3..10).times do
+    other_user = User.find(Random.rand(1..User.all.count-1))
+    #create a number of interchanges between users
+    Random.rand(1..15).times do
+      Message.create!(body: Faker::Lorem.sentences(Random.rand(3..15)).join,
+                      sender_id: user.id,
+                      receiver_id: other_user.id)
+      Message.create!(body: Faker::Lorem.sentences(Random.rand(3..15)).join,
+                      sender_id: other_user.id,
+                      receiver_id: user.id)
     end
   end
 end
