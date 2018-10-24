@@ -24,7 +24,7 @@ body {
   list-style-type: none;
 
   @include max-width(m){
-    padding-left: 0.5em;
+    // padding-left: 0.5em;
   }
 }
 
@@ -67,3 +67,10 @@ p  {
   font-size: 0.8em;
  }
 }
+
+html {
+  height: 100%;
+  margin: 0;
+}
+
+a:visited { outline: none; }

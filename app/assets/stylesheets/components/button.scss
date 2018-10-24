@@ -135,6 +135,18 @@
     font-size: 1.2em;
   }
 
+  &--search_users {
+    background-color: colour("cta","font");
+    color: $white;
+    font-size: 0.8em;
+    margin-left: 0;
+    padding: 0.4em;
+
+    @include max-width(m) {
+      margin-left: -3em;
+    }
+  }
+
   &--search_post {
     background-color: colour("cta","font");
     font-size: 1em;

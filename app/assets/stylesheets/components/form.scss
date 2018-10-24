@@ -149,16 +149,16 @@ padding: 0 0.2em;
 
   &--log_in {
     margin-top: 3em;
-  
+
     @include max-width(m) {
       font-size: 0.9em;
     }
-  
+
     input[type=email] {
       height: 1.3em;
       margin-left: 4.4em;
       width: 30%;
-  
+
       @include max-width(m) {
         height: 1.1em;
         margin-left: 0.3em;
@@ -168,13 +168,16 @@ padding: 0 0.2em;
 
     input[type=password] {
       height: 1.3em;
-      margin-left: 4.4em;
+      white-space: pre;
       width: 30%;
-  
+
       @include max-width(m) {
         margin-left: 0.3em;
         width: 83%;
       }
+    }
+    input[type=checkbox] {
+      margin-left: 2em;
     }
   }
 
