@@ -85,3 +85,32 @@
   padding: 0.4em;
   text-align:right;
 }
+
+.message_txt_field {
+    border: 0.1em solid colour("cta","main");
+    border-radius: 0.4em;
+    background-color: colour("greys","light");
+    font-family: 'Roboto Mono', monospace;
+    font-size: 1em;
+    margin-top: 0.5em;
+    outline: none;
+    padding: 12px 20px;
+    width: 50%;
+    margin-left:25%;
+    margin-right:25%;
+}
+
+.message_send_button {
+  background-color: rgba(colour("cta","main"), 0.8);
+  border: 0;
+  border-radius: 0.25em;
+  color: blue;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 1em;
+  line-height: 1.1em;
+  margin-left: 45%;
+  padding: 1em;
+  text-align: center;
+  text-decoration: none;
+}

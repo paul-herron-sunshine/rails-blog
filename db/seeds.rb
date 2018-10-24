@@ -108,7 +108,7 @@ User.all.each do |user|
       send_read_at_time = send_time + Random.rand(1..400).minutes
       reply_time = send_read_at_time + Random.rand(1..60).minutes
       reply_read_at_time = reply_time + Random.rand(1..400).minutes
-      if Time.now > send_time && Time.now > reply_time
+      if Time.now > send_read_at_time && Time.now > reply_read_at_time
         Message.create!(body: Faker::Lorem.sentences(Random.rand(4..15)).join,
                         sender_id: user.id,
                         receiver_id: other_user.id,
