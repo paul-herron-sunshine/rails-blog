@@ -47,13 +47,13 @@
     font-family: 'Roboto Mono', monospace;
     font-size: 0.8em;
     margin-bottom: 0.2em;
-    margin-left: -1.2em;
     margin-right: 2em;
     outline: none;
     word-spacing: -0.3em;
 
     @include max-width(m) {
       font-size: 1em;
+      margin-left: -1.2em;
       padding-left: 2em;
       padding-right: 0;
     }

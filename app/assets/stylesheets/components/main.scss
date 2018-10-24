@@ -21,20 +21,25 @@ body {
 }
 .pagination {
   display: flex;
+  justify-content: center;
   list-style-type: none;
+  margin-left: 2%;
+  width: 78em;
 
   @include max-width(m){
-    // padding-left: 0.5em;
+    width: 20em;
   }
 }
 
 .pagination a {
-  border: 2px solid colour("cta","font");
+  border: 1px dashed colour("cta","font");
+  border-radius: 0.2em;
   color: colour("cta","font");
   display: inline-flex;
   float: left;
   list-style-type: none;
-  padding: 8px 16px;
+  margin: 0.1em;
+  padding: 0.3em 0.7em;
   text-decoration: none;
   transition: background-color .3s;
 }
@@ -72,5 +77,3 @@ html {
   height: 100%;
   margin: 0;
 }
-
-a:visited { outline: none; }

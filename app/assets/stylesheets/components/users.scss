@@ -4,9 +4,13 @@
 
   &__buttons-container {
 		display: flex;
-		padding: 0 0 0.5em 4%;
+    padding: 0 0 0.5em 35%;
+
+    @include max-width(m) {
+      padding: 0 0 0.5em 9%;
+    }
   }
-  
+
   &__container {
     align-self: center;
     align-items: center;
