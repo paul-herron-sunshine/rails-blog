@@ -4,11 +4,21 @@ class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
 
   def index
-    @posts = if params[:term]
+    @params = params
+    @posts = if params[:term].present?
       Post.where("title LIKE ? or body LIKE ?", "%#{params[:term]}%", "%#{params[:term]}%")
+    else
+      if params[:sort] == "1"
+        # Rails.logger.debug("\n\n\n\n-------------------------- \e[31m#{__method__}\e[39m sort1\n\n\n\n")
+        Post.order("created_at DESC").all
+      elsif params[:sort] == "2"
+        Post.order("votes DESC").all
+      elsif params[:sort] == "3"
+        Post.order("title ASC").all
       else
         Post.order("created_at DESC").all
-      end
+    end
+  end
     single_title = "Welcome to the OTB Academy Blogosphere"
   end
 
