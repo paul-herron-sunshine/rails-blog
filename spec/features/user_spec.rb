@@ -281,7 +281,8 @@ RSpec.feature "Integration Tests", :type => :feature do
 
   scenario "a logged in user should be able to view the inbox" do
     login_user(@user)
-    visit messages_path
+    visit user_path(@user)
+    click_on "View Conversations"
     expect(page).to_not have_text "Log In"
   end
 
