@@ -105,6 +105,7 @@ User.all.each do |user|
     end
 
     Random.rand(1..15).times do
+
       send_read_at_time = send_time + Random.rand(1..400).minutes
       reply_time = send_read_at_time + Random.rand(1..60).minutes
       reply_read_at_time = reply_time + Random.rand(1..400).minutes

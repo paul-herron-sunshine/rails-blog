@@ -10,12 +10,12 @@
   &__buttons{
     display: flex;
     justify-content: space-between;
-    padding-left: 45%;
+    padding-left: 43.5%;
     padding-top: 1.4em;
     width: 10%;
 
     @include max-width(m) {
-      padding-left: 35%;
+      padding-left: 32%;
     }
 
     &--home {
@@ -32,8 +32,9 @@
     color: colour("cta","font");
     margin-left: auto;
     margin-right: auto;
+    margin-top: 1em;
     padding: 1em;
-    width: 35%;
+    width: 45%;
   }
 
   &__page {
