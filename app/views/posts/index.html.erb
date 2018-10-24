@@ -1,8 +1,11 @@
+<%=@params%>
+<%=@test_string%>
 <%= form_tag(posts_path, method: :get) do %>
 <div class="posts">
   <div class="posts__search--container">
     <%= text_field_tag :term, "", class: "posts__search" %>
-    <%= submit_tag 'Search for Keywords', class: "button button--search_post" %>
+    <%= submit_tag 'Search', class: "button button--search_post" %>
+    <%= select_tag(:sort, options_for_select([['Sort by ⬇️', 0],['Most recent', 1], ['Votes', 2], ['Title', 3]]), {:class => 'posts__dropdown'}) %>
   </div>
   <% end %>
   <div class="posts__page">
