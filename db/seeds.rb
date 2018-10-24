@@ -69,7 +69,7 @@ User.all.each do |user|
     title = Faker::FamilyGuy.quote
     post_txt = []
     Random.rand(1..4).times do
-      post_txt << Faker::Loem.paragraph(Random.rand(4..10))
+      post_txt << Faker::Lorem.paragraph(Random.rand(4..10))
     end
 
     post_txt = post_txt.join("\n\n")
@@ -82,7 +82,7 @@ User.all.each do |user|
                  created_at: post_created_at)
 
     num_comments.times do |t|
-      txt = Faker::Loem.sentences(Random.rand(1..3)).join
+      txt = Faker::Lorem.sentences(Random.rand(1..3)).join
       comment_created_at = Faker::Time.between(post.created_at, Time.now)
       Comment.create!(body: txt,
                    user_id: user.id,
@@ -99,10 +99,10 @@ User.all.each do |user|
     other_user = User.find(Random.rand(1..User.all.count-1))
     #create a number of interchanges between users
     Random.rand(1..15).times do
-      Message.create!(body: Faker::Loem.sentences(Random.rand(3..15)).join,
+      Message.create!(body: Faker::Lorem.sentences(Random.rand(3..15)).join,
                       sender_id: user.id,
                       receiver_id: other_user.id)
-      Message.create!(body: Faker::Loem.sentences(Random.rand(3..15)).join,
+      Message.create!(body: Faker::Lorem.sentences(Random.rand(3..15)).join,
                       sender_id: other_user.id,
                       receiver_id: user.id)
     end
