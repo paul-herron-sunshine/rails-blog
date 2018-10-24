@@ -22,6 +22,24 @@
 		}
 	}
 
+	&__edited {
+		color: #bbb;
+		font-size: 0.8em;
+		margin: 0;
+		padding: 0;
+		text-align: right;
+	}
+
+	&__none {
+		display: flex;
+	}
+
+	&__paragraph {
+		font-size: 1.4em;
+		margin-left: 80%;
+	}
+
+
 	&__container {
 		max-width:800px;
 		padding:2rem;
@@ -51,23 +69,6 @@
 		min-height: 3em;
 	    padding: 2rem;
 		text-align: center;
-
-		&__edited {
-			color: colour("greys","light");
-			font-size: 0.8em;
-			margin: 0;
-			padding: 0;
-			text-align: right;
-		}
-
-		&__none {
-			display: flex;
-		}
-
-		&__paragraph {
-			font-size: 1.4em;
-			margin-left: 80%;
-		}
 
 		@include max-width(m) {
 			border-radius: 1em;
@@ -147,7 +148,7 @@
 	}
 
 	.liked {
-		color:#0080ff
+		color:#bf5c35
 	}
 
 }
