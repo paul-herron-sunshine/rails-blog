@@ -94,4 +94,5 @@ class CommentsController < ApplicationController
       params.fetch(:comment, {})
       params.require(:comment).permit(:body, :user_id, :post_id)
     end
+
 end
