@@ -66,7 +66,7 @@ User.all.each do |user|
   Random.rand(1..15).times do |post_num|
     num_comments = Random.rand(0..7)
 
-    title = Faker::FamilyGuy.quote
+    title = Faker::Friends.quote
     post_txt = []
     Random.rand(1..4).times do
       post_txt << Faker::Lorem.paragraph(Random.rand(4..10))
