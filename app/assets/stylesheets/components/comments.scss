@@ -1,12 +1,24 @@
 
 .comments {
 
+	&__back {
+		float: right;
+		margin-right: 2em;
+  	}
+
 	&__buttons-container {
 		display: flex;
 		padding: 1em 0 0.5em 42%;
 
+		@include max-width(m) {
+			padding: 0 0 0 15%;
+		}
 		&--edit {
 			margin-left: 40%;
+
+			@include max-width(m) {
+				margin-left: 10%;
+			}
 		}
 	}
 
@@ -22,48 +34,62 @@
 	    min-height: 20em;
 	    width: 100%;
 		padding-bottom:2rem;
-
-
 	}
 
 	&__single {
 		position:relative;
 		overflow:hidden;
 		background-color: rgba(colour("cta","main"),0.3);
-	    background-color: $white;
- 		border: 2px solid colour("cta","font");
-		border-radius: 3rem;
+		background-color: $white;
+		border: 2px solid colour("cta","font");
+		border-radius: 3em;
 		border-style: ridge;
 		color: colour("cta","font");
 		justify-content: space-around;
-		line-height: 2.5;
+		line-height: 2;
 		margin: 1%;
 		min-height: 3em;
 	    padding: 2rem;
 		text-align: center;
 
-		.edited {
-			font-size:0.8rem;
-			padding:0;
-			margin:0;
-			color:#bbb;
-			text-align:right;
+		&__edited {
+			color: colour("greys","light");
+			font-size: 0.8em;
+			margin: 0;
+			padding: 0;
+			text-align: right;
 		}
+
+		&__none {
+			display: flex;
+		}
+
+		&__paragraph {
+			font-size: 1.4em;
+			margin-left: 80%;
+		}
+
+		@include max-width(m) {
+			border-radius: 1em;
+			margin: 0;
+			padding: 0.5em;
+		}
+
 
 		hr {
 		    border: 0;
 		    height: 1px;
-		    background: #17317f;
+		    background: #ccc;
 		}
 
 		header {
-			padding:0.5rem;
+			padding:0.5em;
 			text-align:left;
 
  			span {
 
 				display:inline-block;
-				font-size:0.9rem;
+				font-size:0.8em;
 				font-weight:bold;
 
 				&:nth-child(2) {
@@ -72,14 +98,33 @@
 			}
 		}
 		main {
-			padding:0.5rem;
+			padding:0.5em;
 			text-align:left;
 		}
 		footer {
-			padding:0.5rem;
+			padding:0.5em 0.5em 0.5em ;
 			text-align:left;
-		}
 
+			.sub-footer {
+				margin:0;
+				position:absolute;
+				bottom:0;
+				right:0;
+				left:0;
+				color:#999;
+				font-size:0.8rem;
+				text-align:center;
+				background-color: #eee;
+				display:inline-block;
+				padding:0.2rem 4rem;
+				list-style-type: none;
+
+				li {
+					width:20%;
+					display:inline-block;
+				}
+			}
+		}
 	}
 
 	.back {
@@ -102,7 +147,7 @@
 	}
 
 	.liked {
-		color:red;
+		color:#0080ff
 	}
 
 }

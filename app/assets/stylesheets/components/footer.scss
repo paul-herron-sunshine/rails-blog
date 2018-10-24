@@ -4,12 +4,15 @@
   background-size: 100% 100%;
   bottom: 0;
   color: colour("cta","font");
-  font-size: 1.2rem;
+  font-size: 1.2em;
   font-style: italic;
   height: 2em;
   margin-left: -1em;
-  padding: 0.3em;
-  padding-bottom: 1em;
-  padding-left: 1.6em;
-  width: 100%;
+  padding: 0.3em 0.3em 1em 1.6em;
+  // width: 100%;
+
+  @include max-width(m) {
+    font-size: 0.8em;
+    padding: 0.3em 0.3em 1em 1em;
+  }
 }

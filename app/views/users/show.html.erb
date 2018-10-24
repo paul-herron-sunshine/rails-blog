@@ -3,24 +3,48 @@
 
 <div class="profile">
   <div class="profile__single">
-  <div class="profile__buttons-container">
-  <%= gravatar_for @user %>
-<h1>
-  <%= @user.name %>
-</h1>
-</div>
-<ul class="profile__single--list">
-  <li><%= @user.email %></li>
-  <li><%= @user.views %> profile views</li>
-  <li>Last login: <%= distance_of_time_in_words(@user.last_active_at, Time.now) %> ago</li>
-  <li>Member since <%= @user.activated_at.strftime("%d %B %Y") %></li>
-
-  <% if @user.id == current_user.id %>
-    <li>- - -</li>
-    <li><%= link_to "Modify Account Details", edit_user_path(@user.id) %></li>
-    <li><%= link_to "Delete Account", @user, method: :delete,
-                  data: { confirm: "Are you certain you wish to delete your account?" } %></li>
-  <% end %>
-</ul>
+    <div class="profile__single--header">
+      <%= gravatar_for @user %>
+      <br />
+      <h1>
+        <%= @user.name %>
+      </h1>
+    </div>
+    <br />
+      <% if @user.id == current_user.id %>
+      <div class="profile__links">
+        <%= link_to "Compose Post",   new_post_path, class: "profile__compose" %>
+        <%= link_to "View Posts", single_user_posts_path(:user_id => @user.id), class: "profile__compose" %>
+      <% end %>
+    </div>
+      <br />
+      <hr /><br />
+      <div class="profile__modify">
+        <%= @user.email %>
+        <br />
+        <%= @user.views %> profile views
+        <br />
+        <% if @user.is_online %>
+          <br />
+          <span class="profile__online--link">Currently Online</span>
+          <br />
+        <% else %>
+          last login -  <%= distance_of_time_in_words(@user.last_active_at, Time.now) %> ago
+        <% end %>
+        <br />
+        Member since <%= @user.activated_at.strftime("%d %B %Y") %>
+        <br />
+     </div>
+      <% if @user.id == current_user.id %>
+        <br /><hr /><br />
+        <%= link_to "View Conversations", user_inbox_path %>
+        <br /><br /><hr /><br />
+        <div class="profile__modify">
+          <%= link_to "Modify Account Details", edit_user_path(@user.id) %>
+          <br /><br />
+          <%= link_to "Remove Account", @user, method: :delete, class: "profile__remove",
+                                  data: { confirm: "Are you certain you want to delete #{@user.name}?" } %>
+        <% end %>
+      </div>
   </div>
 </div>

@@ -1,0 +1,25 @@
+<% provide(:title, 'Conversations') %>
+<% provide(:single_title, 'Your Conversations') %>
+
+<ul class="users__container">
+  <% @users.each do |user| %>
+    <li>
+      <div class="users">
+        <span class="users__single--container">
+          <div class="users__gravatar">
+            <%= gravatar_for user, size: 50 %>
+          </div>
+            <div class="users__username">
+              <strong><%= link_to user.name, messages_path(:sender_id => current_user.id, :receiver_id => user.id) %></strong>
+              <% if user.is_online %>
+                &nbsp;|&nbsp;<span class="users__online--link">Currently Online</span>
+              <% else %>
+                &nbsp;|&nbsp;last login -  <%= distance_of_time_in_words(user.last_active_at, Time.now) %> ago
+              <% end %>
+            </div>
+          </div>
+        </span>
+      <hr />
+    </li>
+  <% end %>
+</ul>

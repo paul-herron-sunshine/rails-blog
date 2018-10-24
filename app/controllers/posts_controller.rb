@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   layout "posts"
   include SessionsHelper
-  before_action :set_post, only: [:show, :edit, :update, :destroy, :vote]
+  before_action :set_post, only: [:show, :edit, :update, :destroy]
 
   def index
     @posts = if params[:term]
@@ -10,6 +10,12 @@ class PostsController < ApplicationController
         Post.order("created_at DESC").all
       end
     single_title = "Welcome to the OTB Academy Blogosphere"
+  end
+
+  def single_user_index
+    @parameters = params
+    @posts = Post.where(user_id: params[:user_id])
+    single_title = "Posts"
   end
 
   def show
@@ -38,7 +44,7 @@ class PostsController < ApplicationController
       format.json { head :no_content }
       flash[:success] = "Your post was successfully deleted"
 
-      single_title = "Your post was successfully removed"
+      single_title = "Your post was successfully emoved"
     end
     else
       flash[:danger] = "You can only delete articles that you have written"
@@ -52,19 +58,12 @@ class PostsController < ApplicationController
     redirect_to @post
   end
 
-  def vote_down
-    @post = post.find(params[:id])
-    @post.update_attribute(:votes, @post.votes - 1)
-    redirect_to @post
-  end
-
-  def comment_count 
+  def comment_count
     @count = Comment.where("post_id = ?", params[:id]).count
-    # @count = "test count"
   end
 
-  private 
-  
+  private
+
   def post_params
     params.require(:post).permit(:user_id, :title, :body, :term)
   end

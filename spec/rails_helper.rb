@@ -23,7 +23,7 @@ require 'rspec/rails'
 # Dir[Rails.root.join('spec', 'support', '**', '*.rb')].each { |f| require f }
 
 # Checks for pending migrations and applies them before tests are run.
-# If you are not using ActiveRecord, you can remove these lines.
+# If you are not using ActiveRecord, you can emove these lines.
 begin
   ActiveRecord::Migration.maintain_test_schema!
 rescue ActiveRecord::PendingMigrationError => e
@@ -31,11 +31,11 @@ rescue ActiveRecord::PendingMigrationError => e
   exit 1
 end
 RSpec.configure do |config|
-  # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
+  # emove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
-  # examples within a transaction, remove the following line or assign false
+  # examples within a transaction, emove the following line or assign false
   # instead of true.
   config.use_transactional_fixtures = true
 
@@ -43,7 +43,7 @@ RSpec.configure do |config|
   # based on their file location, for example enabling you to call `get` and
   # `post` in specs under `spec/controllers`.
   #
-  # You can disable this behaviour by removing the line below, and instead
+  # You can disable this behaviour by emoving the line below, and instead
   # explicitly tag your specs with their type, e.g.:
   #
   #     RSpec.describe UsersController, :type => :controller do

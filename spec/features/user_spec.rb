@@ -39,7 +39,7 @@ RSpec.feature "Integration Tests", :type => :feature do
   end
 
   scenario "User Navigates the the sign up page and clicks 'create my account' \
-            button without filling in any fields. will recieve notification of \
+            button without filling in any fields. will receive notification of \
             errors in the form" do
     visit signup_path
     click_on 'Create my account'
@@ -47,7 +47,7 @@ RSpec.feature "Integration Tests", :type => :feature do
   end
 
   scenario "User Navigates the the sign up page and a confirmation password that \
-            does not match the password given. should recieve notification \
+            does not match the password given. should receive notification \
             of the error" do
     visit signup_path
 
@@ -215,7 +215,7 @@ RSpec.feature "Integration Tests", :type => :feature do
     login_user(@user)
     visit user_path(@user)
     users_before_delete = User.all.count
-    click_link("Delete Account")
+    click_link("emove Account")
     expect(User.all.count).to_not eq users_before_delete
   end
 
@@ -245,7 +245,7 @@ RSpec.feature "Integration Tests", :type => :feature do
     expect(page).to_not have_text "Test User Admin"
   end
 
-  scenario "views should be incremented when another user visits a profile" do
+  scenario "views should be incemented when another user visits a profile" do
     login_user(@user)
     views_before_profile_view = @user2.views
     visit "/users/#{@user2.id}"
@@ -253,7 +253,7 @@ RSpec.feature "Integration Tests", :type => :feature do
     expect(@user2.views).to_not eq views_before_profile_view
   end
 
-  scenario "views should be incremented when another user visits a profile" do
+  scenario "views should be incemented when another user visits a profile" do
     login_user(@user2)
     views_before_profile_view = @user2.views
     visit "/users/#{@user2.id}"
@@ -266,5 +266,39 @@ RSpec.feature "Integration Tests", :type => :feature do
     login_user(@user_admin)
     @user_admin.reload
     expect(@user_admin.is_online).to be true
+  end
+
+  scenario "a non logged in user should not be able to view an inbox" do
+    visit user_inbox_path
+    expect(page).to have_text "Log In"
+  end
+
+  scenario "a logged in user should be able to view the inbox" do
+    login_user(@user)
+    visit user_inbox_path
+    expect(page).to_not have_text "Log In"
+  end
+
+  scenario "a non logged in user should not be able to view any messages" do
+    visit messages_path
+    expect(page).to have_text "Log In"
+  end
+
+  scenario "a logged in user should be able to view the inbox" do
+    login_user(@user)
+    visit messages_path
+    expect(page).to_not have_text "Log In"
+  end
+
+  scenario "a logged in user should be able to send a message to another user" do
+    initial_msg_count = Message.all.count
+
+    login_user(@user)
+    visit user_path(@user2.id)
+    click_on "Start Conversation"
+    fill_in "message", :with => "test message content"
+    click_button "Send Message"
+
+    expect(Message.all.count).to be > initial_msg_count
   end
 end

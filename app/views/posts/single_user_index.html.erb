@@ -1,0 +1,36 @@
+<div class="posts__page">
+  <div class="posts__container">
+    <%@posts.each do |post|%>
+      <%= link_to post_path(post.id) do %>
+        <div class="posts__single">
+          <h1>
+            <%=post.title%>
+          </h1>
+          <p>
+            created by <%=post.user.name%>
+          </p>
+          <p>
+            <%= time_ago_in_words(post.created_at) %> ago
+          </p>
+          <% if post.votes %>
+            <p>
+              votes <%=post.votes%>
+            </p>
+          <% else %>
+            <p>
+              votes 0
+            </p>
+          <% end %>
+          <p class="posts__body">
+            <%=simple_format(post.body)%>
+          </p>
+        <%end%>
+        </div>
+    <%end%>
+    </div>
+  </div>
+  <div class="posts__container--link">
+    <h2>Feel like joining the discussion?</h2>
+    <li class="button button--create_post"><%= link_to "Create Post", new_post_path, {:style=>'text-decoration:none;'} %></li>
+  </div>
+</div>
