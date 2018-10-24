@@ -1,19 +1,19 @@
 Rails.logger.debug
-class CommentLikesController < ApplicationController
 
+class CommentLikesController < ApplicationController
 
   def create
 	
 	@commentLike = CommentLike.new({:comment_id => params[:comment_id], :user_id => params[:user_id]})
 
 	@comment = Comment.find(params[:comment_id])
-    respond_to do |format|
-      if @commentLike.save
-        format.html { redirect_to [@comment.post, @comment] }
-      else 
-        format.html { redirect_to [@comment.post, @comment] }
-      end
-    end	
+
+    if @commentLike.save
+	    respond_to do |format|
+	      format.html { redirect_to post_comments_url, notice: 'Comment liked.' }
+	      format.json { head :no_content }
+		end   
+    end
   end
 
 end

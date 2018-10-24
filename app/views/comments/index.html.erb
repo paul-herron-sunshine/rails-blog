@@ -6,8 +6,10 @@
   <% if @comments.all.count > 0 %>
 
     <div class="comments__container">
+
       <% @comments.each do |comment| %>
 
+        <%# vars %>
         <% user = User.find(comment.user_id) %>
         <% likes = CommentLike.where(comment_id: comment.id) %><!-- get all likes for comment -->
         <% liked = CommentLike.where("comment_id = ? AND user_id = ?", comment.id, current_user.id) %><!-- has user liked this copmment? -->
@@ -29,21 +31,32 @@
 
             <div class="comments__buttons-container">
               <footer>
+
+                <%# if user is logged in  and user is comment owner, display the edit options %>
                 <% if (current_user && current_user.id == comment.user_id) %>
-                  <%# if user logged and comment belongs to user %>
                   <li class="button button--comment_post"> <%= link_to '✍️', edit_post_comment_path(comment.post, comment) %></li>
                   <li class="button button--comment_post"> <%= link_to '🗑️', [comment.post, comment], method: :delete, data: { confirm: 'Are you sure?' } %></li>
                 <% end %>
+
                 <ul class="sub-footer">
-                  <li>
-                    <% if liked.count > 0 %>
-                      <span class="liked" >liked <span style="font-size:1.3rem;position:absolute;margin-left:0.5rem;bottom:-0.2rem;">👍</span></span>
-                    <% else %>
-                      <span><%= likes.count %> likes</span>
+                  <li><%= likes.count %> likes</li>
+                  <%# IF 
+                      - user has liked the comment already
+                      --  display 'liked' 
+                      ELSE
+                      -- display 'like this [comment]' link
+                      %>
+                  <% if liked.count > 0 %>
+                    <li><span class="liked" >liked <span style="font-size:1.3rem;position:absolute;margin-left:0.5rem;bottom:-0.2rem;">👍</span></span></li>
+                  <% else %>
+                    <%# IF 
+                        - The user is logged in
+                        - They are not the comment owner
+                        -- Display the 'like this [comment]' link 
+                    %>
+                    <% if current_user && (current_user.id != comment.user_id) %>
+                      <li><%= link_to 'like this', post_comment_comment_likes_path(comment.post, comment, user_id: current_user.id), method: :post %></li>
                     <% end %>
-                  </li>
-                  <% if current_user && (current_user.id != comment.user_id) && liked.all.count < 1  %>
-                    <li><%= link_to 'like this', post_comment_comment_likes_path(comment.post, comment, user_id: current_user.id), method: :post %></li>
                   <% end %>
                 </ul>
               </footer>
@@ -63,6 +76,7 @@
   <% end %>
 </section>
 
+<%# If user logged in, display new comment button %>
 <% if current_user %>
   <%= link_to 'New Comment', new_post_comment_path, class: "button button--new_comment" %>
 <% end %>

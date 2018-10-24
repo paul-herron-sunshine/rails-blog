@@ -1,48 +1,70 @@
 <% provide(:single_title, @title) %>
 
+<!-- vars -->
 <% user = User.find(@comment.user_id) %>
 <% likes = CommentLike.where(comment_id: @comment.id) %><!-- get all likes for comment -->
 <% liked = CommentLike.where("comment_id = ? AND user_id = ?", @comment.id, current_user.id) %><!-- has user liked this post? -->
 
 <section class="comments">
+
+  <!-- Go back -->
   <%= link_to 'Show all comments for ' + @post.title, post_comments_path, class: "back" %>		
+
+  <!-- Comments -->
   <div class="comments__container">
     <article class="comments__single">
+
+    	<!-- Comment header -->
         <header>
           <span><%= @comment.created_at.strftime("%d/%m/%Y %H:%M:%S") %></span>
           <span><%= user.admin ? "<span class='account-type'>admin</span>".html_safe : "" %> <%= @userName %></span>
         </header>    	
+
         <hr>
+
     	<main>
 			<%= @comment.body %>
 		</main>
-		<% if current_user && current_user.id == @comment.user_id %>
 
-			<footer class="comments__buttons-container--edit">
+		<!-- footer -->
+		<footer class="comments__buttons-container--edit">
 
+			<%# if user is logged in  and user is comment owner, display the edit options %>
+			<% if current_user && current_user.id == @comment.user_id %>
 				<!-- Edit/delete buttons -->
 				<li class="button button--comment_editsecond"><%= link_to '✍️', edit_post_comment_path(@comment.post, @comment) %></span>
 	            <li class="button button--comment_editsecond"><%= link_to 'Delete', [@comment.post, @comment], method: :delete, data: { confirm: 'Are you sure?' } %></span>
+			<% end %>
 
-	            <!-- Subfooter - likes -->
-                <ul class="sub-footer">
-                  <li>
-                    <% if liked.count > 0 %>
-                      <span class="liked" >liked <span style="font-size:1.3rem;position:absolute;margin-left:0.5rem;bottom:-0.2rem;">👍</span></span>
-                    <% else %>
-                      <span><%= likes.count %> likes</span>
-                    <% end %>
-                  </li>
-                  <% if current_user && (current_user.id != @comment.user_id) && liked.all.count < 1  %>
-                    <li><%= link_to 'like this', post_comment_comment_likes_path(@comment.post, @comment, user_id: current_user.id), method: :post %></li>
-                  <% end %>
-                </ul>
+            <!-- Subfooter - likes -->
+            <ul class="sub-footer">
+              <li>
+	            <%# IF the user has liked this comment already 
+	            	-- Display 'liked' 
+	            	ELSE
+	            	-- Display no. of likes 
+	            %>
+                <% if liked.count > 0 %>
+                  <span class="liked" >liked <span style="font-size:1.3rem;position:absolute;margin-left:0.5rem;bottom:-0.2rem;">👍</span></span>
+                <% else %>
+                  <span><%= likes.count %> likes</span>
+                <% end %>
+              </li>
+              <%# IF 
+              		- The user is logged in
+              		- They are not the comment owner
+              		- And they have not like the comment already
+              		-- Display the 'like this [comment]' link 
+              %>
+              <% if current_user && (current_user.id != @comment.user_id) && liked.all.count < 1  %>
+                <li><%= link_to 'like this', post_comment_comment_likes_path(@comment.post, @comment, user_id: current_user.id), method: :post %></li>
+              <% end %>
+            </ul><!-- /.sub-footer -->
 
-			</footer>
-		<% end %>
-		</div>
+		</footer>
+
 	</article>
-  </span>
+  </div><!-- /.comments__container -->
 </section>
 
 
