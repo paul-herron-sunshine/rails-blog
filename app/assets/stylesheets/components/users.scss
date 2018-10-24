@@ -21,7 +21,7 @@
     min-height: 20em;
 
     @include max-width(m) {
-      margin-left: -1em;
+      padding: 0.3em;
     }
   }
 
@@ -44,7 +44,8 @@
   &__logged-in {
 
     @include max-width(m) {
-      padding-left: 5em;
+      padding-right: 4em;
+      white-space: pre;
     }
   }
 
@@ -73,6 +74,7 @@
       @include max-width(m){
         margin-left: 0.6em;
         min-width: 10em;
+        padding: 3px;
         width: 22%;
       }
     }
@@ -95,8 +97,15 @@
       @include max-width(m){
         margin-left: 0.6em;
         min-width: 10em;
-        width: 22%;
+        padding: 3px;
+        width: 15%;
+        white-space: pre;
+
       }
+  }
+
+  &__search {
+    display: flex;
   }
 
   &__single {
@@ -106,10 +115,10 @@
       display: inline-flex;
 
       @include max-width(m) {
-        display: inline-block;
+        display: contents;
         font-size: 0.8em;
-        height: 15em;
-        line-height: 3;
+        height: 11em;
+        line-height: 2;
         text-align: left;
       }
     }

@@ -4,15 +4,13 @@
 <div class = "users__pages-container">
 <%= will_paginate @users, :previous_label => '&laquo;', :next_label => '&raquo;' %>
 </div>
-
-<%= form_for(:user, url: users_path, method: :get) do |f| %>
+<%= form_for(:user, url: users_path, method: :get, :html => {:class => "users__search"}) do |f| %>
 
   <%= f.text_field :search_string %>
   <%= select_tag(:sort_by, options_for_select(
-           [['Sort by...', 1], ['Views', 2], ['Most recent login', 3]])) %>
-  <%= f.submit "Search" %>
+           [['Sort by...', 1], ['Views', 2], ['Most recent login', 3]]),{:class => 'posts__dropdown'}) %>
+  <%= f.submit "Search", class: "button button--search_users"%>
 <% end %>
-
 <ul class="users__container">
   <%= render @users %>
 </ul>

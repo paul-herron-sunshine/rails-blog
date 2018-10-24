@@ -33,7 +33,6 @@ text-align: center;
 
     @include max-width(m){
       font-size: 0.85em;
-      margin-left: -22px;
       padding: 0;
     }
   }
@@ -69,7 +68,6 @@ text-align: center;
     width: 22%;
 
     @include max-width(m){
-      margin-left: 3em;
       width: 65%;
     }
   }

@@ -29,8 +29,7 @@
       background-image: url("./header3.jpg");
       background-repeat: no-repeat;
       font-size: 0.8em;
-      margin-left: 0.8em;
-    }
+   }
   }
 
   &__link {
@@ -83,86 +82,9 @@
 
         @include max-width(m) {
           margin-bottom: 1em;
-          margin-left: 0;
+          margin-left: 20%;
         }
       }
     }
   }
 }
-  //   cursor: pointer;
-  //   font-size: 1.2em;
-  //   margin-right: 1em;
-  //   text-align: center;
-  //   text-decoration: none;
-
-//     @include max-width(m) {
-//       display: none;
-//}
-
-//     @include min-width(m) {
-//       font-size: 2em;
-//       margin-bottom: auto;
-//       margin-top: auto;
-//     }
-
-//     @include min-width(l) {
-//       font-size: 2em;
-//       margin-bottom: auto;
-//       margin-top: auto;
-//     }
-
-//     @include min-width(xl) {
-//       font-size: 2.5em;
-//       margin-bottom: auto;
-//       margin-top: auto;
-//     }
-
-//     &--container {
-//       display: flex;
-//       justify-content: flex-start;
-//       margin: 1em;
-//       padding: 0;
-//     }
-//   }
-
-//   &__logo {
-//     margin-left: 0.5em;
-//     transform: scale(1.6);
-
-//     @include min-width(l) {
-//       height: 4em;
-//       margin-left: -0.4em;
-//       margin-top: -0.6em;
-//     }
-
-//     @include min-width(xl) {
-//       height: 6em;
-//       margin-left: -0.4em;
-//       margin-top: -0.6em;
-//     }
-//   }
-
-//   &__social-icon-wrapper {
-//     display: flex;
-//     justify-content: flex-end;
-//     margin: auto 1.5em;
-
-//     @include min-width(xl) {
-//       padding: 0.5em;
-//     }
-//   }
-
-//   &__social-icon {
-//     margin: 0;
-//     transform: scale(0.8);
-
-//     @include min-width(xl) {
-//       margin-right: 1em;
-//       transform: scale(1);
-//     }
-
-//     @include min-width(xxl) {
-//       margin-right: 1em;
-//     }
-//   }
-// }
