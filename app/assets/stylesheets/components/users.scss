@@ -1,51 +1,102 @@
 .users {
-
   display: flex;
 
-  &__pages-container {
-    display: inline-flex;
-    list-style-type: none;
+
+  &__buttons-container {
+		display: flex;
+		padding: 0 0 0.5em 4%;
+  }
+  
+  &__container {
+    align-self: center;
+    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: repeat(auto-fill);
+    grid-row-gap: .5em;
+    grid-column-gap: 2em;
+    justify-content: center;
+    list-style: none;
+    margin-top: 2em;
+    min-height: 20em;
+
+    @include max-width(m) {
+      margin-left: -1em;
+    }
   }
 
   &__gravatar {
-    margin-right: 3em;
+    margin-right: 1em;
+
+    @include max-width(m) {
+      margin-right: 1em;
+      max-height: 4em;
+      max-width: 4em;
+    }
   }
 
   &__gravatar-container {
     display: flex;
     height: 7em;
     line-height: 7em;
-
   }
 
-  &__online {
-    display: grid;
+  &__logged-in {
+
+    @include max-width(m) {
+      padding-left: 5em;
+    }
   }
+
+  &__links {
+    display: inline-flex;
+  }
+
   &__log_in {
     float:right;
     margin-top: auto;
     margin-bottom: auto;
   }
 
-  &__container {
+  &__online {
     display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    grid-template-rows: repeat(auto-fill);
-    grid-row-gap: .5em;
-    grid-column-gap: 2em;
-    list-style: none;
-    margin-top: 2em;
-    min-height: 20em;
-    justify-content: center;
-    width: 100%;  
-    align-self: center;
-    align-items: center
+
+    &--link {
+      background-color: rgba(green, 0.8);
+      border-radius: 0.4em;
+      color: $white;
+      margin-left: 0;
+      margin-right: 0.5em;
+      min-width: 4em;
+      padding: 10px;
+
+      @include max-width(m){
+        margin-left: 0.6em;
+        min-width: 10em;
+        width: 22%;
+      }
+    }
   }
 
-  &__username {
-    vertical-align: middle;
-    margin: auto;
-    margin-left: 0.7em;
+  &__pages-container {
+    display: inline-flex;
+    list-style-type: none;
+  }
+
+  &__remove {
+    background-color: rgba(red, 0.8);
+      border-radius: 0.4em;
+      color: $white;
+      margin-left: 0;
+      margin-right: 0.5em;
+      min-width: 4em;
+      padding: 10px;
+
+      @include max-width(m){
+        margin-left: 0.6em;
+        min-width: 10em;
+        width: 22%;
+      }
   }
 
   &__single {
@@ -53,6 +104,24 @@
 
     &--container {
       display: inline-flex;
+
+      @include max-width(m) {
+        display: inline-block;
+        font-size: 0.8em;
+        height: 15em;
+        line-height: 3;
+        text-align: left;
+      }
+    }
+  }
+
+  &__username {
+    margin: auto;
+    margin-left: 0.7em;
+    vertical-align: middle;
+
+    @include max-width(m) {
+      margin-left: 0;
     }
   }
 }

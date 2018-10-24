@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   layout "posts"
   include SessionsHelper
-  before_action :set_post, only: [:show, :edit, :update, :destroy, :vote]
+  before_action :set_post, only: [:show, :edit, :update, :destroy]
 
   def index
     @posts = if params[:term]
@@ -44,7 +44,7 @@ class PostsController < ApplicationController
       format.json { head :no_content }
       flash[:success] = "Your post was successfully deleted"
 
-      single_title = "Your post was successfully removed"
+      single_title = "Your post was successfully emoved"
     end
     else
       flash[:danger] = "You can only delete articles that you have written"
@@ -58,15 +58,8 @@ class PostsController < ApplicationController
     redirect_to @post
   end
 
-  def vote_down
-    @post = post.find(params[:id])
-    @post.update_attribute(:votes, @post.votes - 1)
-    redirect_to @post
-  end
-
   def comment_count
     @count = Comment.where("post_id = ?", params[:id]).count
-    # @count = "test count"
   end
 
   private

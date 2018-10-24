@@ -8,13 +8,13 @@
         <div class="users__username">
           <strong><%= link_to user.name, user %></strong> | <em><%= pluralize(user.views, "view") %></em>
           <% if user.is_online %>
-            &nbsp;|&nbsp;<span style="padding:10px;background-color:green; color:white;">Currently Online</span>
+            <span class="users__online--link">Currently Online</span>
           <% else %>
-            &nbsp;|&nbsp;last login -  <%= distance_of_time_in_words(user.last_active_at, Time.now) %> ago
+            <span class="users__logged-in">logged in: <%= distance_of_time_in_words(user.last_active_at, Time.now) %> ago</span>
           <% end %>
 
           <% if current_user.admin %>
-            |&nbsp;<em><%= link_to "delete", user, method: :delete, :style=>'padding:10px;background-color:red; color:white;',
+            <em><%= link_to "delete", user, method: :delete, :class=>'users__remove',
                                     data: { confirm: "Are you certain you want to delete #{user.name}?" } %></em>
           <% end %>
         </div>
@@ -23,8 +23,6 @@
           <strong><%= user.name %></strong> - <em>log in to view full profile </em>
         </div>
       <% end %>
-
   </span>
 </div>
-<hr />
 </li>

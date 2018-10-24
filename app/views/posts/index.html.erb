@@ -1,51 +1,50 @@
 <%= form_tag(posts_path, method: :get) do %>
-<div class="posts__search--container">
-  <%= text_field_tag :term, "", class: "posts__search" %>
-  <%= submit_tag 'Search for Keywords', class: "button button--search_post" %>
+<div class="posts">
+  <div class="posts__search--container">
+    <%= text_field_tag :term, "", class: "posts__search" %>
+    <%= submit_tag 'Search for Keywords', class: "button button--search_post" %>
   </div>
-<% end %>
-
-<div class="posts__page">
-  <div class="posts__container">
-    <%@posts.each do |post|%>
-<%= link_to post_path(post.id) do %>
-    <div class="posts__single">
-      <h1>
-        <%=post.title%>
-      </h1>
-      <p>
-        created by <%=post.user.name%>
-      </p>
-       <p>
-        <%= time_ago_in_words(post.created_at) %> ago
-        </p>
-      <% if post.votes %>
-          <p>
-          votes <%=post.votes%>
-        </p>
-        <% else %>
-           <p>
-          votes 0
-        </p>
-        <% end %>
-      <p class="posts__body">
-        <%=simple_format(post.body.truncate_words(150))%>
-      </p>
-  </div>
-    <%end%>
+  <% end %>
+  <div class="posts__page">
+    <div class="posts__container">
+      <%@posts.each do |post|%>
+        <%= link_to post_path(post.id) do %>
+          <div class="posts__single">
+            <h1>
+              <%=post.title%>
+            </h1>
+            <p>
+              created by <em><%=post.user.name%></em>
+            </p>
+            <p>
+              <%= time_ago_in_words(post.created_at) %> ago
+            </p>
+            <p class="posts__body">
+              <%=simple_format(post.body.truncate_words(80))%>
+            </p>
+            <% if post.votes %>
+              <p>
+              votes <%=post.votes%>
+              </p>
+            <% else %>
+              <p>
+              votes 0
+              </p>
+            <% end %>
+          </div>
         <%end%>
+      <%end%>
+    </div>
   </div>
-
-  </li>
-</div>
-<div class="posts__container--link">
-  <h2>Feel like joining the discussion?</h2>
-  <%if logged_in?%>
-  <li class="button button--create_post"><%= link_to "Create Post", new_post_path, {:style=>'text-decoration:none;'} %></li>
-  <%else%>
-  <div class="post__buttons--home">
-<li class="button button--home_page"><%= link_to "Log in", login_path %></li>
-<li class="button button--home_page"><%= link_to "Sign Up", signup_path%></li>  <%end%>
-</div>
-</div>
+  <div class="posts__container--link">
+    <h2>Feel like joining the discussion?</h2>
+    <%if logged_in?%>
+      <li class="button button--create_post"><%= link_to "Create Post", new_post_path, {:style=>'text-decoration:none;'} %></li>
+    <%else%>
+      <div class="post__buttons--home">
+        <li class="button button--home_page"><%= link_to "Log in", login_path %></li>
+        <li class="button button--home_page"><%= link_to "Sign Up", signup_path%></li>
+      </div>
+    <%end%>
+  </div>
 </div>

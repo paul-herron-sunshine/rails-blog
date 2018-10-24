@@ -4,10 +4,11 @@ class CommentsController < ApplicationController
   # GET /comments
   # GET /comments.json
   def index
-
     @comments = Comment.where(post_id: params[:post_id]) 
     if Post.exists?(params[:post_id])
       @post = Post.find(params[:post_id]) 
+      @title = "All comments for &ldquo;" + @post.title + "&rdquo;"
+      @title = @title.html_safe
     else 
       render_not_found
     end
@@ -17,18 +18,25 @@ class CommentsController < ApplicationController
   # GET /comments/1.json
   def show
     @comment = Comment.find(params[:id])
+    @post = Post.find(params[:post_id]) 
+    @userName = User.find(@comment.user_id).name
+    @title = "Comment by " + @userName
   end
 
   # GET /comments/new
   def new
     @comment = Comment.new
     @post = Post.find(params[:post_id]) 
+    @title = "Say something about &ldquo;" + @post.title + "&rdquo;"
+    @title = @title.html_safe
   end
 
   # GET /comments/1/edit
   def edit
-   @comment = Comment.find(params[:id])
-   @post = Post.find(params[:post_id]) 
+    @comment = Comment.find(params[:id])
+    @post = Post.find(params[:post_id]) 
+    @title = "Editing comment for &ldquo;" + @post.title + "&rdquo;"
+    @title = @title.html_safe
   end
 
   # POST /comments

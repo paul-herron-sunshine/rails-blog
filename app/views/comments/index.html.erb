@@ -1,36 +1,43 @@
-<p id="notice"><%= notice %></p>
-<% provide(:title, 'Comments') %>
-<% provide(:single_title, "All comments for #{@post.title}") %>
-
-<%= link_to 'Back to Post', post_path(@post) %>
+<% provide( :title, 'Comments' ) %>
+<% provide( :single_title, "All comments for \'#{@post.title}\'" ) %>
 
 <section class="comments">
+<%= link_to "Back to " + @post.title, post_path(@post), class: "back" %>
   <% if @comments.all.count > 0 %>
 
-    <% @comments.each do |comment| %>
-    <article class="comments__single">
-      <header>
-        <span class=><em>Posted at: <%= comment.created_at.strftime("%d/%m/%Y %H:%M:%S") %></span>
-        <span>by <%= User.find(comment.user_id).name %></em></span>
-      </header>
-      <main style="font-size:1.4em;">"<%= comment.body %>"</main>
-      <footer>
-      <div class="comments__buttons-container">
-        <%# <li class="button button--comment_post"><%= link_to '👀', [comment.post, comment] %></li>
-        <%# if user logged and comment belongs to user %>
-        <% if current_user && current_user.id == comment.user_id %></span>
-          <li class="button button--comment_post"><%= link_to '✍️', edit_post_comment_path(comment.post, comment) %></li>
-          <li class="button button--comment_post"><%= link_to '🗑️', [comment.post, comment], method: :delete, data: { confirm: 'Are you sure?' } %></li>
+    <div class="comments__container">
+      <% @comments.each do |comment| %>
+      <article class="comments__single">
+        <header>
+          <span>POSTED <%= time_ago_in_words(comment.created_at).upcase %> AGO</span>
+          <span><%= link_to User.find(comment.user_id).name.upcase, User.find(comment.user_id) %></span>
+        </header>
+        <hr>
+        <main><%= truncate(comment.body, :length => 400, :separator => ' ', :omission => ' ... ') {link_to '(more)', [comment.post, comment] } %></main>
+        <% if (current_user && current_user.id == comment.user_id) || (comment.created_at != comment.updated_at) %>
+          <% if comment.created_at != comment.updated_at %>
+            <div class="comments__edited">updated <%= time_ago_in_words(comment.updated_at) %> ago</div>
+          <% end %>
+        <hr>
+        <div class="comments__buttons-container">
+          <footer>
+              <%# if user logged and comment belongs to user %>
+              <li class="button button--comment_post"> <%= link_to '✍️', edit_post_comment_path(comment.post, comment) %></li>
+              <li class="button button--comment_post"> <%= link_to '🗑️', [comment.post, comment], method: :delete, data: { confirm: 'Are you sure?' } %></li>
+          </footer>
         <% end %>
-        </div>
-      </footer>
-    </article>
-    <% end %>
-  <% else %>
-    There are no comments for this post yet
+      </article>
+      <% end %>
+    </div>
+    <% else %>
+    <div class="comments__none">
+    <div>
+    <p class="comments__paragraph">There are no comments for this post yet</p>
+    </div>
+    </div>
   <% end %>
 </section>
 
 <% if current_user %>
-  <%= link_to 'New Comment', new_post_comment_path %>
+  <%= link_to 'New Comment', new_post_comment_path, class: "button button--new_comment" %>
 <% end %>

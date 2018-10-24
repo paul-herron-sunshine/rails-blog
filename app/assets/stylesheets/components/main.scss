@@ -11,26 +11,29 @@ body {
   background-color: rgba(colour("cta","main"),0.3);
   font-family: 'Roboto Mono', monospace;
   height: 100%;
-  width: 100%
-}
-
-.pagination {
-  display: inline-flex;
-  list-style-type: none;
-}
-
-.previous_page {
-    padding-right: 0.2em;
+  margin: 0;
+  padding: 0;
+  width: 100%;
 }
 
 .next_page {
   padding-left: 0.2em;
 }
+.pagination {
+  display: flex;
+  list-style-type: none;
+
+  @include max-width(m){
+    padding-left: 0.5em;
+  }
+}
 
 .pagination a {
   border: 2px solid colour("cta","font");
   color: colour("cta","font");
+  display: inline-flex;
   float: left;
+  list-style-type: none;
   padding: 8px 16px;
   text-decoration: none;
   transition: background-color .3s;
@@ -42,3 +45,25 @@ body {
 }
 
 .pagination a:hover:not(.active) {background-color: #ddd;}
+
+.previous_page {
+    padding-right: 0.2em;
+}
+
+h1  {
+  @include max-width(m) {
+  font-size: 1.2em;
+ }
+}
+
+h2  {
+  @include max-width(m) {
+  font-size: 0.9em;
+ }
+}
+
+p  {
+  @include max-width(m) {
+  font-size: 0.8em;
+ }
+}
