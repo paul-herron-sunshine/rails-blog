@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema.define(version: 2018_10_23_101247) do
+ActiveRecord::Schema.define(version: 2018_10_24_081745) do
 
   create_table "comment_likes", force: :cascade do |t|
     t.integer "comment_id"
