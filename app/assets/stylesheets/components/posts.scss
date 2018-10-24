@@ -47,6 +47,11 @@
     font-family: 'Roboto Mono', monospace;
     font-size: 1.4em;
     word-spacing: -0.3em;
+
+    @include max-width(m) {
+      font-size: 1em;
+    }
+
   }
 
   &__page {
@@ -54,7 +59,7 @@
     width: 60%;
 
     @include max-width(m) {
-     padding-top: 3em;
+     padding-top: 0;
      width: 100%
     }
   }
@@ -81,6 +86,7 @@
 
       @include max-width(m) {
         padding-left: 0;
+        padding-top: 3em;
       }
     }
   }
