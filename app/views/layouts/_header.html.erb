@@ -2,13 +2,13 @@
   <div>
     <nav class="nav">
       <ul class="nav__link--container">
-          <li><%=link_to "Home",   posts_path, class: "nav__link--home"%></li>
+          <li><%=link_to image_tag("logo1.png", :class => "nav__logo",:alt => 'logo', :title => ''), posts_path, class: "nav__link--home"%></li>
          <div class="nav__link--container--others">
         <li><%= link_to "Bloggers", users_path, class: "nav__link" %></li>
         <% if logged_in? %>
           <li><%= link_to "Profile", current_user, class: "nav__link" %></li>
           <li><%= link_to "Log out", logout_path, class: "nav__link", method: :delete %></li>
-          <li><%= link_to "⚙", edit_user_path(current_user.id), class: "nav__link" %></li>
+          <li><%= link_to "⚙", edit_user_path(current_user.id), class: "nav__link nav__link--settings" %></li>
         <% else %>
           <li><%= link_to "Log in", login_path, class: "nav__link" %></li>
           <li><%= link_to "Sign Up", signup_path, class: "nav__link" %></li>
