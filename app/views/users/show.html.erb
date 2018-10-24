@@ -12,13 +12,14 @@
     </div>
     <br />
       <% if @user.id == current_user.id %>
-      <div class="profile__links">
-        <%= link_to "Compose Post",   new_post_path, class: "profile__compose" %>
-        <%= link_to "View Posts", single_user_posts_path(:user_id => @user.id), class: "profile__compose" %>
+        <div class="profile__links">
+          <%= link_to "Compose Post",   new_post_path, class: "profile__compose" %>
+          <%= link_to "View Posts", single_user_posts_path(:user_id => @user.id), class: "profile__compose" %>
+        </div>
       <% end %>
-    </div>
       <br />
       <hr /><br />
+
       <div class="profile__modify">
         <%= @user.email %>
         <br />
@@ -34,6 +35,7 @@
         <br />
         Member since <%= @user.activated_at.strftime("%d %B %Y") %>
         <br />
+
      </div>
       <% if @user.id == current_user.id %>
         <br /><hr /><br />
@@ -44,7 +46,14 @@
           <br /><br />
           <%= link_to "Remove Account", @user, method: :delete, class: "profile__remove",
                                   data: { confirm: "Are you certain you want to delete #{@user.name}?" } %>
+        </div>
+      <% else %>
+        <br /><hr /><br />
+        <% if conversation_exists?(@user.id, current_user.id) %>
+          <%= link_to "Continue Conversation", messages_path(:sender_id => current_user.id, :receiver_id => @user.id) %>
+        <% else %>
+          <%= link_to "Start Conversation", messages_path(:sender_id => current_user.id, :receiver_id => @user.id) %>
         <% end %>
-      </div>
+      <% end %>
   </div>
 </div>
