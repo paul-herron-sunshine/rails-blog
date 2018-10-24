@@ -7,34 +7,59 @@
 
     <div class="comments__container">
       <% @comments.each do |comment| %>
-      <article class="comments__single">
-        <header>
-          <span>POSTED <%= time_ago_in_words(comment.created_at).upcase %> AGO</span>
-          <span><%= link_to User.find(comment.user_id).name.upcase, User.find(comment.user_id) %></span>
-        </header>
-        <hr>
-        <main><%= truncate(comment.body, :length => 400, :separator => ' ', :omission => ' ... ') {link_to '(more)', [comment.post, comment] } %></main>
-        <% if (current_user && current_user.id == comment.user_id) || (comment.created_at != comment.updated_at) %>
-          <% if comment.created_at != comment.updated_at %>
-            <div class="comments__edited">updated <%= time_ago_in_words(comment.updated_at) %> ago</div>
-          <% end %>
-        <hr>
-        <div class="comments__buttons-container">
-          <footer>
-              <%# if user logged and comment belongs to user %>
-              <li class="button button--comment_post"> <%= link_to '✍️', edit_post_comment_path(comment.post, comment) %></li>
-              <li class="button button--comment_post"> <%= link_to '🗑️', [comment.post, comment], method: :delete, data: { confirm: 'Are you sure?' } %></li>
-          </footer>
-        <% end %>
-      </article>
+
+        <% user = User.find(comment.user_id) %>
+        <% likes = CommentLike.where(comment_id: comment.id) %><!-- get all likes for comment -->
+        <% liked = CommentLike.where("comment_id = ? AND user_id = ?", comment.id, current_user.id) %><!-- has user liked this copmment? -->
+
+        <article class="comments__single">
+
+          <!-- header - date/time/name and user status -->
+          <header>
+            <span><%= time_ago_in_words(comment.created_at).upcase %> AGO</span>
+            <span><%= user.admin ? "<span class='account-type'>admin</span>".html_safe : "" %> <%= link_to user.name.upcase, user %></span>
+          </header>
+
+          <hr>
+
+          <main><%= truncate(comment.body, :length => 400, :separator => ' ', :omission => ' ... ') {link_to '(more)', [comment.post, comment] } %></main>
+            <% if comment.created_at != comment.updated_at %>
+              <div class="comments__edited">updated <%= time_ago_in_words(comment.updated_at) %> ago</div>
+            <% end %>
+
+            <div class="comments__buttons-container">
+              <footer>
+                <% if (current_user && current_user.id == comment.user_id) %>
+                  <%# if user logged and comment belongs to user %>
+                  <li class="button button--comment_post"> <%= link_to '✍️', edit_post_comment_path(comment.post, comment) %></li>
+                  <li class="button button--comment_post"> <%= link_to '🗑️', [comment.post, comment], method: :delete, data: { confirm: 'Are you sure?' } %></li>
+                <% end %>
+                <ul class="sub-footer">
+                  <li>
+                    <% if liked.count > 0 %>
+                      <span class="liked" >liked <span style="font-size:1.3rem;position:absolute;margin-left:0.5rem;bottom:-0.2rem;">👍</span></span>
+                    <% else %>
+                      <span><%= likes.count %> likes</span>
+                    <% end %>
+                  </li>
+                  <% if current_user && (current_user.id != comment.user_id) && liked.all.count < 1  %>
+                    <li><%= link_to 'like this', post_comment_comment_likes_path(comment.post, comment, user_id: current_user.id), method: :post %></li>
+                  <% end %>
+                </ul>
+              </footer>
+            </div>
+        </article>
       <% end %>
     </div>
     <% else %>
-    <div class="comments__none">
-    <div>
-    <p class="comments__paragraph">There are no comments for this post yet</p>
-    </div>
-    </div>
+
+      <!-- No comments -->
+      <div class="comments__none">
+        <div>
+          <p class="comments__paragraph">There are no comments for this post yet</p>
+        </div>
+      </div>
+
   <% end %>
 </section>
 

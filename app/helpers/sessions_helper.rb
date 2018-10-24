@@ -24,6 +24,14 @@ module SessionsHelper
     end
   end
 
+  def is_logged_in_user?(user_id)
+    if current_user.id == user_id
+      true
+    else
+      false
+    end
+  end
+
   def logged_in?
     !current_user.nil?
   end

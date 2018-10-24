@@ -16,10 +16,12 @@
               <% else %>
                 &nbsp;|&nbsp;last login -  <%= distance_of_time_in_words(user.last_active_at, Time.now) %> ago
               <% end %>
+              <% if has_unread_mail_specific?(current_user, user) %>
+                <strong><em><span style="color:red;">unread mail</span></em></strong>
+              <% end %>
             </div>
           </div>
         </span>
-      <hr />
     </li>
   <% end %>
 </ul>

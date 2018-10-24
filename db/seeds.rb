@@ -66,7 +66,7 @@ User.all.each do |user|
   Random.rand(1..15).times do |post_num|
     num_comments = Random.rand(0..7)
 
-    title = Faker::FamilyGuy.quote
+    title = Faker::Friends.quote
     post_txt = []
     Random.rand(1..4).times do
       post_txt << Faker::Lorem.paragraph(Random.rand(4..10))
@@ -97,14 +97,33 @@ User.all.each do |user|
   # create a number of conversations
   Random.rand(3..10).times do
     other_user = User.find(Random.rand(1..User.all.count-1))
-    #create a number of interchanges between users
+    datetime_both_users_exist = [user.activated_at, other_user.activated_at].max
+
+    send_time = Faker::Time.between(Time.now - 3.days, Time.now)
+    if send_time < datetime_both_users_exist
+      send_time = datetime_both_users_exist
+    end
+
     Random.rand(1..15).times do
-      Message.create!(body: Faker::Lorem.sentences(Random.rand(3..15)).join,
-                      sender_id: user.id,
-                      receiver_id: other_user.id)
-      Message.create!(body: Faker::Lorem.sentences(Random.rand(3..15)).join,
-                      sender_id: other_user.id,
-                      receiver_id: user.id)
+
+      send_read_at_time = send_time + Random.rand(1..400).minutes
+      reply_time = send_read_at_time + Random.rand(1..60).minutes
+      reply_read_at_time = reply_time + Random.rand(1..400).minutes
+      if Time.now > send_read_at_time && Time.now > reply_read_at_time
+        Message.create!(body: Faker::Lorem.sentences(Random.rand(4..15)).join,
+                        sender_id: user.id,
+                        receiver_id: other_user.id,
+                        created_at: send_time,
+                        seen_time: send_read_at_time,
+                        seen: true)
+        Message.create!(body: Faker::Lorem.sentences(Random.rand(4..15)).join,
+                        sender_id: other_user.id,
+                        receiver_id: user.id,
+                        created_at: reply_time,
+                        seen_time: reply_read_at_time,
+                        seen: true)
+        send_time = reply_read_at_time + Random.rand(1..500).minutes
+      end
     end
   end
 end

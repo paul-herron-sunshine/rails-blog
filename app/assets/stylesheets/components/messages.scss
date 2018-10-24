@@ -2,47 +2,36 @@
   font-size: 1em;
   padding: 0.3em;
 
-  &__single {
+  &__single_receiver{
+    position:relative;
     background-color: rgba(colour("cta","main"),0.3);
     border: 2px solid colour("cta","font");
-    border-radius: 3em;
+    border-radius: 1em;
     border-style: ridge;
     color: colour("cta","font");
     justify-content: space-around;
     margin: 1%;
-    min-height: 3em;
-    padding: 2em;
-    text-align: center;
+    margin-right:30%;
+    margin-left: 10%;
+    min-height: 1em;
+    padding: 0.5em;
+    text-align: left;
   }
 
   &__single_sender {
-    background-color: rgba(colour("cta","main"),0.3);
-    border: 2px solid colour("cta","font");
-    border-radius: 3em;
-    border-style: ridge;
-    color: colour("cta","font");
-    justify-content: space-around;
-    margin: 1%;
-    margin-right:35%;
-    margin-left: -15%;
-    min-height: 2em;
-    padding: 2em;
-    text-align: center;
-  }
-
-  &__single_receiver {
+    position:relative;
     background-color: white;
     border: 2px solid colour("cta","font");
-    border-radius: 3em;
+    border-radius: 1em;
     border-style: ridge;
     color: colour("cta","font");
     justify-content: space-around;
     margin: 1%;
-    margin-right:-15%;
-    margin-left: 35%;
-    min-height: 3em;
-    padding: 2em;
-    text-align: center;
+    margin-right:10%;
+    margin-left: 30%;
+    min-height: 1em;
+    padding: 0.5em;
+    text-align: right;
   }
 
   &__page {
@@ -66,4 +55,62 @@
     // width: 100%;
 
   }
+}
+
+
+
+.sender_msg_info {
+  position:absolute;
+  color: black;
+  //background-color: #E7E7FD;
+  width: 250px;
+  top:0px;
+  left: 101.5%;
+  font-size: 0.8em;
+  text-align: left;
+  border-radius: 0.5em;
+  padding: 0.4em;
+}
+
+.receiver_msg_info {
+  position:absolute;
+  color: black;
+  //background-color: #E7E7FD;
+  width: 250px;
+  top:0px;
+  right: 101.5%;
+  font-size: 0.8em;
+  text-align: left;
+  border-radius: 0.5em;
+  padding: 0.4em;
+  text-align:right;
+}
+
+.message_txt_field {
+    border: 0.1em solid colour("cta","main");
+    border-radius: 0.4em;
+    background-color: colour("greys","light");
+    font-family: 'Roboto Mono', monospace;
+    font-size: 1em;
+    margin-top: 0.5em;
+    outline: none;
+    padding: 12px 20px;
+    width: 50%;
+    margin-left:25%;
+    margin-right:25%;
+}
+
+.message_send_button {
+  background-color: rgba(colour("cta","main"), 0.8);
+  border: 0;
+  border-radius: 0.25em;
+  color: blue;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 1em;
+  line-height: 1.1em;
+  margin-left: 45%;
+  padding: 1em;
+  text-align: center;
+  text-decoration: none;
 }

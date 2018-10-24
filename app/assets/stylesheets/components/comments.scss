@@ -1,9 +1,10 @@
+
 .comments {
 
 	&__back {
 		float: right;
 		margin-right: 2em;
-  }
+  	}
 
 	&__buttons-container {
 		display: flex;
@@ -21,22 +22,8 @@
 		}
 	}
 
-	&__container {
-		display: grid;
-		grid-template-columns: repeat(1, 1fr);
-		grid-template-rows: repeat(auto-fill);
-		grid-row-gap: .5em;
-		grid-column-gap: 2em;
-		margin-top: 2em;
-		max-width: 800px;
-		min-height: 20em;
-		padding: 2em;
-		padding-bottom: 2em;
-		// width: 100%;
-	}
-
 	&__edited {
-		color: colour("greys","light");
+		color: #bbb;
 		font-size: 0.8em;
 		margin: 0;
 		padding: 0;
@@ -50,10 +37,26 @@
 	&__paragraph {
 		font-size: 1.4em;
 		margin-left: 80%;
-		// width: 200%;
+	}
+
+
+	&__container {
+		max-width:800px;
+		padding:2rem;
+	    display: grid;
+	    grid-template-columns: repeat(1, 1fr);
+	    grid-template-rows: repeat(auto-fill);
+	    grid-row-gap: .5em;
+	    grid-column-gap: 2em;
+	    margin-top: 2em;
+	    min-height: 20em;
+	    width: 100%;
+		padding-bottom:2rem;
 	}
 
 	&__single {
+		position:relative;
+		overflow:hidden;
 		background-color: rgba(colour("cta","main"),0.3);
 		background-color: $white;
 		border: 2px solid colour("cta","font");
@@ -61,10 +64,10 @@
 		border-style: ridge;
 		color: colour("cta","font");
 		justify-content: space-around;
-		line-height: 2.5;
+		line-height: 2;
 		margin: 1%;
 		min-height: 3em;
-		padding: 2em;
+	    padding: 2rem;
 		text-align: center;
 
 		@include max-width(m) {
@@ -72,23 +75,22 @@
 			margin: 0;
 			padding: 0.5em;
 		}
-	}
+
 
 		hr {
 		    border: 0;
 		    height: 1px;
-		    background: #17317f;
+		    background: #ccc;
 		}
 
 		header {
-
 			padding:0.5em;
 			text-align:left;
 
  			span {
 
 				display:inline-block;
-				font-size:0.9em;
+				font-size:0.8em;
 				font-weight:bold;
 
 				&:nth-child(2) {
@@ -101,7 +103,52 @@
 			text-align:left;
 		}
 		footer {
-			padding:0.5em;
+			padding:0.5em 0.5em 0.5em ;
 			text-align:left;
+
+			.sub-footer {
+				margin:0;
+				position:absolute;
+				bottom:0;
+				right:0;
+				left:0;
+				color:#999;
+				font-size:0.8rem;
+				text-align:center;
+				background-color: #eee;
+				display:inline-block;
+				padding:0.2rem 4rem;
+				list-style-type: none;
+
+				li {
+					width:20%;
+					display:inline-block;
+				}
+			}
 		}
 	}
+
+	.back {
+		float:right;
+		margin-right:2rem;
+	}
+
+	.account-type {
+		position:absolute;
+		top:0;
+		right:0;
+		left:50%;
+		color:#999;
+		font-weight:normal;
+		font-size:0.8rem;
+		text-align:right;
+		background-color: #eee;
+		display:inline-block;
+		padding:0.2rem 4rem;
+	}
+
+	.liked {
+		color:#bf5c35
+	}
+
+}
