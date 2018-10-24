@@ -1,12 +1,11 @@
-<%= form_tag(url: messages_path, method: :post) do %>
-
-  <%= text_field_tag :message %>
-  <%= hidden_field_tag 'sender_id', @sender_id  %>
-  <%= hidden_field_tag 'receiver_id', @receiver_id  %>
-  <%= submit_tag "Send Message" %>
-<% end %>
-
 <div class="messages__page">
+  <%= form_tag(url: messages_path, method: :post) do %>
+    <%= text_area_tag :message, nil, class: 'message_txt_field' %>
+    <%= hidden_field_tag 'sender_id', @sender_id  %>
+    <%= hidden_field_tag 'receiver_id', @receiver_id  %>
+    <%= submit_tag "Send Message", class: "message_send_button" %>
+  <% end %>
+  <br />
       <% if @messages.count == 0 %>
         <div class="messages__single">
           There are no messages between the two of you...type in the box above to start a conversation
@@ -37,9 +36,7 @@
                 <div class="receiver_msg_info">
                   <strong><%= @receiver.name.split(' ').first %><br />
                   <% if @receiver.is_online %>
-                    <br />
-                    <span class="profile__online--link">online now</span>
-                    <br />
+                    <span style="color:green">online now</span>
                   <% else %>
                     not online
                   <% end %>
