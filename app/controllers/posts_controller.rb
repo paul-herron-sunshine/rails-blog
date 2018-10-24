@@ -14,6 +14,13 @@ class PostsController < ApplicationController
       elsif params[:sort] == "2"
         Post.order("votes DESC").all
       elsif params[:sort] == "3"
+        Post.where("title LIKE ? or body LIKE ?", "%#{params[:term]}%", "%#{params[:term]}%")
+    else
+      if params[:sort] == "1"
+        Post.order("created_at DESC").all
+      elsif params[:sort] == "2"
+        Post.order("votes DESC").all
+      elsif params[:sort] == "3"
         Post.order("title ASC").all
       else
         Post.order("created_at DESC").all

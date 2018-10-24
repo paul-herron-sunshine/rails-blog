@@ -93,19 +93,16 @@ RSpec.feature "Integration Tests", :type => :feature do
             options after logging in" do
     visit root_path
     expect(page).to_not have_link("Profile")
-    expect(page).to_not have_link("Settings")
     expect(page).to_not have_link("Log out")
 
     login_user(@user)
 
     expect(page).to have_link("Profile")
-    expect(page).to have_link("Settings")
     expect(page).to have_link("Log out")
 
     click_link 'Log out'
 
     expect(page).to_not have_link("Profile")
-    expect(page).to_not have_link("Settings")
     expect(page).to_not have_link("Log out")
   end
 
@@ -113,7 +110,6 @@ RSpec.feature "Integration Tests", :type => :feature do
     login_user(@user)
 
     expect(page).to have_link("Profile")
-    expect(page).to have_link("Settings")
     expect(page).to have_link("Log out")
 
     visit "http://www.google.com"
@@ -121,7 +117,6 @@ RSpec.feature "Integration Tests", :type => :feature do
     visit root_path
 
     expect(page).to have_link("Profile")
-    expect(page).to have_link("Settings")
     expect(page).to have_link("Log out")
   end
 
@@ -301,4 +296,17 @@ RSpec.feature "Integration Tests", :type => :feature do
 
     expect(Message.all.count).to be > initial_msg_count
   end
+
+  scenario "user 1 sends a message to user 2. A message will exist on the db \
+            where the sender and receiver are correctly identified" do
+
+    login_user(@user)
+    visit user_path(@user2.id)
+    click_on "Start Conversation"
+    fill_in "message", :with => "test message content"
+    click_button "Send Message"
+
+    expect(Message.where(sender_id: @user.id, receiver_id: @user2.id).count).to be 1
+  end
+
 end
