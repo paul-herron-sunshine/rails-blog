@@ -26,6 +26,7 @@ class PostsController < ApplicationController
         Post.order("created_at DESC").all
     end
   end
+  end
     single_title = "Welcome to the OTB Academy Blogosphere"
   end
 
