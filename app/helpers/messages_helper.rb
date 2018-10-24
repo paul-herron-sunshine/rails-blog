@@ -7,4 +7,12 @@ module MessagesHelper
       false
     end
   end
+
+  def has_unread_mail_generic?(logged_in_user)
+    Message.exists?(receiver_id: logged_in_user.id, seen: false) ? true : false
+  end
+
+  def has_unread_mail_specific?(logged_in_user, other_user)
+    Message.exists?(receiver_id: logged_in_user.id, sender_id: other_user, seen: false) ? true : false
+  end
 end

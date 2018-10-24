@@ -1,13 +1,11 @@
-<%= form_tag(url: messages_path, method: :post) do %>
-
-  <%= text_field_tag :message %>
-  <%= hidden_field_tag 'sender_id', @sender_id  %>
-  <%= hidden_field_tag 'receiver_id', @receiver_id  %>
-  <%= submit_tag "Send Message" %>
-<% end %>
-
 <div class="messages__page">
-
+  <%= form_tag(url: messages_path, method: :post) do %>
+    <%= text_area_tag :message, nil, class: 'message_txt_field' %>
+    <%= hidden_field_tag 'sender_id', @sender_id  %>
+    <%= hidden_field_tag 'receiver_id', @receiver_id  %>
+    <%= submit_tag "Send Message", class: "message_send_button" %>
+  <% end %>
+  <br />
       <% if @messages.count == 0 %>
         <div class="messages__single">
           There are no messages between the two of you...type in the box above to start a conversation
@@ -17,12 +15,32 @@
           <% if msg.sender_id == current_user.id %>
             <div class="messages__single_sender">
               <p class="messages__body">
+                <div class="sender_msg_info">
+                  <strong>you
+                  <br />
+                  sent <%= distance_of_time_in_words(msg.created_at, Time.now) %> ago
+                  <br />
+                  <% if msg.seen %>
+                    <span style="color:green;">read <%= distance_of_time_in_words(msg.seen_time, Time.now) %> ago</span>
+                    <br /><br />
+                  <% else %>
+                    <span style="color:red;">not read</span></strong> <br />
+                  <% end %>
+                </div>
                 <%=simple_format(msg.body)%>
               </p>
             </div>
           <% else %>
             <div class="messages__single_receiver">
               <p class="messages__body">
+                <div class="receiver_msg_info">
+                  <strong><%= @receiver.name.split(' ').first %><br />
+                  <% if @receiver.is_online %>
+                    <span style="color:green">online now</span>
+                  <% else %>
+                    not online
+                  <% end %>
+                </div>
                 <%=simple_format(msg.body)%>
               </p>
             </div>

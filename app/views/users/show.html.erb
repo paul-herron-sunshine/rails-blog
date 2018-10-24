@@ -40,6 +40,10 @@
       <% if @user.id == current_user.id %>
         <br /><hr /><br />
         <%= link_to "View Conversations", user_inbox_path %>
+        <% if has_unread_mail_generic?(current_user) %>
+          <br />
+          <strong><span style="color:green">--- New Mail ---</span></strong>
+        <% end %>
         <br /><br /><hr /><br />
         <div class="profile__modify">
           <%= link_to "Modify Account Details", edit_user_path(@user.id) %>

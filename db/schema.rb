@@ -1,6 +1,6 @@
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
-# incementally modify your database, and then regenerate this schema definition.
+# incrementally modify your database, and then regenerate this schema definition.
 #
 # Note that this schema.rb definition is the authoritative source for your
 # database schema. If you need to create the application database on another
@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_23_101247) do
+ActiveRecord::Schema.define(version: 2018_10_24_081745) do
 
   create_table "comment_likes", force: :cascade do |t|
     t.integer "comment_id"
@@ -38,6 +38,8 @@ ActiveRecord::Schema.define(version: 2018_10_23_101247) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "conversation_id"
+    t.datetime "seen_time"
+    t.boolean "seen", default: false
   end
 
   create_table "posts", force: :cascade do |t|
